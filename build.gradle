@@ -8,8 +8,32 @@ apply plugin: 'teamcity'
 
 
 
+defaultTasks 'clean', 'build'
+
+
 group   = 'com.github.goldin.plugins'
 version = '0.1-SNAPSHOT'
+
+
+idea.project {
+    jdkName = '1.6'
+    ipr.withXml { provider -> provider.node.component.find { it.@name == 'VcsDirectoryMappings' }.mapping.@vcs = 'Git' }
+}
+
+
+idea.module {
+
+    downloadSources = true
+    downloadJavadoc = true
+
+    iml.withXml {
+        provider ->
+        provider.node.component.content.first().with {
+            appendNode( 'excludeFolder', [ url : 'file://$MODULE_DIR$/gradle' ])
+            appendNode( 'excludeFolder', [ url : 'file://$MODULE_DIR$/out'    ])
+        }
+    }
+}
 
 
 buildscript {
@@ -36,7 +60,8 @@ repositories {
 
 
 dependencies {
-    compile 'com.github.goldin.rest:youtrack:0.1-SNAPSHOT'
+    compile     'com.github.goldin.rest:youtrack:0.1-SNAPSHOT'
+    testCompile 'junit:junit:4.10'
 }
 
 
