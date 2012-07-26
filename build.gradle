@@ -61,6 +61,7 @@ repositories {
 dependencies {
     compile     'com.github.goldin.rest:youtrack:0.1-SNAPSHOT'
     testCompile ( 'junit:junit:4.10' ){ exclude group: 'org.hamcrest' }
+    testRuntime 'ch.qos.logback:logback-classic:1.0.6'
 }
 
 
