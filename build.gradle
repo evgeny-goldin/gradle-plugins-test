@@ -7,7 +7,14 @@ apply plugin: 'duplicates'
 apply plugin: 'teamcity'
 
 
+
+group   = 'com.github.goldin.plugins'
+version = '0.1-SNAPSHOT'
+
+
 buildscript {
+
+    final pluginsVersion = '0.1.4-SNAPSHOT'
 
     repositories {
         mavenLocal()
@@ -15,9 +22,9 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.github.goldin.plugins:gradle:$version",
-                  "com.github.goldin.plugins:kotlin:$version",
-                  "com.github.goldin.plugins:teamcity:$version"
+        classpath "com.github.goldin.plugins:gradle:$pluginsVersion",
+                  "com.github.goldin.plugins:kotlin:$pluginsVersion",
+                  "com.github.goldin.plugins:teamcity:$pluginsVersion"
     }
 }
 
@@ -31,3 +38,6 @@ repositories {
 dependencies {
     compile 'com.github.goldin.rest:youtrack:0.1-SNAPSHOT'
 }
+
+
+task wrapper( type: Wrapper ) { gradleVersion = '1.0' }
