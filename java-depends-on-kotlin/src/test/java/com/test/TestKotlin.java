@@ -7,7 +7,7 @@ import static junit.framework.TestCase.assertTrue;
 
 
 /**
- * Tests {@link YouTrackRest} implemented in Kotlin.
+ * Tests {@link YouTrackRestKotlin} implemented in Kotlin.
  */
 public class TestKotlin
 {
@@ -15,10 +15,10 @@ public class TestKotlin
     @Test
     public void testYouTrackIssueExists()
     {
-        assertTrue  ( new YouTrackRest( "http://rest-clients.myjetbrains.com/youtrack/" ).
+        assertTrue  ( new YouTrackRestKotlin( "http://rest-clients.myjetbrains.com/youtrack/" ).
                       issueExists( "pl-359" ));
         assertEquals( "Fixed",
-                      new YouTrackRest( "http://evgeny-goldin.org/youtrack/" ).
+                      new YouTrackRestKotlin( "http://evgeny-goldin.org/youtrack/" ).
                       issue( "pl-645" ).getCustomField( "State" ) );
     }
 }

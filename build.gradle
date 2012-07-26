@@ -1,11 +1,4 @@
-
 apply plugin: 'idea'
-apply plugin: 'groovy'
-apply plugin: 'kotlin'
-apply plugin: 'about'
-apply plugin: 'duplicates'
-apply plugin: 'teamcity'
-
 
 
 defaultTasks 'clean', 'build', 'about', 'duplicates'
@@ -52,16 +45,38 @@ buildscript {
 }
 
 
-repositories {
-    mavenRepo url: 'http://evgenyg.artifactoryonline.com/evgenyg/repo/'
+subprojects {
+
+    apply plugin: 'idea'
+    apply plugin: 'kotlin'
+    apply plugin: 'about'
+    apply plugin: 'duplicates'
+    apply plugin: 'teamcity'
+
+
+    clean { delete( "$rootDir/out", "$rootDir/build" ) }
+
+
+    repositories {
+        mavenRepo url: 'http://evgenyg.artifactoryonline.com/evgenyg/repo/'
+    }
+
+    dependencies {
+        compile     'com.github.goldin.rest:youtrack:0.1-SNAPSHOT'
+        testCompile ( 'junit:junit:4.10' ){ exclude group: 'org.hamcrest' }
+        testRuntime 'ch.qos.logback:logback-classic:1.0.6'
+    }
 }
 
 
+project( ':java-depends-on-kotlin' ){
+    compileTestJava.dependsOn compileKotlin
+}
 
-dependencies {
-    compile     'com.github.goldin.rest:youtrack:0.1-SNAPSHOT'
-    testCompile ( 'junit:junit:4.10' ){ exclude group: 'org.hamcrest' }
-    testRuntime 'ch.qos.logback:logback-classic:1.0.6'
+
+project( ':kotlin-depends-on-java' ){
+    compileKotlinConfig { dependsOnJava = true }
+    compileTestJava.dependsOn compileKotlin
 }
 
 
