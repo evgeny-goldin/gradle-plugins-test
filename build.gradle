@@ -16,7 +16,7 @@ idea.project {
 idea.module {
 
     downloadSources = true
-    downloadJavadoc = true
+    downloadJavadoc = false
 
     iml.withXml {
         provider ->
@@ -66,18 +66,12 @@ subprojects {
         testCompile ( 'junit:junit:4.10' ){ exclude group: 'org.hamcrest' }
         testRuntime 'ch.qos.logback:logback-classic:1.0.6'
     }
-}
 
-
-project( ':java-depends-on-kotlin' ){
     compileTestJava.dependsOn compileKotlin
 }
 
 
-project( ':kotlin-depends-on-java' ){
-    compileKotlinConfig { dependsOnJava = true }
-    compileTestJava.dependsOn compileKotlin
-}
-
+project ( ':java-depends-on-kotlin' ) { compileJava.dependsOn   compileKotlin }
+project ( ':kotlin-depends-on-java' ) { compileKotlin.dependsOn compileJava   }
 
 task wrapper( type: Wrapper ) { gradleVersion = '1.0' }
