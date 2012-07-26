@@ -11,8 +11,7 @@ apply plugin: 'teamcity'
 defaultTasks 'clean', 'build', 'about', 'duplicates'
 
 
-group   = 'com.github.goldin.plugins'
-version = '0.1-SNAPSHOT'
+group = 'com.github.goldin.plugins'
 
 
 idea.project {
