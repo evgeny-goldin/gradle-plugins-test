@@ -4,11 +4,11 @@ import com.github.goldin.rest.youtrack.Issue;
 import com.github.goldin.rest.youtrack.YouTrack;
 
 
-public class YouTrackRestJava
+public class YouTrackRestJava2
 {
     private final YouTrack youtrack;
 
-    public YouTrackRestJava ( String youtrackUrl )
+    public YouTrackRestJava2 ( String youtrackUrl )
     {
         this.youtrack = new YouTrack( youtrackUrl );
     }

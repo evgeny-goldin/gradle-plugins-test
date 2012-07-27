@@ -66,12 +66,17 @@ subprojects {
         testCompile ( 'junit:junit:4.10' ){ exclude group: 'org.hamcrest' }
         testRuntime 'ch.qos.logback:logback-classic:1.0.6'
     }
-
-    compileTestJava.dependsOn compileKotlin
 }
 
 
-project ( ':java-depends-on-kotlin' ) { compileJava.dependsOn   compileKotlin }
-project ( ':kotlin-depends-on-java' ) { compileKotlin.dependsOn compileJava   }
+project ( ':java-depends-on-kotlin' ) {
+    dependencies.compile files( compileKotlin.destinationDir )
+    compileJava.dependsOn compileKotlin
+}
+
+project ( ':kotlin-depends-on-java' ) {
+    compileKotlin.  dependsOn compileJava
+    compileTestJava.dependsOn compileKotlin
+}
 
 task wrapper( type: Wrapper ) { gradleVersion = '1.0' }

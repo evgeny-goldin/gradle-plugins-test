@@ -3,7 +3,8 @@ package com.test
 import com.github.goldin.rest.youtrack.YouTrack
 import com.github.goldin.rest.youtrack.Issue
 
-class YouTrackRestKotlin( youTrackUrl: String )
+
+open class YouTrackRestKotlin( youTrackUrl: String )
 {
     private val youtrack = YouTrack( youTrackUrl )
 
