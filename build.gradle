@@ -51,7 +51,6 @@ subprojects {
     apply plugin: 'kotlin'
     apply plugin: 'about'
     apply plugin: 'duplicates'
-    apply plugin: 'teamcity'
 
 
     clean { delete( "$rootDir/out", "$rootDir/build" ) }
