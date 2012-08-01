@@ -1,7 +1,7 @@
 apply plugin: 'idea'
 
 
-defaultTasks 'clean', 'build', 'about', 'duplicates'
+defaultTasks 'clean', 'duplicates', 'build', 'about'
 
 
 group = 'com.github.goldin.plugins'
@@ -68,12 +68,12 @@ subprojects {
 }
 
 
-project ( ':java-depends-on-kotlin' ) {
+project ( ':kotlin:java-depends-on-kotlin' ) {
     dependencies.compile files( compileKotlin.destinationDir )
     compileJava.dependsOn compileKotlin
 }
 
-project ( ':kotlin-depends-on-java' ) {
+project ( ':kotlin:kotlin-depends-on-java' ) {
     compileKotlin.  dependsOn compileJava
     compileTestJava.dependsOn compileKotlin
 }
