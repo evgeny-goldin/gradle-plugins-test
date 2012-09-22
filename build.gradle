@@ -8,7 +8,7 @@ group = 'com.github.goldin.plugins'
 
 
 idea.project {
-    jdkName = '1.6'
+    jdkName = '1.7'
     ipr.withXml { provider -> provider.node.component.find { it.@name == 'VcsDirectoryMappings' }.mapping.@vcs = 'Git' }
 }
 
@@ -24,6 +24,7 @@ idea.module {
             appendNode( 'excludeFolder', [ url : 'file://$MODULE_DIR$/gradle' ])
             appendNode( 'excludeFolder', [ url : 'file://$MODULE_DIR$/out'    ])
         }
+        provider.node.component.first().appendNode( 'orderEntry', [ type : 'library', name : 'Groovy', level: 'application' ])
     }
 }
 
@@ -78,4 +79,4 @@ project ( ':kotlin:kotlin-depends-on-java' ) {
     compileTestJava.dependsOn compileKotlin
 }
 
-task wrapper( type: Wrapper ) { gradleVersion = '1.1' }
+task wrapper( type: Wrapper ) { gradleVersion = '1.2' }
