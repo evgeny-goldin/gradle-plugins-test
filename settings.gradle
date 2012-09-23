@@ -1,3 +1,7 @@
-include 'codenarc', 'kotlin:kotlin-standalone', 'kotlin:java-depends-on-kotlin', 'kotlin:kotlin-depends-on-java'
+include 'codenarc'
+include 'duplicates'
+include 'kotlin:java-depends-on-kotlin'
+include 'kotlin:kotlin-depends-on-java'
+include 'kotlin:kotlin-standalone'
 
 rootProject.name = 'gradle-plugins-test'
