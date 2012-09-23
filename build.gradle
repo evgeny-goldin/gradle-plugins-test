@@ -1,7 +1,11 @@
 apply plugin: 'idea'
 
+ext.codenarcSources      = [ "$projectDir/codenarc/src/main/groovy" ]
+ext.codenarcRuleSetFiles = [ "$projectDir/codenarc.groovy" ]
+apply from: 'https://raw.github.com/evgeny-goldin/gradle-plugins/master/codenarc/CodeNarc.gradle'
 
-defaultTasks 'clean', 'duplicates', 'build', 'about'
+
+defaultTasks 'clean', 'codenarc', 'duplicates', 'build', 'about'
 
 
 group = 'com.github.goldin.plugins.gradle'
