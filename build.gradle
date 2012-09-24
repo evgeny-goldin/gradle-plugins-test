@@ -21,8 +21,12 @@ idea.project {
 
 
 crawler {
-    baseUrl = 'evgeny-goldin.com/wiki'
-    verbose = true
+    baseUrl         = 'evgeny-goldin.com/wiki'
+    verbose         = true
+    cleanupRegexes  = [ '<meta name=".+?" content=".+?"/>' ]
+    ignoredContains = 'Talk: Special: printable= oldid= action='.tokenize()
+    ignoredEndsWith = 'redirect=no'.tokenize()
+    ignoredRegexes  = [ '#[^/]+$' ]
 }
 
 
