@@ -26,6 +26,8 @@ crawler {
     failOnBrokenLinks = true
     ignoredContains   = 'Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php'.tokenize()
     ignoredEndsWith   = 'redirect=no /feed/ /blog/wp-comments-post.php'.tokenize()
+    connectTimeout    = 15000
+    readTimeout       = 15000
 }
 
 
