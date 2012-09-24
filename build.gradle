@@ -8,7 +8,7 @@ ext.codenarcRuleSetFiles = [ "$projectDir/codenarc.groovy" ]
 apply from: 'https://raw.github.com/evgeny-goldin/gradle-plugins/master/codenarc/CodeNarc.gradle'
 
 
-defaultTasks 'clean', 'crawler', 'codenarc', 'duplicates', 'build', 'about'
+defaultTasks 'clean', 'codenarc', 'duplicates', 'build', 'about'
 
 
 group = 'com.github.goldin.plugins.gradle'
@@ -21,12 +21,11 @@ idea.project {
 
 
 crawler {
-    baseUrl           = 'evgeny-goldin.com/wiki'
+    baseUrl           = 'evgeny-goldin.com'
     verbose           = true
     failOnBrokenLinks = true
-    cleanupRegexes    = [ '<meta name=".+?" content=".+?"/>' ]
-    ignoredContains   = 'Talk: Special: printable= oldid= action='.tokenize()
-    ignoredEndsWith   = 'redirect=no'.tokenize()
+    ignoredContains   = 'Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php'.tokenize()
+    ignoredEndsWith   = 'redirect=no /feed/'.tokenize()
 }
 
 
