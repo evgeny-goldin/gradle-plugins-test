@@ -28,6 +28,7 @@ crawler {
     ignoredEndsWith   = 'redirect=no /feed/ /blog/wp-comments-post.php'.tokenize()
     connectTimeout    = 15000
     readTimeout       = 15000
+    ignoreStatusCodes = [ 500 ]
 }
 
 
