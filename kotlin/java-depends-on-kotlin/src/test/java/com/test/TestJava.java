@@ -1,7 +1,6 @@
 package com.test;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.TestCase.assertTrue;
 import org.junit.Test;
 
 
@@ -14,10 +13,7 @@ public class TestJava
     @Test
     public void testYouTrackRestJava ()
     {
-        assertTrue  ( new YouTrackRestJava( "http://rest-clients.myjetbrains.com/youtrack/" ).
-                      issueExists( "pl-359" ));
-        assertEquals( "Fixed",
-                      new YouTrackRestJava( "http://evgeny-goldin.org/youtrack/" ).
-                      issue( "pl-645" ).getCustomField( "State" ) );
+        assertEquals( "pl-359", new YouTrackRestJava( "http://rest-clients.myjetbrains.com/youtrack/" ).issue( "pl-359" ).getId());
+        assertEquals( "Fixed",  new YouTrackRestJava( "http://evgeny-goldin.org/youtrack/" ).issue( "pl-645" ).getCustomField( "State" ));
     }
 }
