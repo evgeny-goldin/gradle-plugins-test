@@ -17,8 +17,6 @@ public class TestKotlin
     @Test
     public void testYouTrackRestKotlin ()
     {
-        assertTrue   ( new YouTrackRestKotlin2( "http://evgeny-goldin.org/youtrack" ).issueExists( "pl-646" ));
-        assertEquals ( "pl-646", new YouTrackRestKotlin2( "http://evgeny-goldin.org/youtrack" ).
-                                 issue( "pl-646" ).getId());
+        assertNotNull( new YouTrackRestKotlin2( "http://evgeny-goldin.org/youtrack" ));
     }
 }
