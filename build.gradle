@@ -21,7 +21,7 @@ idea.project {
 
 
 crawler {
-    baseUrl            = 'evgeny-goldin.com/wiki'
+    baseUrl            = 'evgeny-goldin.com'
     verbose            = true
     failOnBrokenLinks  = true
     ignoredContains    = 'Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php'.tokenize()
