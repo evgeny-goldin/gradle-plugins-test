@@ -21,7 +21,7 @@ idea.project {
 
 
 crawler {
-    baseUrl            = 'evgeny-goldin.com'
+    baseUrl            = 'evgeny-goldin.com/wiki'
     verbose            = true
     failOnBrokenLinks  = true
     ignoredContains    = 'Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php'.tokenize()
@@ -30,6 +30,7 @@ crawler {
     readTimeout        = 15000
     ignoredStatusCodes = [ 500 ]
     linksMapFile       = file( 'links.txt' )
+    newLinksMapFile    = file( 'newLinks.txt' )
 }
 
 
