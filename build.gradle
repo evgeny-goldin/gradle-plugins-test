@@ -14,23 +14,28 @@ defaultTasks 'clean', 'codenarc', 'duplicates', 'build', 'about'
 group = 'com.github.goldin.plugins.gradle'
 
 
-idea.project {
-    jdkName = '1.7'
-    ipr.withXml { provider -> provider.node.component.find { it.@name == 'VcsDirectoryMappings' }.mapping.@vcs = 'Git' }
+buildscript {
+
+    final pluginsVersion = '0.2-SNAPSHOT'
+
+    repositories {
+        mavenLocal()
+        mavenRepo url: 'http://evgenyg.artifactoryonline.com/evgenyg/repo/'
+    }
+
+    dependencies {
+        classpath "com.github.goldin.plugins.gradle:about:$pluginsVersion",
+                  "com.github.goldin.plugins.gradle:crawler:$pluginsVersion",
+                  "com.github.goldin.plugins.gradle:duplicates:$pluginsVersion",
+                  "com.github.goldin.plugins.gradle:kotlin:$pluginsVersion",
+                  "com.github.goldin.plugins.gradle:teamcity:$pluginsVersion"
+    }
 }
 
 
-crawler {
-    baseUrl            = 'evgeny-goldin.com'
-    verbose            = true
-    failOnBrokenLinks  = true
-    ignoredContains    = 'Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php'.tokenize()
-    ignoredEndsWith    = 'redirect=no /feed/ /blog/wp-comments-post.php'.tokenize()
-    connectTimeout     = 15000
-    readTimeout        = 15000
-    ignoredStatusCodes = [ 500 ]
-    linksMapFile       = file( 'links.txt' )
-    newLinksMapFile    = file( 'newLinks.txt' )
+idea.project {
+    jdkName = '1.7'
+    ipr.withXml { provider -> provider.node.component.find { it.@name == 'VcsDirectoryMappings' }.mapping.@vcs = 'Git' }
 }
 
 
@@ -50,22 +55,19 @@ idea.module {
 }
 
 
-buildscript {
-
-    final pluginsVersion = '0.2-SNAPSHOT'
-
-    repositories {
-        mavenLocal()
-        mavenRepo url: 'http://evgenyg.artifactoryonline.com/evgenyg/repo/'
-    }
-
-    dependencies {
-        classpath "com.github.goldin.plugins.gradle:about:$pluginsVersion",
-                  "com.github.goldin.plugins.gradle:crawler:$pluginsVersion",
-                  "com.github.goldin.plugins.gradle:duplicates:$pluginsVersion",
-                  "com.github.goldin.plugins.gradle:kotlin:$pluginsVersion",
-                  "com.github.goldin.plugins.gradle:teamcity:$pluginsVersion"
-    }
+crawler {
+    baseUrl            = 'evgeny-goldin.com'
+    verbose            = true
+    failOnBrokenLinks  = true
+    ignoredContains    = 'Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php'.tokenize()
+    ignoredEndsWith    = 'redirect=no /feed/ /blog/wp-comments-post.php'.tokenize()
+    connectTimeout     = 15000
+    readTimeout        = 15000
+    ignoredStatusCodes = [ 500 ]
+    linksMapFile       = file( 'links.txt' )
+    newLinksMapFile    = file( 'newLinks.txt' )
+    minimumLinks       = 500
+    minimumBytes       = 8 * 1024 * 1024
 }
 
 
