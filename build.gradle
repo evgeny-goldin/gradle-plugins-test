@@ -67,7 +67,7 @@ crawler {
     linksMapFile       = file( 'links.txt' )
     newLinksMapFile    = file( 'newLinks.txt' )
     minimumLinks       = 500
-    minimumBytes       = 8 * 1024 * 1024
+    minimumBytes       = 2 * 1024 * 1024
 }
 
 
