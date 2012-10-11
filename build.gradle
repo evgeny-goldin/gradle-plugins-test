@@ -61,13 +61,15 @@ crawler {
     verbose            = true
     failOnBrokenLinks  = true
     userAgent          = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4'
-    ignoredContains    = 'Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php replytocom='.tokenize()
+    ignoredContains    = '... Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php replytocom='.tokenize()
     ignoredEndsWith    = 'redirect=no /feed/ /blog/wp-comments-post.php'.tokenize()
     connectTimeout     = 15000
     readTimeout        = 15000
     ignoredStatusCodes = [ 500 ]
     linksMapFile       = file( 'links.txt' )
     newLinksMapFile    = file( 'newLinks.txt' )
+    mininumBytes       = 2 * 1024 * 1024
+    minimumLinks       = 498
 }
 
 
