@@ -68,7 +68,7 @@ crawler {
     ignoredStatusCodes = [ 500 ]
     linksMapFile       = file( 'links.txt' )
     newLinksMapFile    = file( 'newLinks.txt' )
-    mininumBytes       = 2 * 1024 * 1024
+    minimumBytes       = 2 * 1024 * 1024
     minimumLinks       = 498
 }
 
