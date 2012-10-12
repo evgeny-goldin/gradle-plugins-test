@@ -21,7 +21,6 @@ buildscript {
     repositories {
         mavenLocal()
         mavenRepo url: 'http://evgenyg.artifactoryonline.com/evgenyg/repo/'
-        mavenRepo url: 'https://oss.sonatype.org/content/repositories/orggcontracts-025/'
     }
 
     dependencies {
