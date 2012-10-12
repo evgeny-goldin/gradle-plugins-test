@@ -60,13 +60,22 @@ crawler {
     baseUrl            = 'evgeny-goldin.com'
     verbose            = true
     failOnBrokenLinks  = true
-    ignoredContains    = '... Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php replytocom='.tokenize()
-    ignoredEndsWith    = 'redirect=no /feed/ /blog/wp-comments-post.php'.tokenize()
+    checkExternalLinks = true
     ignoredStatusCodes = [ 500 ]
     linksMapFile       = file( 'links.txt' )
     newLinksMapFile    = file( 'newLinks.txt' )
     minimumBytes       = 2 * 1024 * 1024
-    minimumLinks       = 498
+    minimumLinks       = 2700
+    ignoredEndsWith    = 'redirect=no /feed/ /blog/wp-comments-post.php'.tokenize()
+    ignoredContains    = [ 'truezip.dev.java.net',
+                           'delicious.com/evgenyg',
+                           'repo.gradle.org',
+                           'repo.grails.org',
+                           'repo.jenkins-ci.org',
+                           'repo.springsource.org',
+                           'repo.typesafe.com',
+                           'repository.jetbrains.com' ] +
+                         '... Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php replytocom='.tokenize()
 }
 
 
