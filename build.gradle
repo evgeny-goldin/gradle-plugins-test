@@ -59,6 +59,7 @@ crawler {
     baseUrl            = 'evgeny-goldin.com'
     failOnBrokenLinks  = true
     checkExternalLinks = true
+    displayLinks       = true
     linkTransformers   = [{ String link -> link.replace( 'evgeny-goldin.org', 'evgeny-goldin.org:8148' ) }]
     linksMapFile       = file( 'links.txt' )
     newLinksMapFile    = file( 'newLinks.txt' )
