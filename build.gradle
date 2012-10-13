@@ -57,7 +57,6 @@ idea.module {
 
 crawler {
     baseUrl            = 'evgeny-goldin.com'
-    verbose            = true
     failOnBrokenLinks  = true
     checkExternalLinks = true
     linkTransformers   = [{ String link -> link.replace( 'evgeny-goldin.org', 'evgeny-goldin.org:8148' ) }]
