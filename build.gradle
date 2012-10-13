@@ -60,6 +60,7 @@ crawler {
     verbose            = true
     failOnBrokenLinks  = true
     checkExternalLinks = true
+    linkTransformers   = [{ String link -> link.replace( 'evgeny-goldin.org', 'evgeny-goldin.org:8148' ) }]
     linksMapFile       = file( 'links.txt' )
     newLinksMapFile    = file( 'newLinks.txt' )
     minimumBytes       = 2 * 1024 * 1024
