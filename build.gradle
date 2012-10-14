@@ -1,6 +1,8 @@
+import groovy.json.JsonSlurper
 
 apply plugin: 'idea'
 apply plugin: 'crawler'
+apply plugin: 'gitdump'
 
 
 ext.codenarcSources      =  'codenarc duplicates'.tokenize().collect { "$projectDir/$it/src/main/groovy" }
@@ -27,6 +29,7 @@ buildscript {
         classpath "com.github.goldin.plugins.gradle:about:$pluginsVersion",
                   "com.github.goldin.plugins.gradle:crawler:$pluginsVersion",
                   "com.github.goldin.plugins.gradle:duplicates:$pluginsVersion",
+                  "com.github.goldin.plugins.gradle:gitdump:$pluginsVersion",
                   "com.github.goldin.plugins.gradle:kotlin:$pluginsVersion",
                   "com.github.goldin.plugins.gradle:teamcity:$pluginsVersion"
     }
@@ -67,6 +70,13 @@ crawler {
     minimumLinks       = 2700
     ignoredEndsWith    = 'redirect=no /feed/ /blog/wp-comments-post.php'.tokenize()
     ignoredContains    = 'truezip.dev.java.net delicious.com/evgenyg ... Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php replytocom='.tokenize()
+}
+
+gitdump {
+    singleArchive = true
+    urls          = new JsonSlurper().parseText( 'https://api.github.com/users/evgeny-goldin/repos'.toURL().text ).
+                    collect { Map    m       -> "git://github.com/evgeny-goldin/${ m.name }.git" }.
+                    findAll { String repoUrl -> ! [ 'gcommons-old', 'presentations', 'WideFinder' ].any{ repoUrl.contains( it )}}
 }
 
 
