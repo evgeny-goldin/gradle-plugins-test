@@ -74,7 +74,7 @@ crawler {
 
 gitdump {
     urls = new JsonSlurper().parseText( 'https://api.github.com/users/evgeny-goldin/repos'.toURL().text ).
-           collect { Map    m       -> "git://github.com/evgeny-goldin/${ m.name }.git" }.
+           collect { Map    m       -> m.git_url }.
            findAll { String repoUrl -> ! [ 'gcommons-old', 'presentations', 'WideFinder' ].any{ repoUrl.contains( it )}}
     runAggressiveGitGc = true       
     singleArchive      = true
