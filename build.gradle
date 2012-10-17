@@ -74,9 +74,9 @@ crawler {
 
 gitdump {
     urls = new JsonSlurper().parseText( 'https://api.github.com/users/evgeny-goldin/repos'.toURL().text ).
-           collect { Map    m       -> m.git_url }.
+           collect { Map    m       -> "${ m.git_url }:master" }.
            findAll { String repoUrl -> ! [ 'gcommons-old', 'presentations', 'WideFinder' ].any{ repoUrl.contains( it )}}
-    runAggressiveGitGc = true       
+    runAggressiveGitGc = true
     singleArchive      = true
     totalBackupMaxSize = 100 * 1024 * 1024
 }
