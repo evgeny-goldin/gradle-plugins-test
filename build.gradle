@@ -59,6 +59,9 @@ idea.module {
 
 
 crawler {
+    final ignoredLinksEndsWith = 'redirect=no /feed/ /blog/wp-comments-post.php'.tokenize()
+    final ignoredLinksContains = 'truezip.dev.java.net delicious.com/evgenyg ... Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php replytocom='.tokenize()
+
     baseUrl            = 'evgeny-goldin.com'
     failOnBrokenLinks  = true
     checkExternalLinks = true
@@ -68,20 +71,20 @@ crawler {
     newLinksMapFile    = file( 'newLinks.txt' )
     minimumBytes       = 2 * 1024 * 1024
     minimumLinks       = 2700
-    ignoredLinks       = [
-        { String link -> 'redirect=no /feed/ /blog/wp-comments-post.php'.tokenize().any { link.endsWith( it )}},
-        { String link -> 'truezip.dev.java.net delicious.com/evgenyg ... Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php replytocom='.tokenize().any { link.contains( it )}}
+    ignoredLinks       = [{ String link -> ignoredLinksEndsWith.any { link.endsWith( it )}},
+                          { String link -> ignoredLinksContains.any { link.contains( it )}}
     ]
 }
 
 
 task jfrogWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+    final ignoredLinksEndsWith = '{thumbnailLink.href} {icon} {spaceUrl} {url} {logoUrl} {1} {2} {4} {4}/'.tokenize()
     config {
         it.with {
             baseUrl      = 'wiki.jfrog.org'
             requestDelay = 1000
             displayLinks = true
-            ignoredLinks = [{ String link -> '{thumbnailLink.href} {icon}'.tokenize().any { link.endsWith( it ) }}]
+            ignoredLinks = [{ String link -> ignoredLinksEndsWith.any { link.endsWith( it ) }}]
         }
     }
 }
