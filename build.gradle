@@ -63,13 +63,15 @@ crawler {
     failOnBrokenLinks  = true
     checkExternalLinks = true
     displayLinks       = true
-    linkTransformers   = [{ String link -> link.replace( 'evgeny-goldin.org', 'evgeny-goldin.org:8148' ) }]
+    pageTransformers   = [{ String pageContent -> pageContent.replace( 'evgeny-goldin.org', 'evgeny-goldin.org:8148' ) }]
     linksMapFile       = file( 'links.txt' )
     newLinksMapFile    = file( 'newLinks.txt' )
     minimumBytes       = 2 * 1024 * 1024
     minimumLinks       = 2700
-    ignoredEndsWith    = 'redirect=no /feed/ /blog/wp-comments-post.php'.tokenize()
-    ignoredContains    = 'truezip.dev.java.net delicious.com/evgenyg ... Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php replytocom='.tokenize()
+    ignoredLinks       = [
+        { String link -> 'redirect=no /feed/ /blog/wp-comments-post.php'.tokenize().any { link.endsWith( it )}},
+        { String link -> 'truezip.dev.java.net delicious.com/evgenyg ... Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php replytocom='.tokenize().any { link.contains( it )}}
+    ]
 }
 
 gitdump {
