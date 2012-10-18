@@ -74,6 +74,24 @@ crawler {
     ]
 }
 
+
+task jfrogWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+    config {
+        it.with {
+            baseUrl      = 'wiki.jfrog.org'
+            requestDelay = 1000
+            displayLinks = true
+            ignoredLinks = [{ String link -> '{thumbnailLink.href} {icon}'.tokenize().any { link.endsWith( it ) }}]
+        }
+    }
+}
+
+
+//task gradleDocumentationCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+//    baseUrl = 'gradle.org/documentation'
+//}
+
+
 gitdump {
     urls = new JsonSlurper().parseText( 'https://api.github.com/users/evgeny-goldin/repos'.toURL().text ).
            collect { Map    m       -> "${ m.git_url }:master" }.
