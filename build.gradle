@@ -77,7 +77,7 @@ crawler {
 }
 
 
-task jfrogWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
     final ignoredLinksEndsWith = '{thumbnailLink.href} {icon} {spaceUrl} {url} {logoUrl} {1} {2} {4} {4}/'.tokenize()
     final nonHtmlLinksContains = '/download/attachments/ /downloadallattachments.action /rpc/trackback/ /placeholder/macro?definition='.tokenize()
     config {
