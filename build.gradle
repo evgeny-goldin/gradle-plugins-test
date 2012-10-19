@@ -79,6 +79,7 @@ crawler {
 
 task jfrogWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
     final ignoredLinksEndsWith = '{thumbnailLink.href} {icon} {spaceUrl} {url} {logoUrl} {1} {2} {4} {4}/'.tokenize()
+    final nonHtmlLinksContains = '/download/attachments/ /downloadallattachments.action /rpc/trackback/ /placeholder/macro?definition='.tokenize()
     config {
         it.with {
             baseUrl            = 'wiki.jfrog.org'
@@ -86,6 +87,7 @@ task jfrogWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
             displayLinks       = true
             checkExternalLinks = true
             ignoredLinks       = [{ String link -> ignoredLinksEndsWith.any { link.endsWith( it ) }}]
+            nonHtmlLinks       = [{ String link -> nonHtmlLinksContains.any { link.contains( it ) }}]
         }
     }
 }
