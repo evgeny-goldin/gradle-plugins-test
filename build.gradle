@@ -81,18 +81,26 @@ task jfrogWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
     final ignoredLinksEndsWith = '{thumbnailLink.href} {icon} {spaceUrl} {url} {logoUrl} {1} {2} {4} {4}/'.tokenize()
     config {
         it.with {
-            baseUrl      = 'wiki.jfrog.org'
-            requestDelay = 1000
-            displayLinks = true
-            ignoredLinks = [{ String link -> ignoredLinksEndsWith.any { link.endsWith( it ) }}]
+            baseUrl            = 'wiki.jfrog.org'
+            requestDelay       = 1000
+            displayLinks       = true
+            checkExternalLinks = true
+            ignoredLinks       = [{ String link -> ignoredLinksEndsWith.any { link.endsWith( it ) }}]
         }
     }
 }
 
 
-//task gradleDocumentationCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
-//    baseUrl = 'gradle.org/documentation'
-//}
+task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+    config {
+        it.with {
+            baseUrl            = 'gradle.org'
+            requestDelay       = 1000
+            displayLinks       = true
+            checkExternalLinks = true
+        }
+    }
+}
 
 
 gitdump {
