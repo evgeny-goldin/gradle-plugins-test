@@ -79,7 +79,7 @@ crawler {
 
 task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
     final ignoredLinksEndsWith = '{thumbnailLink.href} {searchTerms} {thumbnailLink.href} {icon} {spaceUrl} {url} {logoUrl} {1} {2} {4} {4}/'.tokenize()
-    final nonHtmlLinksContains = 'osd.action /download/attachments/ /downloadallattachments.action /rpc/trackback/ /placeholder/macro?definition='.tokenize()
+    final nonHtmlLinksContains = '/jcaptcha osd.action /download/attachments/ /downloadallattachments.action /rpc/trackback/ /placeholder/macro?definition='.tokenize()
     config {
         it.with {
             baseUrl            = 'wiki.jfrog.org'
