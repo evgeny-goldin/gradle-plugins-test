@@ -67,6 +67,7 @@ crawler {
     checkExternalLinks = true
     displayLinks       = true
     pageTransformers   = [{ String pageContent -> pageContent.replace( 'evgeny-goldin.org', 'evgeny-goldin.org:8148' ) }]
+    log                = file( 'log.txt' )
     linksMapFile       = file( 'links.txt' )
     newLinksMapFile    = file( 'newLinks.txt' )
     minimumBytes       = 2 * 1024 * 1024
@@ -86,6 +87,7 @@ task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) 
             requestDelay        = 1000
             displayLinks        = true
             checkExternalLinks  = true
+            log                 = file( 'log-jfrog.txt' )
             ignoredLinks        = [{ String link -> ignoredLinksEndsWith.any { link.endsWith( it ) }}]
             nonHtmlLinks        = [{ String link -> nonHtmlLinksContains.any { link.contains( it ) }}]
             brokenLinkCallbacks = [{ String linkUrl, String referrerUrl, String referrerContent ->
@@ -105,6 +107,7 @@ task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask )
             requestDelay       = 1000
             displayLinks       = true
             checkExternalLinks = true
+            log                = file( 'log-gradle.txt' )
         }
     }
 }
