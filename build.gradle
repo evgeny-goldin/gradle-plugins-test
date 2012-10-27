@@ -113,6 +113,14 @@ task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask )
 }
 
 
+task printEnv << {
+    final r = Runtime.runtime
+    println( "Max   memory: [${ r.maxMemory()}]")
+    println( "Total memory: [${ r.totalMemory()}]")
+    println( "GRADLE_OPTS:  [${ System.getenv( 'GRADLE_OPTS' )}]")
+}
+
+
 gitdump {
     urls = new JsonSlurper().parseText( 'https://api.github.com/users/evgeny-goldin/repos'.toURL().text ).
            collect { Map    m       -> "${ m.git_url }:master" }.
