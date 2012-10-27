@@ -85,7 +85,6 @@ task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) 
         it.with {
             baseUrl             = 'wiki.jfrog.org'
             requestDelay        = 1000
-            displayLinks        = true
             checkExternalLinks  = true
             log                 = file( 'log-jfrog.txt' )
             ignoredLinks        = [{ String link -> ignoredLinksEndsWith.any { link.endsWith( it ) }}]
@@ -105,7 +104,6 @@ task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask )
         it.with {
             baseUrl            = 'gradle.org'
             requestDelay       = 1000
-            displayLinks       = true
             checkExternalLinks = true
             log                = file( 'log-gradle.txt' )
         }
