@@ -1,4 +1,5 @@
 diffpagesbyversion.action
 diffpages.action
+viewpreviousversions.action
 http://5.5.5.5:8081/artifactory/
 http://64.233.169.104/search
