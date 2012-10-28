@@ -1,5 +1,7 @@
 import groovy.json.JsonSlurper
 
+import java.util.regex.Pattern
+
 apply plugin: 'idea'
 apply plugin: 'crawler'
 apply plugin: 'gitdump'
@@ -80,20 +82,30 @@ crawler {
 
 task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
     final ignoredLinksEndsWith = '{thumbnailLink.href} {searchTerms} {thumbnailLink.href} {icon} {spaceUrl} {url} {logoUrl} {1} {2} {4} {4}/'.tokenize()
+    final ignoredLinksContains = file( 'jfrog-ignored-links.txt' ).readLines().grep()
     final nonHtmlLinksContains = '/jcaptcha osd.action /download/attachments/ /downloadallattachments.action /rpc/trackback/ /placeholder/macro?definition='.tokenize()
     config {
         it.with {
-            baseUrl             = 'wiki.jfrog.org'
-            requestDelay        = 1000
-            checksumsChunkSize  = 10 * 1024
-            checkExternalLinks  = true
-            log                 = file( 'log-jfrog.txt' )
-            ignoredLinks        = [{ String link -> ignoredLinksEndsWith.any { link.endsWith( it ) }}]
-            nonHtmlLinks        = [{ String link -> nonHtmlLinksContains.any { link.contains( it ) }}]
-            brokenLinkCallbacks = [{ String linkUrl, String referrerUrl, String referrerContent ->
+            baseUrl            = 'wiki.jfrog.org'
+            requestDelay       = 1000
+            checksumsChunkSize = 10 * 1024
+            checkExternalLinks = true
+            log                = file( 'log-jfrog.txt' )
+            nonHtmlLinks       = [{ String link -> nonHtmlLinksContains.any { link.contains( it ) }}]
+            ignoredContent     = [{
+                String pageUrl, String pageContent ->
+                pageContent.with { contains( 'You are viewing an old version of this page. View the ' ) &&
+                                   contains( 'Compare with Current' ) &&
+                                   contains( 'View Page History' ) }
+            }]
+            ignoredLinks       = [{
+                String link -> ignoredLinksEndsWith.any { link.endsWith( it ) } || ignoredLinksContains.any{ link.contains( it ) }
+            }]
+            ignoredBrokenLinks = [{
+                String linkUrl, String referrerUrl, String referrerContent ->
                 final j1 = referrerContent.indexOf( 'Hot Referrers' )
                 final j2 = referrerContent.indexOf( linkUrl )
-                ( j1 < 0 ) || ( j2 < 0 ) || ( j2 < j1 )
+                ( j1 > 0 ) && ( j2 > 0 ) && ( j2 > j1 )
             }]
         }
     }
@@ -101,6 +113,8 @@ task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) 
 
 
 task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+    final versionPattern = Pattern.compile( 'gradle.org/docs/(.+?)/' )
+
     config {
         it.with {
             baseUrl            = 'gradle.org'
@@ -108,6 +122,13 @@ task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask )
             checksumsChunkSize = 10 * 1024
             checkExternalLinks = true
             log                = file( 'log-gradle.txt' )
+            ignoredLinks       = [{
+                String link ->
+                if ( ! link.startsWith( 'http://gradle.org/docs/' )){ return false }
+
+                final docsVersion = link.find( versionPattern ){ it[ 1 ] }
+                docsVersion.contains( '-milestone-' ) || docsVersion.startsWith( '0.' )
+            }]
         }
     }
 }
