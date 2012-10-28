@@ -65,7 +65,6 @@ crawler {
     final ignoredLinksContains = 'truezip.dev.java.net delicious.com/evgenyg ... Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php replytocom='.tokenize()
 
     baseUrl            = 'evgeny-goldin.com'
-    failOnBrokenLinks  = true
     checkExternalLinks = true
     displayLinks       = true
     pageTransformers   = [{ String pageContent -> pageContent.replace( 'evgeny-goldin.org', 'evgeny-goldin.org:8148' ) }]
