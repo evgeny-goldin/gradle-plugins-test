@@ -67,7 +67,8 @@ crawler {
     baseUrl            = 'evgeny-goldin.com'
     checkExternalLinks = true
     displayLinks       = true
-    pageTransformers   = [{ String pageContent -> pageContent.replace( 'evgeny-goldin.org', 'evgeny-goldin.org:8148' ) }]
+    pageTransformers   = [{ String pageUrl, String pageContent ->
+                            pageContent.replace( 'evgeny-goldin.org', 'evgeny-goldin.org:8148' ) }]
     log                = file( 'log.txt' )
     linksMapFile       = file( 'links.txt' )
     newLinksMapFile    = file( 'newLinks.txt' )
@@ -80,9 +81,10 @@ crawler {
 
 
 task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
-    final ignoredLinksEndsWith = '{thumbnailLink.href} {searchTerms} {thumbnailLink.href} {icon} {spaceUrl} {url} {logoUrl} {1} {2} {4} {4}/'.tokenize()
-    final ignoredLinksContains = file( 'jfrog-ignored-links.txt' ).readLines().grep()
-    final nonHtmlLinksContains = '/jcaptcha osd.action /download/attachments/ /downloadallattachments.action /rpc/trackback/ /placeholder/macro?definition='.tokenize()
+    List<String> ignoredLinksEndsWith = '{thumbnailLink.href} {searchTerms} {thumbnailLink.href} {icon} {spaceUrl} {url} {logoUrl} {1} {2} {4} {4}/'.tokenize()
+    List<String> ignoredLinksContains = file( 'jfrog-ignored-links.txt' ).readLines().grep()
+    List<String> nonHtmlLinksContains = '/jcaptcha osd.action /download/attachments/ /downloadallattachments.action /rpc/trackback/ /placeholder/macro?definition='.tokenize()
+    Pattern      hotReferrers         = Pattern.compile( '(?s)<div class="basicPanelTitle">\\s+Hot Referrers\\s+</div>.+?</table>\\s+</div>' )
     config {
         it.with {
             baseUrl            = 'wiki.jfrog.org'
@@ -90,21 +92,23 @@ task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) 
             checksumsChunkSize = 10 * 1024
             checkExternalLinks = true
             log                = file( 'log-jfrog.txt' )
-            nonHtmlLinks       = [{ String link -> nonHtmlLinksContains.any { link.contains( it ) }}]
-            ignoredContent     = [{
+            pageTransformers   = [{
                 String pageUrl, String pageContent ->
-                pageContent.with { contains( 'You are viewing an old version of this page. View the ' ) &&
-                                   contains( 'Compare with Current' ) &&
-                                   contains( 'View Page History' ) }
+                pageContent.replaceAll( hotReferrers, '' )
+            }]
+            nonHtmlLinks       = [{
+                String link -> nonHtmlLinksContains.any { link.contains( it ) }
             }]
             ignoredLinks       = [{
                 String link -> ignoredLinksEndsWith.any { link.endsWith( it ) } || ignoredLinksContains.any{ link.contains( it ) }
             }]
-            ignoredBrokenLinks = [{
-                String linkUrl, String referrerUrl, String referrerContent ->
-                final j1 = referrerContent.indexOf( 'Hot Referrers' )
-                final j2 = referrerContent.indexOf( linkUrl )
-                ( j1 > 0 ) && ( j2 > 0 ) && ( j2 > j1 )
+            ignoredContent     = [{
+                String pageUrl, String pageContent ->
+                pageContent.with {
+                    contains( 'You are viewing an old version of this page. View the ' ) &&
+                    contains( 'Compare with Current' ) &&
+                    contains( 'View Page History' )
+                }
             }]
         }
     }

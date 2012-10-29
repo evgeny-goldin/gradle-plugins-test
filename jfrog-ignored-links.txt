@@ -1,5 +1,13 @@
 diffpagesbyversion.action
 diffpages.action
 viewpreviousversions.action
-http://5.5.5.5:8081/artifactory/
+http://5.5.5.5:8081/artifactory
 http://64.233.169.104/search
+http://host:port/artifactory
+http://localhost:8081/artifactory
+http://myhost/artifactory
+http://myhost:myport
+http://nicoden.zxq.net/index.php?Maven2/
+http://repo-keythis/
+http://repo.jfrog.org/artifactory/third-party-releases-local/org/jfrog/jfrog-build-info-api/
+http://serverport/
