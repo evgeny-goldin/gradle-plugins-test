@@ -68,7 +68,7 @@ crawler {
     checkExternalLinks = true
     displayLinks       = true
     minimumBytes       = 2 * 1024 * 1024
-    minimumLinks       = 2700
+    minimumLinks       = 2690
 
     log                = file( 'log.txt' )
     linksMapFile       = file( 'links.txt' )
