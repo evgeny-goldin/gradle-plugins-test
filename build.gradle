@@ -102,6 +102,14 @@ task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) 
             ignoredLinks       = [{ String link -> ignoredLinks.any { link.endsWith( it ) }}]
             linkTransformers   = [{ String link -> link.replaceAll( jsessionidPattern, '' )}]
             pageTransformers   = [{ String pageUrl, String pageContent -> pageContent.replaceAll( hotReferrers, '' )}]
+            ignoredContent     = [{
+                String pageUrl, String pageContent ->
+                pageContent.with {
+                    contains( 'You are viewing an old version of this page. View the ' ) &&
+                    contains( 'Compare with Current' ) &&
+                    contains( 'View Page History' )
+                }
+            }]
         }
     }
 }
