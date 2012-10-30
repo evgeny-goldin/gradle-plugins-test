@@ -67,49 +67,41 @@ crawler {
     baseUrl            = 'evgeny-goldin.com'
     checkExternalLinks = true
     displayLinks       = true
-    pageTransformers   = [{ String pageUrl, String pageContent ->
-                            pageContent.replace( 'evgeny-goldin.org', 'evgeny-goldin.org:8148' ) }]
+    minimumBytes       = 2 * 1024 * 1024
+    minimumLinks       = 2700
+
     log                = file( 'log.txt' )
     linksMapFile       = file( 'links.txt' )
     newLinksMapFile    = file( 'newLinks.txt' )
-    minimumBytes       = 2 * 1024 * 1024
-    minimumLinks       = 2700
+
+    linkTransformers   = [{ String link -> link.replace( 'evgeny-goldin.org', 'evgeny-goldin.org:8148' ) }]
     ignoredLinks       = [{ String link -> ignoredLinksEndsWith.any { link.endsWith( it )}},
-                          { String link -> ignoredLinksContains.any { link.contains( it )}}
-    ]
+                          { String link -> ignoredLinksContains.any { link.contains( it )}}]
 }
 
 
 task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
-    List<String> ignoredLinksEndsWith = '{thumbnailLink.href} {searchTerms} {thumbnailLink.href} {icon} {spaceUrl} {url} {logoUrl} {1} {2} {4} {4}/'.tokenize()
-    List<String> ignoredLinksContains = file( 'jfrog-ignored-links.txt' ).readLines().grep()
-    List<String> nonHtmlLinksContains = '/jcaptcha osd.action /download/attachments/ /downloadallattachments.action /rpc/trackback/ /placeholder/macro?definition='.tokenize()
-    Pattern      hotReferrers         = Pattern.compile( '(?s)<div class="basicPanelTitle">\\s+Hot Referrers\\s+</div>.+?</table>\\s+</div>' )
+
+    List<String> nonHtmlLinks      = file( 'jfrog-non-html-links.txt' ).readLines().grep()
+    List<String> ignoredLinks      = file( 'jfrog-ignored-links.txt'  ).readLines().grep()
+    Pattern      jsessionidPattern = Pattern.compile( /;jsessionid=\w+/ )
+    Pattern      hotReferrers      = Pattern.compile( '(?s)<div class="basicPanelTitle">\\s+Hot Referrers\\s+</div>.+?</table>\\s+</div>' )
+
     config {
         it.with {
             baseUrl            = 'wiki.jfrog.org'
             requestDelay       = 1000
             checksumsChunkSize = 10 * 1024
             checkExternalLinks = true
+
             log                = file( 'log-jfrog.txt' )
-            pageTransformers   = [{
-                String pageUrl, String pageContent ->
-                pageContent.replaceAll( hotReferrers, '' )
-            }]
-            nonHtmlLinks       = [{
-                String link -> nonHtmlLinksContains.any { link.contains( it ) }
-            }]
-            ignoredLinks       = [{
-                String link -> ignoredLinksEndsWith.any { link.endsWith( it ) } || ignoredLinksContains.any{ link.contains( it ) }
-            }]
-            ignoredContent     = [{
-                String pageUrl, String pageContent ->
-                pageContent.with {
-                    contains( 'You are viewing an old version of this page. View the ' ) &&
-                    contains( 'Compare with Current' ) &&
-                    contains( 'View Page History' )
-                }
-            }]
+            linksMapFile       = file( 'links-jfrog.txt' )
+            newLinksMapFile    = file( 'newLinks-jfrog.txt' )
+
+            nonHtmlLinks       = [{ String link -> nonHtmlLinks.any { link.contains( it ) }}]
+            ignoredLinks       = [{ String link -> ignoredLinks.any { link.endsWith( it ) }}]
+            linkTransformers   = [{ String link -> link.replaceAll( jsessionidPattern, '' )}]
+            pageTransformers   = [{ String pageUrl, String pageContent -> pageContent.replaceAll( hotReferrers, '' )}]
         }
     }
 }
@@ -124,7 +116,11 @@ task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask )
             requestDelay       = 1000
             checksumsChunkSize = 10 * 1024
             checkExternalLinks = true
+
             log                = file( 'log-gradle.txt' )
+            linksMapFile       = file( 'links-gradle.txt' )
+            newLinksMapFile    = file( 'newLinks-gradle.txt' )
+
             ignoredLinks       = [{
                 String link ->
                 if ( ! link.startsWith( 'http://gradle.org/docs/' )){ return false }
@@ -134,14 +130,6 @@ task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask )
             }]
         }
     }
-}
-
-
-task printEnv << {
-    final r = Runtime.runtime
-    println( "Max   memory: [${ r.maxMemory()}]")
-    println( "Total memory: [${ r.totalMemory()}]")
-    println( "GRADLE_OPTS:  [${ System.getenv( 'GRADLE_OPTS' )}]")
 }
 
 
