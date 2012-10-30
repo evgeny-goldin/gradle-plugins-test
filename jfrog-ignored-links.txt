@@ -11,3 +11,5 @@ http://nicoden.zxq.net/index.php?Maven2/
 http://repo-keythis/
 http://repo.jfrog.org/artifactory/third-party-releases-local/org/jfrog/jfrog-build-info-api/
 http://serverport/
+https://artifactory.yourdomain.com/artifactory
+http://fisidev5-lnx:8081/artifactory/repo
