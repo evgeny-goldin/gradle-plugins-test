@@ -111,3 +111,17 @@ task hascoreCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask 
         }
     }
 }
+
+
+task berlindevopsCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+    config {
+        it.with {
+            baseUrl            = 'berlindevops.org'
+            requestDelay       = 1000
+            checkExternalLinks = true
+            log                = file( 'log-berlindevops.txt' )
+            linksMapFile       = file( 'links-berlindevops.txt' )
+            newLinksMapFile    = file( 'newLinks-berlindevops.txt' )
+        }
+    }
+}
