@@ -119,6 +119,7 @@ task berlindevopsCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
             baseUrl            = 'berlindevops.org'
             requestDelay       = 1000
             checkExternalLinks = true
+            ignoredLinks       = [{ String link -> link.with{ endsWith( '/wp-comments-post.php' ) || endsWith( '/?pushpress=hub' ) }}]
             log                = file( 'log-berlindevops.txt' )
             linksMapFile       = file( 'links-berlindevops.txt' )
             newLinksMapFile    = file( 'newLinks-berlindevops.txt' )
