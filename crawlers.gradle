@@ -96,3 +96,18 @@ task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask )
         }
     }
 }
+
+
+task hascoreCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+    config {
+        it.with {
+            baseUrl            = 'hascore.com'
+            requestDelay       = 1000
+            checkExternalLinks = true
+
+            log                = file( 'log-hascore.txt' )
+            linksMapFile       = file( 'links-hascore.txt' )
+            newLinksMapFile    = file( 'newLinks-hascore.txt' )
+        }
+    }
+}
