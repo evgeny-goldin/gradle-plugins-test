@@ -104,7 +104,7 @@ task hascoreCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask 
             baseUrl            = 'hascore.com'
             requestDelay       = 1000
             checkExternalLinks = true
-
+            ignoredLinks       = [{ String link -> link.endsWith( '/&' ) }]
             log                = file( 'log-hascore.txt' )
             linksMapFile       = file( 'links-hascore.txt' )
             newLinksMapFile    = file( 'newLinks-hascore.txt' )
