@@ -82,8 +82,8 @@ crawler {
 
 task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 
-    List<String> nonHtmlLinks      = file( 'jfrog-non-html-links.txt' ).readLines().grep()
-    List<String> ignoredLinks      = file( 'jfrog-ignored-links.txt'  ).readLines().grep()
+    List<String> nonHtmlLinksData  = file( 'jfrog-non-html-links.txt' ).readLines().grep()
+    List<String> ignoredLinksData  = file( 'jfrog-ignored-links.txt'  ).readLines().grep()
     Pattern      jsessionidPattern = Pattern.compile( /;jsessionid=\w+/ )
     Pattern      hotReferrers      = Pattern.compile( '(?s)<div class="basicPanelTitle">\\s+Hot Referrers\\s+</div>.+?</table>\\s+</div>' )
 
@@ -98,8 +98,8 @@ task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) 
             linksMapFile       = file( 'links-jfrog.txt' )
             newLinksMapFile    = file( 'newLinks-jfrog.txt' )
 
-            nonHtmlLinks       = [{ String link -> nonHtmlLinks.any { link.contains( it ) }}]
-            ignoredLinks       = [{ String link -> ignoredLinks.any { link.endsWith( it ) }}]
+            nonHtmlLinks       = [{ String link -> nonHtmlLinksData.any { link.contains( it ) }}]
+            ignoredLinks       = [{ String link -> ignoredLinksData.any { link.contains( it ) }}]
             linkTransformers   = [{ String link -> link.replaceAll( jsessionidPattern, '' )}]
             pageTransformers   = [{ String pageUrl, String pageContent -> pageContent.replaceAll( hotReferrers, '' )}]
             ignoredContent     = [{
