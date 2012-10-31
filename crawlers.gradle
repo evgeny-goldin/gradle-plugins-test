@@ -24,8 +24,8 @@ crawler {
     baseUrl            = 'evgeny-goldin.com'
     checkExternalLinks = true
     displayLinks       = true
-    minimumBytes       = 2 * 1024 * 1024
     minimumLinks       = 2500
+    minimumBytes       = 2 * 1024 * 1024
 
     log                = file( 'log.txt' )
     linksMapFile       = file( 'links.txt' )
@@ -104,6 +104,8 @@ task hascoreCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask 
             baseUrl            = 'hascore.com'
             requestDelay       = 1000
             checkExternalLinks = true
+            minimumLinks       = 3000
+            minimumBytes       = 1 * 1024 * 1024
             ignoredLinks       = [{ String link -> link.endsWith( '/&' ) }]
             log                = file( 'log-hascore.txt' )
             linksMapFile       = file( 'links-hascore.txt' )
@@ -119,6 +121,8 @@ task berlindevopsCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
             baseUrl            = 'berlindevops.org'
             requestDelay       = 1000
             checkExternalLinks = true
+            minimumLinks       = 400
+            minimumBytes       = 1 * 1024 * 1024
             ignoredLinks       = [{ String link -> link.with{ endsWith( '/wp-comments-post.php' ) || endsWith( '/?pushpress=hub' ) }}]
             log                = file( 'log-berlindevops.txt' )
             linksMapFile       = file( 'links-berlindevops.txt' )
