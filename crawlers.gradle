@@ -139,3 +139,23 @@ task berlindevopsCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
         }
     }
 }
+
+
+task teamcityWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+    Pattern jsessionidPattern   = Pattern.compile( /;jsessionid=\w+/ )
+    config {
+        it.with {
+            baseUrl            = 'confluence.jetbrains.net/display/TCD7'
+            teamcityMessages   = true
+            checkExternalLinks = true
+
+            log                = file( 'log-teamcity.txt' )
+            linksMapFile       = file( 'links-teamcity.txt' )
+            newLinksMapFile    = file( 'newLinks-teamcity.txt' )
+
+            minimumLinks       = 1
+            minimumBytes       = 1
+            linkTransformers   = [{ String link -> link.replaceAll( jsessionidPattern, '' )}]
+        }
+    }
+}
