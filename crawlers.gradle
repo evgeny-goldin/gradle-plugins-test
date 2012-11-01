@@ -142,7 +142,9 @@ task berlindevopsCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
 
 
 task teamcityWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
-    Pattern jsessionidPattern   = Pattern.compile( /;jsessionid=\w+/ )
+    Pattern      jsessionidPattern = Pattern.compile( /;jsessionid=\w+/ )
+    List<String> ignoredLinksData  = file( 'teamcity-ignored-links.txt'  ).readLines().grep()
+
     config {
         it.with {
             baseUrl            = 'confluence.jetbrains.net/display/TCD7'
@@ -156,6 +158,7 @@ task teamcityWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
             minimumLinks       = 1
             minimumBytes       = 1
             linkTransformers   = [{ String link -> link.replaceAll( jsessionidPattern, '' )}]
+            ignoredLinks       = [{ String link -> ignoredLinksData.any { link.contains( it ) }}]
         }
     }
 }
