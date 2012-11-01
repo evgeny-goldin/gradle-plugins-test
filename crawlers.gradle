@@ -24,13 +24,14 @@ crawler {
     baseUrl            = 'evgeny-goldin.com'
     checkExternalLinks = true
     displayLinks       = true
-    minimumLinks       = 2500
-    minimumBytes       = 2 * 1024 * 1024
+    teamcityMessages   = true
 
     log                = file( 'log.txt' )
     linksMapFile       = file( 'links.txt' )
     newLinksMapFile    = file( 'newLinks.txt' )
 
+    minimumLinks       = 2500
+    minimumBytes       = 2 * 1024 * 1024
     linkTransformers   = [{ String link -> link.replace( 'evgeny-goldin.org', 'evgeny-goldin.org:8148' ) }]
     ignoredLinks       = [{ String link -> ignoredLinksEndsWith.any { link.endsWith( it )}},
                           { String link -> ignoredLinksContains.any { link.contains( it )}}]
@@ -47,14 +48,15 @@ task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) 
     config {
         it.with {
             baseUrl            = 'wiki.jfrog.org'
-            requestDelay       = 1000
-            checksumsChunkSize = 10 * 1024
+            teamcityMessages   = true
             checkExternalLinks = true
 
             log                = file( 'log-jfrog.txt' )
             linksMapFile       = file( 'links-jfrog.txt' )
             newLinksMapFile    = file( 'newLinks-jfrog.txt' )
 
+            minimumLinks       = 16800
+            minimumBytes       = 57 * 1024 * 1024
             nonHtmlLinks       = [{ String link -> nonHtmlLinksData.any { link.contains( it ) }}]
             ignoredLinks       = [{ String link -> ignoredLinksData.any { link.contains( it ) }}]
             linkTransformers   = [{ String link -> link.replaceAll( jsessionidPattern, '' )}]
@@ -78,14 +80,15 @@ task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask )
     config {
         it.with {
             baseUrl            = 'gradle.org'
-            requestDelay       = 1000
-            checksumsChunkSize = 10 * 1024
+            teamcityMessages   = true
             checkExternalLinks = true
 
             log                = file( 'log-gradle.txt' )
             linksMapFile       = file( 'links-gradle.txt' )
             newLinksMapFile    = file( 'newLinks-gradle.txt' )
 
+            minimumLinks       = 17300
+            minimumBytes       = 30 * 1024 * 1024
             ignoredLinks       = [{
                 String link ->
                 if ( ! link.startsWith( 'http://gradle.org/docs/' )){ return false }
@@ -102,14 +105,16 @@ task hascoreCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask 
     config {
         it.with {
             baseUrl            = 'hascore.com'
-            requestDelay       = 1000
+            teamcityMessages   = true
             checkExternalLinks = true
-            minimumLinks       = 3000
-            minimumBytes       = 1 * 1024 * 1024
-            ignoredLinks       = [{ String link -> link.endsWith( '/&' ) }]
+
             log                = file( 'log-hascore.txt' )
             linksMapFile       = file( 'links-hascore.txt' )
             newLinksMapFile    = file( 'newLinks-hascore.txt' )
+
+            minimumLinks       = 3000
+            minimumBytes       = 1 * 1024 * 1024
+            ignoredLinks       = [{ String link -> link.endsWith( '/&' ) }]
         }
     }
 }
@@ -119,14 +124,17 @@ task berlindevopsCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
     config {
         it.with {
             baseUrl            = 'berlindevops.org'
-            requestDelay       = 1000
+            teamcityMessages   = true
             checkExternalLinks = true
-            minimumLinks       = 400
-            minimumBytes       = 1 * 1024 * 1024
-            ignoredLinks       = [{ String link -> link.with{ endsWith( '/wp-comments-post.php' ) || endsWith( '/?pushpress=hub' ) }}]
+
             log                = file( 'log-berlindevops.txt' )
             linksMapFile       = file( 'links-berlindevops.txt' )
             newLinksMapFile    = file( 'newLinks-berlindevops.txt' )
+
+            minimumLinks       = 400
+            minimumBytes       = 1 * 1024 * 1024
+            ignoredLinks       = [{ String link -> link.with{ endsWith( '/wp-comments-post.php' ) ||
+                                                              endsWith( '/?pushpress=hub' ) }}]
         }
     }
 }
