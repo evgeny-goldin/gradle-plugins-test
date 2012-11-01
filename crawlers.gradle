@@ -112,7 +112,7 @@ task hascoreCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask 
             linksMapFile       = file( 'links-hascore.txt' )
             newLinksMapFile    = file( 'newLinks-hascore.txt' )
 
-            minimumLinks       = 3000
+            minimumLinks       = 2800
             minimumBytes       = 1 * 1024 * 1024
             ignoredLinks       = [{ String link -> link.endsWith( '/&' ) }]
         }
