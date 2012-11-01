@@ -134,8 +134,8 @@ task berlindevopsCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
             minimumLinks       = 400
             minimumBytes       = 1 * 1024 * 1024
             ignoredLinks       = [{ String link -> link.with{ endsWith( '/wp-comments-post.php' ) ||
-                                                              endsWith( '/?like=1' ) || 
                                                               endsWith( '/?pushpress=hub' ) }}]
+            ignoredBrokenLinks = [{ String link -> link == 'http://berlindevops.org?like=1' }]
         }
     }
 }
