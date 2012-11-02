@@ -155,8 +155,8 @@ task teamcityWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
             linksMapFile       = file( 'links-teamcity.txt' )
             newLinksMapFile    = file( 'newLinks-teamcity.txt' )
 
-            minimumLinks       = 1
-            minimumBytes       = 1
+            minimumLinks       = 2900
+            minimumBytes       = 3 * 1024 * 1024
             linkTransformers   = [{ String link -> link.replaceAll( jsessionidPattern, '' )}]
             ignoredLinks       = [{ String link -> ignoredLinksData.any { link.contains( it ) }}]
         }
