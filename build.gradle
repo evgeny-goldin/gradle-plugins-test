@@ -96,7 +96,7 @@ subprojects {
         includeSystem       = true
         includeProperties   = true
         includePaths        = true
-        includeDependencies = true
+        includeDependencies = [ 'compile', 'runtime' ]
     }
 }
 
