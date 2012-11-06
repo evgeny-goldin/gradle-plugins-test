@@ -90,6 +90,14 @@ subprojects {
         testCompile ( 'junit:junit:4.10' ){ exclude group: 'org.hamcrest' }
         testRuntime 'ch.qos.logback:logback-classic:1.0.7'
     }
+
+    about {
+        includeEnv          = true
+        includeSystem       = true
+        includeProperties   = true
+        includePaths        = true
+        includeDependencies = true
+    }
 }
 
 
