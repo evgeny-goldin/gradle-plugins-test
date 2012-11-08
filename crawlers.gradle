@@ -87,8 +87,8 @@ task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask )
             linksMapFile       = file( 'links-gradle.txt' )
             newLinksMapFile    = file( 'newLinks-gradle.txt' )
 
-            minimumLinks       = 17300
-            minimumBytes       = 30 * 1024 * 1024
+            minimumLinks       = 14000
+            minimumBytes       = 24 * 1024 * 1024
             ignoredLinks       = [{
                 String link ->
                 if ( ! link.startsWith( 'http://gradle.org/docs/' )){ return false }
