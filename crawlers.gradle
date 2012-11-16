@@ -40,8 +40,8 @@ crawler {
 
 task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 
-    List<String> nonHtmlLinksData    = file( 'jfrog-non-html-links.txt' ).readLines().grep()
-    List<String> ignoredLinksData    = file( 'jfrog-ignored-links.txt'  ).readLines().grep()
+    List<String> nonHtmlLinksData    = file( 'jfrog-non-html-links.txt' ).readLines()*.trim().grep()
+    List<String> ignoredLinksData    = file( 'jfrog-ignored-links.txt'  ).readLines()*.trim().grep()
     Pattern      jsessionidPattern   = Pattern.compile( /;jsessionid=\w+/ )
     Pattern      hotReferrersPattern = Pattern.compile( '(?s)<div class="basicPanelTitle">\\s+Hot Referrers\\s+</div>.+?</table>\\s+</div>' )
 
@@ -143,7 +143,7 @@ task berlindevopsCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
 
 task teamcityWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
     Pattern      jsessionidPattern = Pattern.compile( /;jsessionid=\w+/ )
-    List<String> ignoredLinksData  = file( 'teamcity-ignored-links.txt'  ).readLines().grep()
+    List<String> ignoredLinksData  = file( 'teamcity-ignored-links.txt'  ).readLines()*.trim().grep()
 
     config {
         it.with {
