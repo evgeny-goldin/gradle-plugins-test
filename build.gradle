@@ -15,6 +15,8 @@ defaultTasks 'clean', 'codenarc', 'duplicates', 'build', 'about'
 
 group = 'com.github.goldin.plugins.gradle'
 
+println "> Running Gradle [${ project.gradle.gradleVersion }], Groovy [${ GroovySystem.version }], Java [${ System.getProperty( 'java.version' ) }]"
+
 
 buildscript {
 
@@ -113,4 +115,4 @@ project ( ':kotlin:kotlin-depends-on-java' ) {
 }
 
 
-task wrapper( type: Wrapper ) { gradleVersion = '1.2' }
+task wrapper( type: Wrapper ) { gradleVersion = '1.3' }
