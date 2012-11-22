@@ -16,6 +16,10 @@ defaultTasks 'clean', 'codenarc', 'duplicates', 'build', 'about'
 group = 'com.github.goldin.plugins.gradle'
 
 println "> Running Gradle [${ project.gradle.gradleVersion }], Groovy [${ GroovySystem.version }], Java [${ System.getProperty( 'java.version' ) }]"
+gradle.taskGraph.whenReady {
+    println "Zip tasks: ${ project.rootProject.subprojects*.tasks*.toList().flatten().findAll{ Task t -> t instanceof Zip }}"    
+}
+
 
 
 buildscript {
@@ -72,6 +76,8 @@ gitdump {
 
 subprojects {
 
+    Project p ->
+
     apply plugin: 'idea'
     apply plugin: 'groovy'
     apply plugin: 'about'
@@ -99,6 +105,7 @@ subprojects {
         includeProperties   = true
         includePaths        = true
         includeDependencies = [ 'compile', 'runtime' ]
+        tasks               = p.tasks.toList().findAll{ Task t -> t instanceof Zip }
     }
 }
 
