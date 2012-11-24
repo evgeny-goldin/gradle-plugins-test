@@ -141,6 +141,7 @@ task berlindevopsCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
 }
 
 
+
 task teamcityWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
     Pattern      jsessionidPattern = Pattern.compile( /;jsessionid=\w+/ )
     List<String> ignoredLinksData  = file( 'teamcity-ignored-links.txt'  ).readLines()*.trim().grep()
@@ -151,14 +152,32 @@ task teamcityWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
             teamcityMessages   = true
             checkExternalLinks = true
 
-            log                = file( 'log-teamcity.txt' )
-            linksMapFile       = file( 'links-teamcity.txt' )
-            newLinksMapFile    = file( 'newLinks-teamcity.txt' )
+            log                = file( 'log-teamcity-wiki.txt' )
+            linksMapFile       = file( 'links-teamcity-wiki.txt' )
+            newLinksMapFile    = file( 'newLinks-teamcity-wiki.txt' )
 
             minimumLinks       = 2900
             minimumBytes       = 3 * 1024 * 1024
             linkTransformers   = [{ String link -> link.replaceAll( jsessionidPattern, '' )}]
             ignoredLinks       = [{ String link -> ignoredLinksData.any { link.contains( it ) }}]
+        }
+    }
+}
+
+
+task teamcityJavadocCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+    config {
+        it.with {
+            baseUrl            = 'javadoc.jetbrains.net/teamcity/openapi/current/'
+            teamcityMessages   = true
+            checkExternalLinks = true
+
+            log                = file( 'log-teamcity-javadoc.txt' )
+            linksMapFile       = file( 'links-teamcity-javadoc.txt' )
+            newLinksMapFile    = file( 'newLinks-teamcity-javadoc.txt' )
+
+            minimumLinks       = 3300
+            minimumBytes       = 28 * 1024 * 1024
         }
     }
 }
