@@ -165,7 +165,7 @@ task teamcityWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
 }
 
 
-task teamcityJavadocCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+task teamcityJavadocsCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
     config {
         it.with {
             baseUrl            = 'javadoc.jetbrains.net/teamcity/openapi/current/'
