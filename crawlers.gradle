@@ -82,6 +82,7 @@ task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask )
             baseUrl            = 'gradle.org'
             teamcityMessages   = true
             checkExternalLinks = true
+            pageDownloadLimit  = 500 * 1024
 
             log                = file( 'log-gradle.txt' )
             linksMapFile       = file( 'links-gradle.txt' )
