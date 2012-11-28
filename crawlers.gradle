@@ -51,7 +51,7 @@ task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) 
             teamcityMessages   = true
             checkExternalLinks = true
             pageDownloadLimit  = 300 * 1024
-            totalDownloadLimit = 150 * 1024 * 1024
+            totalDownloadLimit = -1
 
             log                = file( 'log-jfrog.txt' )
             linksMapFile       = file( 'links-jfrog.txt' )
