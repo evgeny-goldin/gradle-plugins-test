@@ -166,6 +166,7 @@ task teamcityJavadocsCrawler( type: com.github.goldin.plugins.gradle.crawler.Cra
         baseUrl            = 'javadoc.jetbrains.net/teamcity/openapi/current/'
         teamcityMessages   = true
         checkExternalLinks = true
+        pageDownloadLimit  = 300 * 1024
 
         log                = file( 'log-teamcity-javadoc.txt' )
         linksMapFile       = file( 'links-teamcity-javadoc.txt' )
