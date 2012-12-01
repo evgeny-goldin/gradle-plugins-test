@@ -10,14 +10,14 @@ ext.codenarcRuleSetFiles = [ "$projectDir/codenarc.groovy" ]
 apply from: 'https://raw.github.com/evgeny-goldin/gradle-plugins/master/codenarc/CodeNarc.gradle'
 
 
-defaultTasks 'clean', 'codenarc', 'duplicates', 'build', 'about'
+defaultTasks 'clean', 'codenarc', 'duplicates', 'build'
 
 
 group = 'com.github.goldin.plugins.gradle'
 
 println "> Running Gradle [${ project.gradle.gradleVersion }], Groovy [${ GroovySystem.version }], Java [${ System.getProperty( 'java.version' ) }]"
 gradle.taskGraph.whenReady {
-    println "Zip tasks: ${ project.rootProject.subprojects*.tasks*.withType( Zip ).flatten()}"    
+    println "Zip tasks: ${ project.rootProject.subprojects*.tasks*.withType( Zip ).flatten()}"
 }
 
 
@@ -70,7 +70,7 @@ gitdump {
            findAll { String repoUrl -> ! [ 'gcommons-old', 'presentations', 'WideFinder' ].any{ repoUrl.contains( it )}}
     runAggressiveGitGc = true
     singleArchive      = true
-    totalBackupMaxSize = 100 * 1024 * 1024
+    totalBackupMaxSize = 50 * 1024 * 1024
 }
 
 
@@ -99,13 +99,31 @@ subprojects {
         testRuntime 'ch.qos.logback:logback-classic:1.0.7'
     }
 
+    jar.dependsOn 'about'
+
     about {
         includeEnv          = true
         includeSystem       = true
         includeProperties   = true
         includePaths        = true
         includeDependencies = [ 'compile', 'runtime' ]
-        tasks               = p.tasks.withType( Zip ).toList()
+    }
+
+    task sourcesJar( type: Jar, dependsOn: classes ) {
+        dependsOn 'about'
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    task groovydocJar( type: Jar, dependsOn: groovydoc ) {
+        dependsOn 'about'
+        classifier = 'javadoc'
+        from groovydoc.destinationDir
+    }
+
+    artifacts {
+         archives sourcesJar
+         archives groovydocJar
     }
 }
 
