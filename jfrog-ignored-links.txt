@@ -1,8 +1,18 @@
+viewpagesrc.action
+space-bookmarks.action
+copypage.action
+viewpage.action?pageId=20316438
+downloadallattachments.action
+
+</fieldset>
+
 {thumbnailLink.href}
 {searchTerms}
 {thumbnailLink.href}
 {icon}
 {spaceUrl}
+{spaceAdminUsername}
+{spaceSummaryPath}
 {url}
 {logoUrl}
 {1}
@@ -10,6 +20,7 @@
 {4}
 {4}/
 
+http://groupIdartifactIdversion
 http://yourserver/artifactory/p2
 http://5.5.5.5:8081/artifactory
 http://64.233.169.104/search
@@ -22,4 +33,10 @@ http://repo-keythis/
 http://repo.jfrog.org/artifactory/third-party-releases-local/org/jfrog/jfrog-build-info-api/
 http://serverport/
 https://artifactory.yourdomain.com/artifactory
+
+https://nuget.org/api/v2/Packages
 http://fisidev5-lnx:8081/artifactory/repo
+http://artifactory.jfrog.org/xsd/1
+http://www.jfrog.org/xsd/artifactory-v1_
+/display/S4J/2012/08
+.bookmarks
