@@ -57,8 +57,8 @@ task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) 
             linksMapFile       = file( 'links-jfrog.txt' )
             newLinksMapFile    = file( 'newLinks-jfrog.txt' )
 
-            minimumLinks       = 16700
-            minimumBytes       = 57 * 1024 * 1024
+            minimumLinks       = 15000
+            minimumBytes       = 400 * 1024 * 1024
             nonHtmlLinks       = [{ String link -> nonHtmlLinksData.any { link.contains( it ) }}]
             ignoredLinks       = [{ String link -> ignoredLinksData.any { link.contains( it ) }}]
             linkTransformers   = [{ String link -> link.replaceAll( jsessionidPattern, '' )}]
