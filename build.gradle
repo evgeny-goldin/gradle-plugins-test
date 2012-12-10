@@ -16,10 +16,6 @@ defaultTasks 'clean', 'codenarc', 'duplicates', 'build'
 group = 'com.github.goldin.plugins.gradle'
 
 println "> Running Gradle [${ project.gradle.gradleVersion }], Groovy [${ GroovySystem.version }], Java [${ System.getProperty( 'java.version' ) }]"
-gradle.taskGraph.whenReady {
-    println "Zip tasks: ${ project.rootProject.subprojects*.tasks*.withType( Zip ).flatten()}"
-}
-
 
 
 buildscript {
@@ -96,7 +92,7 @@ subprojects {
         groovy      'org.codehaus.groovy:groovy-all:2.0.5'
         compile     'com.github.goldin.rest:youtrack:0.1-SNAPSHOT'
         testCompile ( 'junit:junit:4.10' ){ exclude group: 'org.hamcrest' }
-        testRuntime 'ch.qos.logback:logback-classic:1.0.7'
+        testRuntime 'ch.qos.logback:logback-classic:1.0.9'
     }
 
     jar.dependsOn 'about'
@@ -137,6 +133,11 @@ project ( ':kotlin:java-depends-on-kotlin' ) {
 project ( ':kotlin:kotlin-depends-on-java' ) {
     compileKotlin.  dependsOn compileJava
     compileTestJava.dependsOn compileKotlin
+    dependencies {
+        compile 'org.jetbrains.kotlin:kotlin-runtime:0.4.297',
+                'org.jetbrains.kotlin:kotlin-stdlib:0.4.297',
+                'org.jetbrains.kotlin:kotlin-jdk-annotations:0.4.297'
+    }
 }
 
 
