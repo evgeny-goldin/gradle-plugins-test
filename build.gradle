@@ -147,7 +147,8 @@ project ( ':kotlin:kotlin-standalone' ) {
     dependencies {
         compile "org.jetbrains.kotlin:kotlin-runtime:$kotlinVersion",
                 "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
-                "org.jetbrains.kotlin:kotlin-jdk-annotations:$kotlinVersion"
+                "org.jetbrains.kotlin:kotlin-jdk-annotations:$kotlinVersion",
+                files( "${ System.getProperty( 'java.home' )}/lib/jce.jar" )
     }
 }
 
