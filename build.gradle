@@ -13,7 +13,8 @@ apply from: 'https://raw.github.com/evgeny-goldin/gradle-plugins/master/codenarc
 defaultTasks 'clean', 'codenarc', 'duplicates', 'build'
 
 
-group = 'com.github.goldin.plugins.gradle'
+final kotlinVersion = '0.4.297'
+group               = 'com.github.goldin.plugins.gradle'
 
 println "> Running Gradle [${ project.gradle.gradleVersion }], Groovy [${ GroovySystem.version }], Java [${ System.getProperty( 'java.version' ) }]"
 
@@ -90,8 +91,7 @@ subprojects {
 
     dependencies {
         groovy      'org.codehaus.groovy:groovy-all:2.0.5'
-        compile     'com.github.goldin.rest:youtrack:0.1-SNAPSHOT'
-        testCompile ( 'junit:junit:4.10' ){ exclude group: 'org.hamcrest' }
+        testCompile 'junit:junit:4.11'
         testRuntime 'ch.qos.logback:logback-classic:1.0.9'
     }
 
@@ -127,6 +127,9 @@ subprojects {
 project ( ':kotlin:java-depends-on-kotlin' ) {
     dependencies.compile files( compileKotlin.destinationDir )
     compileJava.dependsOn compileKotlin
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-runtime:$kotlinVersion"
+    }
 }
 
 
@@ -134,9 +137,17 @@ project ( ':kotlin:kotlin-depends-on-java' ) {
     compileKotlin.  dependsOn compileJava
     compileTestJava.dependsOn compileKotlin
     dependencies {
-        compile 'org.jetbrains.kotlin:kotlin-runtime:0.4.297',
-                'org.jetbrains.kotlin:kotlin-stdlib:0.4.297',
-                'org.jetbrains.kotlin:kotlin-jdk-annotations:0.4.297'
+        testRuntime "org.jetbrains.kotlin:kotlin-runtime:$kotlinVersion"
+    }
+}
+
+
+project ( ':kotlin:kotlin-standalone' ) {
+    compileJava.dependsOn compileKotlin
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-runtime:$kotlinVersion",
+                "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+                "org.jetbrains.kotlin:kotlin-jdk-annotations:$kotlinVersion"
     }
 }
 

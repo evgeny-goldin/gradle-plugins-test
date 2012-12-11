@@ -1,12 +1,18 @@
 package com.test;
 
-import com.github.goldin.rest.youtrack.Issue;
-import com.github.goldin.rest.youtrack.YouTrack;
-
 
 public class YouTrackRestJava2
 {
     private final YouTrack youtrack;
+
+    static class Issue{ Issue ( String issueId )   { super(); }}
+    static class YouTrack
+    {
+        YouTrack ( String url ){ super(); }
+        boolean issueExists( String issueId ){ return ! issueId.isEmpty(); }
+        Issue    issue( String issueId ){ return new Issue( issueId ); }
+    }
+
 
     public YouTrackRestJava2 ( String youtrackUrl )
     {
