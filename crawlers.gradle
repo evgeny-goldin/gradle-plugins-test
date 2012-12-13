@@ -50,8 +50,8 @@ task jfrogSiteCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
             linksMapFile       = file( 'links-jfrog-site.txt' )
             newLinksMapFile    = file( 'newLinks-jfrog-site.txt' )
 
-            minimumLinks       = 200
-            minimumBytes       = 500 * 1024
+            minimumLinks       = 210
+            minimumBytes       = 570 * 1024
             ignoredLinks       = [{ String link -> link == 'http://localhost:8080/artifactory/' }]
     }}
 }
