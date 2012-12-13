@@ -38,7 +38,25 @@ crawler {
 }
 
 
-task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+task jfrogSiteCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+
+    config { it.with {
+
+            baseUrl            = 'www.jfrog.com'
+            teamcityMessages   = true
+            checkExternalLinks = true
+
+            log                = file( 'log-jfrog-site.txt' )
+            linksMapFile       = file( 'links-jfrog-site.txt' )
+            newLinksMapFile    = file( 'newLinks-jfrog-site.txt' )
+
+            minimumLinks       = 1
+            minimumBytes       = 1
+    }}
+}
+
+
+task jfrogWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 
     List<String> nonHtmlLinksData    = file( 'jfrog-non-html-links.txt' ).readLines()*.trim().grep()
     List<String> ignoredLinksData    = file( 'jfrog-ignored-links.txt'  ).readLines()*.trim().grep()
@@ -53,9 +71,9 @@ task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) 
             pageDownloadLimit  = 300 * 1024
             totalDownloadLimit = -1
 
-            log                = file( 'log-jfrog.txt' )
-            linksMapFile       = file( 'links-jfrog.txt' )
-            newLinksMapFile    = file( 'newLinks-jfrog.txt' )
+            log                = file( 'log-jfrog-wiki.txt' )
+            linksMapFile       = file( 'links-jfrog-wiki.txt' )
+            newLinksMapFile    = file( 'newLinks-jfrog-wiki.txt' )
 
             minimumLinks       = 15000
             minimumBytes       = 400 * 1024 * 1024
