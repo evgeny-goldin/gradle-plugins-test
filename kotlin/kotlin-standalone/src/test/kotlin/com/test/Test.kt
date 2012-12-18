@@ -19,16 +19,20 @@ class TestKotlin2
     }
 
 
+/*
     [Test]
     fun testLife()
     {
         life.main( array())
     }
+*/
 
 
+/*
     [Test]
     fun testMaze()
     {
         maze.main( array())
     }
+*/
 }

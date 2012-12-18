@@ -1,6 +1,6 @@
 import javax.crypto.Cipher
 
-class Test()
+class CipherTest()
 {
     val c = Cipher.getInstance( "DES/CBC/PKCS5Padding" )
 }
