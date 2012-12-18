@@ -76,21 +76,14 @@ subprojects {
     Project p ->
 
     apply plugin: 'idea'
-    apply plugin: 'groovy'
     apply plugin: 'about'
     apply plugin: 'duplicates'
     apply plugin: 'kotlin'
 
-
     clean { delete( "$rootDir/out", "$rootDir/build" ) }
 
-
-    repositories {
-        mavenRepo url: 'http://evgenyg.artifactoryonline.com/evgenyg/repo/'
-    }
-
+    repositories { maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }}
     dependencies {
-        groovy      'org.codehaus.groovy:groovy-all:2.0.5'
         testCompile 'junit:junit:4.11'
         testRuntime 'ch.qos.logback:logback-classic:1.0.9'
     }
@@ -111,18 +104,18 @@ subprojects {
         from sourceSets.main.allSource
     }
 
-    task groovydocJar( type: Jar, dependsOn: groovydoc ) {
-        dependsOn 'about'
-        classifier = 'javadoc'
-        from groovydoc.destinationDir
-    }
-
-    artifacts {
-         archives sourcesJar
-         archives groovydocJar
-    }
+    artifacts { archives sourcesJar }
 }
 
+project ( ':codenarc' ) {
+    apply plugin: 'groovy'
+    dependencies { groovy 'org.codehaus.groovy:groovy-all:2.0.5' }
+}
+
+project ( ':duplicates' ) {
+    apply plugin: 'groovy'
+    dependencies { groovy 'org.codehaus.groovy:groovy-all:2.0.5' }
+}
 
 project ( ':kotlin:java-depends-on-kotlin' ) {
     dependencies.compile files( compileKotlin.destinationDir )
