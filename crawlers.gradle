@@ -195,6 +195,6 @@ task teamcityJavadocsCrawler( type: com.github.goldin.plugins.gradle.crawler.Cra
         newLinksMapFile    = file( 'newLinks-teamcity-javadoc.txt' )
 
         minimumLinks       = 3300
-        minimumBytes       = 28 * 1024 * 1024
+        minimumBytes       = 5 * 1024 * 1024
     }}
 }
