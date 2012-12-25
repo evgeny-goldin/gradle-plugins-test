@@ -38,6 +38,30 @@ crawler {
 }
 
 
+task wikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+
+    final ignoredLinksEndsWith = 'redirect=no'.tokenize()
+    final ignoredLinksContains = 'Talk: Special: printable= oldid= action='.tokenize()
+
+    config { it.with {
+
+            baseUrl            = 'evgeny-goldin.com/wiki'
+            teamcityMessages   = true
+            checkExternalLinks = true
+
+            log                = file( 'log-wiki.txt' )
+            linksMapFile       = file( 'links-wiki.txt' )
+            newLinksMapFile    = file( 'newLinks-wiki.txt' )
+
+            minimumLinks       = 1
+            minimumBytes       = 1 * 1024
+
+            ignoredLinks       = [{ String link -> ignoredLinksEndsWith.any { link.endsWith( it )}},
+                                  { String link -> ignoredLinksContains.any { link.contains( it )}}]
+    }}
+}
+
+
 task jfrogSiteCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 
     config { it.with {
