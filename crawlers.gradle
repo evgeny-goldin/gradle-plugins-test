@@ -18,8 +18,8 @@ buildscript {
 
 
 crawler {
-    final ignoredLinksEndsWith = 'redirect=no /feed/ /blog/wp-comments-post.php'.tokenize()
-    final ignoredLinksContains = 'truezip.dev.java.net delicious.com/evgenyg ... Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php replytocom='.tokenize()
+    final ignoredLinksEndsWith = 'redirect=no /wiki/... /wiki/MyPage /feed/ /blog/wp-comments-post.php'.tokenize()
+    final ignoredLinksContains = '/export/exportCsvQuery/xml? truezip.dev.java.net delicious.com/evgenyg ... Talk: Special: printable= oldid= action= /blog/tag/ wp-app.php xmlrpc.php replytocom='.tokenize()
 
     baseUrl            = 'evgeny-goldin.com'
     checkExternalLinks = true
@@ -40,8 +40,8 @@ crawler {
 
 task wikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 
-    final ignoredLinksEndsWith = 'redirect=no'.tokenize()
-    final ignoredLinksContains = 'Talk: Special: printable= oldid= action='.tokenize()
+    final ignoredLinksEndsWith = 'redirect=no /wiki/... /wiki/MyPage'.tokenize()
+    final ignoredLinksContains = '/export/exportCsvQuery/xml? Talk: Special: printable= oldid= action='.tokenize()
 
     config { it.with {
 
