@@ -56,6 +56,7 @@ task wikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
             minimumLinks       = 1
             minimumBytes       = 1 * 1024
 
+            linkTransformers   = [{ String link -> link.replace( 'evgeny-goldin.org', 'evgeny-goldin.org:8148' ) }]
             ignoredLinks       = [{ String link -> ignoredLinksEndsWith.any { link.endsWith( it )}},
                                   { String link -> ignoredLinksContains.any { link.contains( it )}}]
     }}
