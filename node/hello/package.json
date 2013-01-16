@@ -10,8 +10,6 @@
         "hashish"       : "*"
     },
     "devDependencies": {
-        "coffee-script" : "*",
-        "mocha"         : "*",
         "forever"       : "*"
     },
     "repository": {
