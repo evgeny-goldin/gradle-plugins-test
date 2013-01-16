@@ -1,0 +1,4 @@
+include 'hello'
+include 'coffee'
+
+rootProject.name = 'gradle-plugins-test-node'

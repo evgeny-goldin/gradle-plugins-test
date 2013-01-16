@@ -1,0 +1,21 @@
+{
+    "name": "hello",
+    "version": "0.0.1",
+    "preferGlobal": "false",
+    "description": "Hello World Node.js test",
+    "contributors": [
+        { "name": "Evgeny Goldin",  "email": "evgenyg@gmail.com" }
+    ],
+    "dependencies": {
+        "hashish"       : "*"
+    },
+    "devDependencies": {
+        "coffee-script" : "*",
+        "mocha"         : "*",
+        "forever"       : "*"
+    },
+    "repository": {
+        "type": "git",
+        "url":  "git://github.com/evgeny-goldin/gradle-plugins-test.git"
+    }
+}

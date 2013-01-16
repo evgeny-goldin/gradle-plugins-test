@@ -1,9 +1,7 @@
 import groovy.json.JsonSlurper
 
-
 apply plugin: 'idea'
 apply plugin: 'gitdump'
-
 
 ext.codenarcSources      =  'codenarc duplicates'.tokenize().collect { "$projectDir/$it/src/main/groovy" }
 ext.codenarcRuleSetFiles = [ "$projectDir/codenarc.groovy" ]
@@ -23,11 +21,7 @@ buildscript {
 
     final pluginsVersion = '0.2-SNAPSHOT'
 
-    repositories {
-        mavenLocal()
-        maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }
-    }
-
+    repositories { mavenLocal(); maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }}
     dependencies {
         classpath "com.github.goldin.plugins.gradle:about:$pluginsVersion",
                   "com.github.goldin.plugins.gradle:crawler:$pluginsVersion",
@@ -109,12 +103,12 @@ subprojects {
 
 project ( ':codenarc' ) {
     apply plugin: 'groovy'
-    dependencies { groovy 'org.codehaus.groovy:groovy-all:2.0.5' }
+    dependencies { groovy 'org.codehaus.groovy:groovy-all:2.0.6' }
 }
 
 project ( ':duplicates' ) {
     apply plugin: 'groovy'
-    dependencies { groovy 'org.codehaus.groovy:groovy-all:2.0.5' }
+    dependencies { groovy 'org.codehaus.groovy:groovy-all:2.0.6' }
 }
 
 project ( ':kotlin:java-depends-on-kotlin' ) {
