@@ -7,9 +7,18 @@ buildscript {
 
 defaultTasks 'clean', 'cleanModules', 'start', 'stop'
 
-
 subprojects {
     apply plugin: 'node'
+    clean.doFirst {
+        if ( System.getProperty( 'cleanNode' ) != null )
+        {
+            final deleteFiles = [ new File( System.getProperty( 'user.home' ), '.npm' ),
+                                  new File( System.getProperty( 'user.home' ), '.nvm' ) ]
+
+            println "Deleting $deleteFiles"
+            project.delete( deleteFiles )
+        }
+    }
 }
 
 project ( 'coffee' ) {
