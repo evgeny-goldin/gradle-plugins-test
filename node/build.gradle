@@ -22,11 +22,23 @@ subprojects {
 }
 
 project ( 'hello-js' ) {
-    node { checkContent = 'Hello World - js' }
+    node {
+        portNumber    = 3000 + new Random( System.currentTimeMillis()).nextInt( 100 )
+        configs       = [[ 'config/development.json' : [ port : portNumber ]]]
+        checkContent  = 'Hello World - js'
+        checkUrl      = "http://127.0.0.1:$portNumber"
+        pidOnlyToStop = false
+    }
 }
 
 project ( 'hello-coffee' ) {
-    node { checkContent = 'Hello World - coffee' }
+    node {
+        portNumber    = 4000 + new Random( System.currentTimeMillis()).nextInt( 100 )
+        configs       = [[ 'config/development.json' : [ port : portNumber ]]]
+        checkContent  = 'Hello World - coffee'
+        checkUrl      = "http://127.0.0.1:$portNumber"
+        pidOnlyToStop = false
+    }
 }
 
 task wrapper ( type: Wrapper ) { gradleVersion = '1.4-rc-1' }
