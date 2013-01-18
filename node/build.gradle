@@ -7,6 +7,8 @@ buildscript {
 
 defaultTasks 'clean', 'cleanModules', 'start', 'stop'
 
+println "> Running Gradle [${ project.gradle.gradleVersion }], Groovy [${ GroovySystem.version }], Java [${ System.getProperty( 'java.version' ) }]"
+
 subprojects {
     apply plugin: 'node'
     clean.doFirst {
