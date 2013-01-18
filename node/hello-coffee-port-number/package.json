@@ -2,13 +2,14 @@
     "name": "hello",
     "version": "0.0.1",
     "preferGlobal": "false",
-    "description": "Hello World Node.js JS test",
+    "description": "Hello World Node.js Coffee test",
     "contributors": [
         { "name": "Evgeny Goldin",  "email": "evgenyg@gmail.com" }
     ],
     "dependencies": {
     },
     "devDependencies": {
+        "coffee-script" : "*",
         "forever"       : "*"
     },
     "repository": {

@@ -4,13 +4,15 @@ buildscript {
     dependencies { classpath 'com.github.goldin.plugins.gradle:node:0.2-SNAPSHOT' }
 }
 
-
 defaultTasks 'clean', 'cleanModules', 'start', 'stop'
 
 println "> Running Gradle [${ project.gradle.gradleVersion }], Groovy [${ GroovySystem.version }], Java [${ System.getProperty( 'java.version' ) }]"
 
 subprojects {
+    Project p ->
+
     apply plugin: 'node'
+
     clean.doFirst {
         if ( System.getProperty( 'cleanNode' ) != null )
         {
@@ -21,26 +23,16 @@ subprojects {
             project.delete( deleteFiles )
         }
     }
-}
 
-project ( 'hello-js' ) {
     node {
-        portNumber    = 3000 + new Random( System.currentTimeMillis()).nextInt( 100 )
-        configs       = [[ 'config/development.json' : [ port : portNumber ]]]
-        checkContent  = 'Hello World - js'
-        checkUrl      = "http://127.0.0.1:$portNumber"
-        pidOnlyToStop = false
+        checkContent = p.name
+        if ( new File( p.projectDir, 'config' ).directory )
+        {
+            portNumber = 3000 + ( Math.abs( p.name.hashCode()) % 100 )
+            configs    = [[ 'config/development.json' : [ port : portNumber ]]]
+        }
     }
 }
 
-project ( 'hello-coffee' ) {
-    node {
-        portNumber    = 4000 + new Random( System.currentTimeMillis()).nextInt( 100 )
-        configs       = [[ 'config/development.json' : [ port : portNumber ]]]
-        checkContent  = 'Hello World - coffee'
-        checkUrl      = "http://127.0.0.1:$portNumber"
-        pidOnlyToStop = false
-    }
-}
 
 task wrapper ( type: Wrapper ) { gradleVersion = '1.4-rc-1' }

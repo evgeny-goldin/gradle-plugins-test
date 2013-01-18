@@ -1,12 +1,9 @@
 
-var fs     = require( 'fs' )
-var http   = require( 'http' )
-var config = JSON.parse( fs.readFileSync( 'config/development.json', 'ascii' ))
-var port   = config.port
+var http = require( 'http' )
 
 http.createServer( function ( req, res ) {
   res.writeHead( 200, { 'Content-Type': 'text/plain' })
-  res.end( 'Hello World - js\n' )
-}).listen( port, '127.0.0.1' )
+  res.end( 'hello-js' )
+}).listen( 1337, '127.0.0.1' )
 
-console.log( 'Server running at http://127.0.0.1:' + port + '/' )
+console.log( 'Server running at http://127.0.0.1:1337' )
