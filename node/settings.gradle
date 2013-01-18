@@ -1,4 +1,4 @@
-include 'hello'
-include 'coffee'
+include 'hello-js'
+include 'hello-coffee'
 
 rootProject.name = 'gradle-plugins-test-node'

@@ -44,12 +44,10 @@ idea.module {
     downloadSources = true
     downloadJavadoc = false
 
+    excludeDirs += file( 'out' )
+
     iml.withXml {
         provider ->
-        provider.node.component.content.first().with {
-            appendNode( 'excludeFolder', [ url : 'file://$MODULE_DIR$/gradle' ])
-            appendNode( 'excludeFolder', [ url : 'file://$MODULE_DIR$/out'    ])
-        }
         provider.node.component.first().appendNode( 'orderEntry', [ type : 'library', name : 'Groovy', level: 'application' ])
     }
 }
@@ -141,4 +139,4 @@ project ( ':kotlin:kotlin-standalone' ) {
 }
 
 
-task wrapper( type: Wrapper ) { gradleVersion = '1.3' }
+task wrapper ( type: Wrapper ) { gradleVersion = '1.4-rc-1' }

@@ -21,8 +21,12 @@ subprojects {
     }
 }
 
-project ( 'coffee' ) {
-    node { scriptPath = 'server.coffee' }
+project ( 'hello-js' ) {
+    node { checkContent = 'Hello World - js' }
 }
 
-task wrapper( type: Wrapper ) { gradleVersion = '1.3' }
+project ( 'hello-coffee' ) {
+    node { checkContent = 'Hello World - coffee' }
+}
+
+task wrapper ( type: Wrapper ) { gradleVersion = '1.4-rc-1' }
