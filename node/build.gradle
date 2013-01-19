@@ -4,7 +4,7 @@ buildscript {
     dependencies { classpath 'com.github.goldin.plugins.gradle:node:0.2-SNAPSHOT' }
 }
 
-defaultTasks 'clean', 'cleanModules', 'start', 'stop'
+defaultTasks 'clean', 'cleanModules', 'start', 'restartall', 'stop', 'stopall'
 
 println "> Running Gradle [${ project.gradle.gradleVersion }], Groovy [${ GroovySystem.version }], Java [${ System.getProperty( 'java.version' ) }]"
 
@@ -25,7 +25,9 @@ subprojects {
     }
 
     node {
-        checkContent = p.name
+        checkContent  = p.name
+        pidOnlyToStop = false
+
         if ( new File( p.projectDir, 'config' ).directory )
         {
             portNumber = 3000 + ( Math.abs( p.name.hashCode()) % 100 )
