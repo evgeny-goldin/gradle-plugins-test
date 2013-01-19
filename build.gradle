@@ -1,6 +1,7 @@
 import groovy.json.JsonSlurper
 
 apply plugin: 'idea'
+apply plugin: 'monitor'
 apply plugin: 'gitdump'
 
 ext.codenarcSources      =  'codenarc duplicates'.tokenize().collect { "$projectDir/$it/src/main/groovy" }
@@ -28,6 +29,7 @@ buildscript {
                   "com.github.goldin.plugins.gradle:duplicates:$pluginsVersion",
                   "com.github.goldin.plugins.gradle:gitdump:$pluginsVersion",
                   "com.github.goldin.plugins.gradle:kotlin:$pluginsVersion",
+                  "com.github.goldin.plugins.gradle:monitor:$pluginsVersion",
                   "com.github.goldin.plugins.gradle:teamcity:$pluginsVersion"
     }
 }
@@ -52,6 +54,8 @@ idea.module {
     }
 }
 
+
+monitor { resources = file( 'monitor-resources.txt' )}
 
 gitdump {
     urls = new JsonSlurper().parseText( 'https://api.github.com/users/evgeny-goldin/repos'.toURL().text ).
