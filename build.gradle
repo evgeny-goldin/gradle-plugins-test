@@ -55,7 +55,10 @@ idea.module {
 }
 
 
-monitor { resources = file( 'monitor-resources.txt' )}
+monitor {
+    headers   = [ 'Accept-Encoding' : 'gzip,deflate' ]
+    resources = file( 'monitor-resources.txt' )
+}
 
 gitdump {
     urls = new JsonSlurper().parseText( 'https://api.github.com/users/evgeny-goldin/repos'.toURL().text ).

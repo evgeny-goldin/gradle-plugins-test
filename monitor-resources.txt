@@ -6,40 +6,40 @@ http://www.trademob.com/
 
 # Home Pages
 
-http://evgeny-goldin.com/|200|<h1>Evgeny Goldin</h1>|2000
-http://evgeny-goldin.org:8148/|200|<title>Evgeny Goldin</title>|2000
+http://evgeny-goldin.com/|200|<h1>Evgeny Goldin</h1>|4000
+http://evgeny-goldin.org:8148/|200|<title>Evgeny Goldin</title>|4000
 
 # Blog
 
-http://evgeny-goldin.com/blog/|200|Software blog about tools, builds and making it all work|2000
-http://evgeny-goldin.com/blog/tag/groovy/|200|<h1>Groovy</h1>|2000
+http://evgeny-goldin.com/blog/|200|Software blog about tools, builds and making it all work|4000
+http://evgeny-goldin.com/blog/tag/groovy/|200|<h1>Groovy</h1>|4000
 
 # Wiki
 
-http://evgeny-goldin.com/wiki/|200|>Gradle Plugins<|2000
-http://evgeny-goldin.com/wiki/Maven_Plugins|200|copy-maven-plugin|2000
-http://evgeny-goldin.com/wiki/Gradle_Plugins|200|CodeNarc plugin|2000
+http://evgeny-goldin.com/wiki/|200|>Gradle Plugins<|4000
+http://evgeny-goldin.com/wiki/Maven_Plugins|200|copy-maven-plugin|4000
+http://evgeny-goldin.com/wiki/Gradle_Plugins|200|CodeNarc plugin|4000
 
 # YouTrack
 
-http://evgeny-goldin.org:8148/youtrack/|200|>Log in as guest<|2000
-http://evgeny-goldin.org:8148/youtrack/issues|200|Enter search request|2000
-http://evgeny-goldin.org:8148/youtrack/issues/pl|200|Maven Plugins (pl)|2000
-http://evgeny-goldin.org:8148/youtrack/issues/gc|200|GCommons (gc)|2000
-http://evgeny-goldin.org:8148/youtrack/issues/gp|200|Gradle Plugins (gp)|2000
+http://evgeny-goldin.org:8148/youtrack/|200|>Log in as guest<|4000
+http://evgeny-goldin.org:8148/youtrack/issues|200|Enter search request|4000
+http://evgeny-goldin.org:8148/youtrack/issues/pl|200|Maven Plugins (pl)|4000
+http://evgeny-goldin.org:8148/youtrack/issues/gc|200|GCommons (gc)|4000
+http://evgeny-goldin.org:8148/youtrack/issues/gp|200|Gradle Plugins (gp)|4000
 
 # TeamCity
 
-http://evgeny-goldin.org:8148/teamcity/|200|>Login as a Guest User<|2000
-http://evgeny-goldin.org:8148/teamcity/login.html|200|>Login as a Guest User<|2000
-http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project6|200|>Login as a Guest User<|2000
+http://evgeny-goldin.org:8148/teamcity/|200|>Login as a Guest User<|4000
+http://evgeny-goldin.org:8148/teamcity/login.html|200|>Login as a Guest User<|4000
+http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project6|200|>Login as a Guest User<|4000
 
-http://evgeny-goldin.org:8148/teamcity/?guest=1|200|<title>Projects -- TeamCity</title>|2000
-http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project2&guest=1|200|maven-plugins|2000
-http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project4&guest=1|200|gcommons|2000
-http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project6&guest=1|200|gradle-plugins|2000
-http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project17&guest=1|200|Misc Projects|2000
-http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project21&guest=1|200|Crawlers|2000
+http://evgeny-goldin.org:8148/teamcity/?guest=1|200|<title>Projects -- TeamCity</title>|4000
+http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project2&guest=1|200|maven-plugins|4000
+http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project4&guest=1|200|gcommons|4000
+http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project6&guest=1|200|gradle-plugins|4000
+http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project17&guest=1|200|Misc Projects|4000
+http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project21&guest=1|200|Crawlers|4000
 
 # Artifactory
 
