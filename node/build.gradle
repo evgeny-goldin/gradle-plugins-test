@@ -1,3 +1,4 @@
+apply from: 'https://raw.github.com/evgeny-goldin/scripts/master/src/main/gradle/wrapper.gradle'
 
 buildscript {
     repositories { mavenLocal(); maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }}
@@ -35,6 +36,3 @@ subprojects {
         }
     }
 }
-
-
-task wrapper ( type: Wrapper ) { gradleVersion = '1.4-rc-1' }

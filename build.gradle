@@ -7,7 +7,7 @@ apply plugin: 'gitdump'
 ext.codenarcSources      =  'codenarc duplicates'.tokenize().collect { "$projectDir/$it/src/main/groovy" }
 ext.codenarcRuleSetFiles = [ "$projectDir/codenarc.groovy" ]
 apply from: 'https://raw.github.com/evgeny-goldin/gradle-plugins/master/codenarc/CodeNarc.gradle'
-
+apply from: 'https://raw.github.com/evgeny-goldin/scripts/master/src/main/gradle/wrapper.gradle'
 
 defaultTasks 'clean', 'codenarc', 'duplicates', 'build'
 
@@ -144,6 +144,3 @@ project ( ':kotlin:kotlin-standalone' ) {
                 files( "${ System.getProperty( 'java.home' )}/lib/jce.jar" )
     }
 }
-
-
-task wrapper ( type: Wrapper ) { gradleVersion = '1.4-rc-1' }
