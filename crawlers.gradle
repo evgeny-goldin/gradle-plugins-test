@@ -3,6 +3,7 @@ import java.util.regex.Pattern
 apply plugin: 'crawler'
 defaultTasks  'crawler'
 
+println "> Running Gradle [${ project.gradle.gradleVersion }], Groovy [${ GroovySystem.version }], Java [${ System.getProperty( 'java.version' ) }]"
 
 buildscript {
 
