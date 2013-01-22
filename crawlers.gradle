@@ -1,9 +1,9 @@
 import java.util.regex.Pattern
 
 apply plugin: 'crawler'
+apply from:   'https://raw.github.com/evgeny-goldin/scripts/master/src/main/gradle/wrapper.gradle'
 defaultTasks  'crawler'
 
-println "> Running Gradle [${ project.gradle.gradleVersion }], Groovy [${ GroovySystem.version }], Java [${ System.getProperty( 'java.version' ) }]"
 
 buildscript {
 
