@@ -15,8 +15,6 @@ defaultTasks 'clean', 'codenarc', 'duplicates', 'build'
 final kotlinVersion = '0.4.297'
 group               = 'com.github.goldin.plugins.gradle'
 
-println "> Running Gradle [${ project.gradle.gradleVersion }], Groovy [${ GroovySystem.version }], Java [${ System.getProperty( 'java.version' ) }]"
-
 
 buildscript {
 
