@@ -56,8 +56,8 @@ idea.module {
 
 
 monitor {
-    headers   = [ 'Accept-Encoding' : 'gzip,deflate' ]
-    resources = file( 'monitor-resources.txt' )
+    headers       = [ 'Accept-Encoding' : 'gzip,deflate' ]
+    resourcesFile = file( 'monitor-resources.txt' )
 }
 
 gitdump {
