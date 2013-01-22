@@ -146,16 +146,16 @@ task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask )
 }
 
 
-task hascoreCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+task marsjobsCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
     config { it.with {
 
-            baseUrl            = 'hascore.com'
+            baseUrl            = 'marsjobs.net'
             teamcityMessages   = true
             checkExternalLinks = true
 
-            log                = file( 'log-hascore.txt' )
-            linksMapFile       = file( 'links-hascore.txt' )
-            newLinksMapFile    = file( 'newLinks-hascore.txt' )
+            log                = file( 'log-marsjobs.txt' )
+            linksMapFile       = file( 'links-marsjobs.txt' )
+            newLinksMapFile    = file( 'newLinks-marsjobs.txt' )
 
             minimumLinks       = 2700
             minimumBytes       = 1 * 1024 * 1024
