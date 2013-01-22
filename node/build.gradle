@@ -7,8 +7,6 @@ buildscript {
 
 defaultTasks 'clean', 'cleanModules', 'start', 'restartall', 'stop', 'stopall'
 
-println "> Running Gradle [${ project.gradle.gradleVersion }], Groovy [${ GroovySystem.version }], Java [${ System.getProperty( 'java.version' ) }]"
-
 subprojects {
     Project p ->
 
