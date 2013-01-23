@@ -59,7 +59,7 @@ monitor {
 }
 
 gitdump {
-    urls               = new JsonSlurper().parseText( 'https://api.github.com/users/evgeny-goldin/repos'.toURL().text ).
+    urls               = new JsonSlurper().parseText( 'https://api.github.com/users/evgeny-goldin/repos?per_page=1000'.toURL().text ).
                          collect { Map m -> "${ m.git_url }:<last>" }
     runAggressiveGitGc = true
     singleArchive      = true
