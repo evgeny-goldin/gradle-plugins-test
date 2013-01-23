@@ -8,20 +8,21 @@ buildscript {
 defaultTasks 'clean', 'cleanModules', 'start', 'restartall', 'stop', 'stopall'
 
 
-if ( System.getProperty( 'cleanNode' ) != null )
-{
-    final deleteFiles = [ new File( System.getProperty( 'user.home' ), '.npm' ),
-                          new File( System.getProperty( 'user.home' ), '.nvm' ) ]
-
-    println "Deleting $deleteFiles"
-    project.delete( deleteFiles )
-}
-
-
 subprojects {
     Project p ->
 
     apply plugin: 'node'
+
+    clean.doFirst {
+        if ( System.getProperty( 'cleanNode' ) != null )
+        {
+            final deleteFiles = [ new File( System.getProperty( 'user.home' ), '.npm' ),
+                                  new File( System.getProperty( 'user.home' ), '.nvm' ) ]
+
+            println "Deleting $deleteFiles"
+            project.delete( deleteFiles )
+        }
+    }
 
     node {
         checkContent    = p.name + (( p.name == 'hello-js'                 ) ? '|yhn|890|' :
