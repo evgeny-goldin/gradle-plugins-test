@@ -7,30 +7,35 @@ buildscript {
 
 defaultTasks 'clean', 'cleanModules', 'start', 'restartall', 'stop', 'stopall'
 
+
+if ( System.getProperty( 'cleanNode' ) != null )
+{
+    final deleteFiles = [ new File( System.getProperty( 'user.home' ), '.npm' ),
+                          new File( System.getProperty( 'user.home' ), '.nvm' ) ]
+
+    println "Deleting $deleteFiles"
+    project.delete( deleteFiles )
+}
+
+
 subprojects {
     Project p ->
 
     apply plugin: 'node'
 
-    clean.doFirst {
-        if ( System.getProperty( 'cleanNode' ) != null )
-        {
-            final deleteFiles = [ new File( System.getProperty( 'user.home' ), '.npm' ),
-                                  new File( System.getProperty( 'user.home' ), '.nvm' ) ]
-
-            println "Deleting $deleteFiles"
-            project.delete( deleteFiles )
-        }
-    }
-
     node {
-        checkContent  = p.name
-        pidOnlyToStop = false
-
-        if ( new File( p.projectDir, 'config' ).directory )
-        {
-            portNumber = 3000 + ( Math.abs( p.name.hashCode()) % 100 )
-            configs    = [[ 'config/development.json' : [ port : portNumber ]]]
-        }
+        checkContent    = p.name + (( p.name == 'hello-js'                 ) ? '|yhn|890|' :
+                                    ( p.name == 'hello-js-port-number'     ) ? '|undefined|undefined|' :
+                                    ( p.name == 'hello-coffee-port-number' ) ? '|zaq|123|' :
+                                                                               '' )
+        pidOnlyToStop   = false
+        portNumber      = 3000 + ( Math.abs( p.name.hashCode()) % 100 )
+        scriptArguments = "--port $portNumber"
+        configs         = [[ 'config/development.json' : file( "${ project.name }.json" ) ],
+                           [ 'config/development.json' : [ port : portNumber ]]]
     }
 }
+
+project ( ':hello-js'                 ) { node { configsNewKeys = 'fail'   }}
+project ( ':hello-js-port-number'     ) { node { configsNewKeys = 'ignore' }}
+project ( ':hello-coffee-port-number' ) { node { configsNewKeys = 'create' }}

@@ -6,7 +6,7 @@ var port   = config.port
 
 http.createServer( function ( req, res ) {
   res.writeHead( 200, { 'Content-Type': 'text/plain' })
-  res.end( 'hello-js-port-number' )
+  res.end( 'hello-js-port-number|' + config.key1 + '|' + config.key2 + '|' )
 }).listen( port, '127.0.0.1' )
 
 console.log( 'Server running at http://127.0.0.1:' + port + '/' )
