@@ -59,12 +59,12 @@ monitor {
 }
 
 gitdump {
-    urls = new JsonSlurper().parseText( 'https://api.github.com/users/evgeny-goldin/repos'.toURL().text ).
-           collect { Map    m       -> "${ m.git_url }:master" }.
-           findAll { String repoUrl -> ! [ 'gcommons-old', 'presentations', 'WideFinder' ].any{ repoUrl.contains( it )}}
+    urls               = new JsonSlurper().parseText( 'https://api.github.com/users/evgeny-goldin/repos'.toURL().text ).
+                         collect { Map m -> "${ m.git_url }:<last>" }
     runAggressiveGitGc = true
     singleArchive      = true
-    totalBackupMaxSize = 50 * 1024 * 1024
+    totalBackupMinSize = 40 * 1024 * 1024
+    totalBackupMaxSize = 60 * 1024 * 1024
 }
 
 
