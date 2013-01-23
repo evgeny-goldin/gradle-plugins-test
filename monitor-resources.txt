@@ -7,6 +7,9 @@ http://www.trademob.com/
 # Home Pages
 
 http://evgeny-goldin.com/|200|<h1>Evgeny Goldin</h1>|10000
+http://evgeny-goldin.com/|200|-<h2>Evgeny Goldin</h2>|10000
+http://evgeny-goldin.com/|200|/Evgeny\s+Goldin/|10000
+http://evgeny-goldin.com/|200|-/Evgeny\w+Goldin/|10000
 http://evgeny-goldin.org:8148/|200|<title>Evgeny Goldin</title>|10000
 
 # Blog
