@@ -3,6 +3,7 @@
 http://www.google.com/
 https://www.google.com/
 http://www.trademob.com/
+http://udelivery.trademob.com/|200|Forgot your password?
 
 # Home Pages
 
@@ -11,6 +12,9 @@ http://evgeny-goldin.com/|200|-<h2>Evgeny Goldin</h2>|10000
 http://evgeny-goldin.com/|200|/Evgeny\s+Goldin/|10000
 http://evgeny-goldin.com/|200|-/Evgeny\w+Goldin/|10000
 http://evgeny-goldin.org:8148/|200|<title>Evgeny Goldin</title>|10000
+
+nmap://trademob.com|22,25,80,81,443
+nmap://evgeny-goldin.org|22,80,9090
 
 # Blog
 
