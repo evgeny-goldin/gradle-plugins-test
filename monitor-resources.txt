@@ -14,7 +14,7 @@ http://evgeny-goldin.com/|200|-/Evgeny\w+Goldin/|10000
 http://evgeny-goldin.org:8148/|200|<title>Evgeny Goldin</title>|10000
 
 nmap://trademob.com|22,25,80,81,443
-nmap://evgeny-goldin.org|22,80,9090
+nmap://evgeny-goldin.org|22,9090
 
 # Blog
 
