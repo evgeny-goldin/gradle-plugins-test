@@ -135,10 +135,26 @@ project ( ':kotlin:kotlin-depends-on-java' ) {
 project ( ':kotlin:kotlin-standalone' ) {
     compileJava.    dependsOn compileKotlin
     compileTestJava.dependsOn compileTestKotlin
+
     dependencies {
         compile "org.jetbrains.kotlin:kotlin-runtime:$kotlinVersion",
                 "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
                 "org.jetbrains.kotlin:kotlin-jdk-annotations:$kotlinVersion",
                 files( "${ System.getProperty( 'java.home' )}/lib/jce.jar" )
+    }
+
+    // 'kotlin' extension is an instance of K2JVMCompilerArguments (http://goo.gl/NyLkC)
+    kotlin {
+        notNullAssertions      = true
+        notNullParamAssertions = true
+        outputDir              = project.buildDir.canonicalPath + '/' + new Random().nextInt( 100 )
+        // This fails the build
+        // classpath           = ''
+    }
+
+    compileKotlin << {
+        // Can be also seen if Gradle is run with "-i" flag
+        println "Compilation classpath: [${ kotlin.classpath }]"
+        assert new File(( String ) kotlin.outputDir ).with{ directory && list() }
     }
 }
