@@ -169,7 +169,7 @@ task checkAboutAndLicense << {
     final version = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : pluginsVersion
 
     configurations { aboutDependencies { transitive = false }}
-    repositories   { version.contains( '-SNAPSHOT' ) ? maven { url mavenRepoUrl } : mavenCentral() }
+    repositories   { maven { url mavenRepoUrl }}
     dependencies   {
         aboutDependencies "com.github.goldin.plugins.gradle:about:$version",
                           "com.github.goldin.plugins.gradle:crawler:$version",
