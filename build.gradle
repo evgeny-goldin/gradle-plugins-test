@@ -89,7 +89,7 @@ subprojects {
         testRuntime 'ch.qos.logback:logback-classic:1.0.9'
     }
 
-    jar.dependsOn 'about'
+    jar.dependsOn 'about', ':checkAboutAndLicense'
 
     about {
         includeEnv          = true
@@ -201,6 +201,6 @@ task checkAboutAndLicense << {
         [ 'Git Info', 'Build Info', 'Gradle Info', dependencyCoordinates ].each { assert aboutFileText.contains( it )}
         assert licenseFileText.contains( "Copyright $currentYear Goldin Evgeny (http://evgeny-goldin.com/)" )
 
-        println "[$dependencyCoordinates][$file] - about and license are checked"
+        println "[$dependencyCoordinates][$file] - about and license checked"
     }
 }
