@@ -22,6 +22,7 @@ group                = 'com.github.goldin.plugins.gradle'
 buildscript {
 
     final version = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : '0.2-SNAPSHOT'
+    println "> Testing plugins version [$version]"
 
     repositories { mavenLocal(); maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }}
     dependencies {
@@ -167,6 +168,7 @@ project ( ':kotlin:kotlin-standalone' ) {
 task checkAboutAndLicense << {
 
     final version = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : pluginsVersion
+    println "> Testing plugins version [$version] for correct 'about' and 'license' files"
 
     configurations { aboutDependencies { transitive = false }}
     repositories   { maven { url mavenRepoUrl }}
