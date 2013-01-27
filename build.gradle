@@ -9,26 +9,30 @@ ext.codenarcRuleSetFiles = [ "$projectDir/codenarc.groovy" ]
 apply from: 'https://raw.github.com/evgeny-goldin/gradle-plugins/master/codenarc/CodeNarc.gradle'
 apply from: 'https://raw.github.com/evgeny-goldin/scripts/master/src/main/gradle/wrapper.gradle'
 
+
 defaultTasks 'clean', 'codenarc', 'duplicates', 'build'
 
 
-final kotlinVersion = '0.4.297'
-group               = 'com.github.goldin.plugins.gradle'
+final pluginsVersion = '0.2-SNAPSHOT' // Also update in buildscript { .. } below!
+final mavenRepoUrl   = 'http://evgenyg.artifactoryonline.com/evgenyg/repo/'
+final kotlinVersion  = '0.4.297'
+group                = 'com.github.goldin.plugins.gradle'
 
 
 buildscript {
 
-    final pluginsVersion = '0.2-SNAPSHOT'
+    final version = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : '0.2-SNAPSHOT'
 
     repositories { mavenLocal(); maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }}
     dependencies {
-        classpath "com.github.goldin.plugins.gradle:about:$pluginsVersion",
-                  "com.github.goldin.plugins.gradle:crawler:$pluginsVersion",
-                  "com.github.goldin.plugins.gradle:duplicates:$pluginsVersion",
-                  "com.github.goldin.plugins.gradle:gitdump:$pluginsVersion",
-                  "com.github.goldin.plugins.gradle:kotlin:$pluginsVersion",
-                  "com.github.goldin.plugins.gradle:monitor:$pluginsVersion",
-                  "com.github.goldin.plugins.gradle:teamcity:$pluginsVersion"
+        classpath "com.github.goldin.plugins.gradle:about:$version",
+                  "com.github.goldin.plugins.gradle:crawler:$version",
+                  "com.github.goldin.plugins.gradle:duplicates:$version",
+                  "com.github.goldin.plugins.gradle:gitdump:$version",
+                  "com.github.goldin.plugins.gradle:kotlin:$version",
+                  "com.github.goldin.plugins.gradle:monitor:$version",
+                  "com.github.goldin.plugins.gradle:node:$version",
+                  "com.github.goldin.plugins.gradle:teamcity:$version"
     }
 }
 
@@ -79,7 +83,7 @@ subprojects {
 
     clean { delete( "$rootDir/out", "$rootDir/build" ) }
 
-    repositories { maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }}
+    repositories { maven { url mavenRepoUrl }}
     dependencies {
         testCompile 'junit:junit:4.11'
         testRuntime 'ch.qos.logback:logback-classic:1.0.9'
@@ -156,5 +160,47 @@ project ( ':kotlin:kotlin-standalone' ) {
         // Can be also seen if Gradle is run with "-i" flag
         println "Compilation classpath: [${ kotlin.classpath }]"
         assert new File(( String ) kotlin.outputDir ).with{ directory && list() }
+    }
+}
+
+
+task checkAboutAndLicense << {
+
+    final version = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : pluginsVersion
+
+    configurations { aboutDependencies { transitive = false }}
+    repositories   { version.contains( '-SNAPSHOT' ) ? maven { url mavenRepoUrl } : mavenCentral() }
+    dependencies   {
+        aboutDependencies "com.github.goldin.plugins.gradle:about:$version",
+                          "com.github.goldin.plugins.gradle:crawler:$version",
+                          "com.github.goldin.plugins.gradle:duplicates:$version",
+                          "com.github.goldin.plugins.gradle:gitdump:$version",
+                          "com.github.goldin.plugins.gradle:kotlin:$version",
+                          "com.github.goldin.plugins.gradle:monitor:$version",
+                          "com.github.goldin.plugins.gradle:node:$version",
+                          "com.github.goldin.plugins.gradle:teamcity:$version"
+    }
+
+    final unpackDir = new File(( String ) project.buildDir, 'aboutLicenseUnpack' )
+    final config    = ( Configuration ) configurations.aboutDependencies
+
+    config.dependencies.each {
+        Dependency dependency ->
+
+        File file = config.fileCollection( dependency ).singleFile
+
+        delete ( unpackDir )
+        mkdir  ( unpackDir )
+        copy   { from zipTree( file ); into unpackDir }
+
+        final aboutFileText         = new File( unpackDir, 'about.txt'   ).text
+        final licenseFileText       = new File( unpackDir, 'license.txt' ).text
+        final dependencyCoordinates = "${ dependency.group }:${ dependency.name }:${ dependency.version }"
+        final currentYear           = Calendar.instance.get( Calendar.YEAR )
+
+        [ 'Git Info', 'Build Info', 'Gradle Info', dependencyCoordinates ].each { assert aboutFileText.contains( it )}
+        assert licenseFileText.contains( "Copyright $currentYear Goldin Evgeny (http://evgeny-goldin.com/)" )
+
+        println "[$dependencyCoordinates][$file] - about and license are checked"
     }
 }
