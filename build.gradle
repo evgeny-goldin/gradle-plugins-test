@@ -171,7 +171,7 @@ task checkAboutAndLicense << {
     println "> Testing plugins version [$version] for correct 'about' and 'license' files"
 
     configurations { aboutDependencies { transitive = false }}
-    repositories   { maven { url mavenRepoUrl }}
+    repositories   { mavenLocal(); maven { url mavenRepoUrl }}
     dependencies   {
         aboutDependencies "com.github.goldin.plugins.gradle:about:$version",
                           "com.github.goldin.plugins.gradle:crawler:$version",
