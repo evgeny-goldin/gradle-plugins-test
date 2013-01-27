@@ -1,8 +1,13 @@
+
 apply from: 'https://raw.github.com/evgeny-goldin/scripts/master/src/main/gradle/wrapper.gradle'
 
 buildscript {
+
+    final version = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : '0.2-SNAPSHOT'
+    println "> Testing Node.js plugin version [$version]"
+
     repositories { mavenLocal(); maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }}
-    dependencies { classpath 'com.github.goldin.plugins.gradle:node:0.2-SNAPSHOT' }
+    dependencies { classpath "com.github.goldin.plugins.gradle:node:$version" }
 }
 
 defaultTasks 'clean', 'cleanModules', 'start', 'restartall', 'stop', 'stopall'
