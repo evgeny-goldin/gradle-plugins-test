@@ -13,7 +13,7 @@ apply from: 'https://raw.github.com/evgeny-goldin/scripts/master/src/main/gradle
 defaultTasks 'clean', 'codenarc', 'duplicates', 'build'
 
 
-final pluginsVersion = '0.2-SNAPSHOT' // Also update in buildscript { .. } below!
+final pluginsVersion = '0.2.1-SNAPSHOT' // Also update in buildscript { .. } below!
 final mavenRepoUrl   = 'http://evgenyg.artifactoryonline.com/evgenyg/repo/'
 final kotlinVersion  = '0.4.297'
 group                = 'com.github.goldin.plugins.gradle'
@@ -21,7 +21,7 @@ group                = 'com.github.goldin.plugins.gradle'
 
 buildscript {
 
-    final version = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : '0.2-SNAPSHOT'
+    final version = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : '0.2.1-SNAPSHOT'
     println "> Testing plugins version [$version]"
 
     repositories { mavenLocal(); maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }}
