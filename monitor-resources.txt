@@ -25,7 +25,7 @@ http://evgeny-goldin.com/blog/tag/groovy/|200|<h1>Groovy</h1>|10000
 
 http://evgeny-goldin.com/wiki/|200|>Gradle Plugins<|10000
 http://evgeny-goldin.com/wiki/Maven_Plugins|200|copy-maven-plugin|10000
-http://evgeny-goldin.com/wiki/Gradle_Plugins|200|CodeNarc plugin|10000
+http://evgeny-goldin.com/wiki/Gradle_Plugins|200|kotlin|10000
 
 # YouTrack
 
