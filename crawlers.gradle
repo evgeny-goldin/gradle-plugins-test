@@ -51,8 +51,8 @@ task wikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
             linksMapFile       = file( 'links-wiki.txt' )
             newLinksMapFile    = file( 'newLinks-wiki.txt' )
 
-            minimumLinks       = 1130
-            minimumBytes       = 500 * 1024
+            minimumLinks       = 1100
+            minimumBytes       = 510 * 1024
 
             linkTransformers   = [{ String link -> link.replace( 'evgeny-goldin.org', 'evgeny-goldin.org:8148' ) }]
             ignoredLinks       = [{ String link -> ignoredLinksEndsWith.any { link.endsWith( it )}},
