@@ -3,7 +3,6 @@
 http://www.google.com/
 https://www.google.com/
 http://www.trademob.com/
-http://udelivery.trademob.com/|200|Forgot your password?
 
 # Home Pages
 
