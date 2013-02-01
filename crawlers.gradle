@@ -39,7 +39,7 @@ crawler {
 task wikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 
     final ignoredLinksEndsWith = 'redirect=no /wiki/... /wiki/MyPage'.tokenize()
-    final ignoredLinksContains = 'blogs.atlassian.com/2011/12/git-submodules/ /export/exportCsvQuery/xml? Talk: Special: printable= oldid= action='.tokenize()
+    final ignoredLinksContains = 'ftp.newartisans.com/pub/git.from.bottom.up.pdf blogs.atlassian.com/2011/12/git-submodules/ /export/exportCsvQuery/xml? Talk: Special: printable= oldid= action='.tokenize()
 
     config { it.with {
 
