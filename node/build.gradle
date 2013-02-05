@@ -14,6 +14,11 @@ defaultTasks 'clean', 'cleanModules', 'start', 'restartall', 'stop', 'stopall'
 
 
 int portNumberForProject( Project p ){ 3000 + ( Math.abs( p.name.hashCode()) % 100 ) }
+void assertEqualFiles( Project p, String fileName1, String fileName2 )
+{
+    assert p.file( fileName1 ).text == p.file( fileName2 ).text
+    println "[$fileName1] == [$fileName2]"
+}
 
 
 subprojects {
@@ -33,13 +38,15 @@ subprojects {
     }
 
     node {
+        nodeVersion            = 'latest'
         cleanWorkspace         = true
         cleanWorkspaceCommands = [ 'git checkout -f config' ]
-        checkContent           = p.name + (( p.name == 'hello-js'                  ) ? '|yhn|890|' :
-                                           ( p.name == 'hello-js-port-number'      ) ? '|undefined|undefined|' :
-                                           ( p.name == 'hello-coffee-port-number'  ) ? '|zaq|123|' :
-                                           ( p.name == 'hello-js-configs-new-keys' ) ? '|OLM|457|false|false' :
-                                                                                       '' )
+        checkContent           = p.name + (( p.name == 'hello-js'                     ) ? '|yhn|890|' :
+                                           ( p.name == 'hello-js-port-number'         ) ? '|undefined|undefined|' :
+                                           ( p.name == 'hello-coffee-port-number'     ) ? '|zaq|123|' :
+                                           ( p.name == 'hello-js-configs-new-keys'    ) ? '|OLM|457|false|false' :
+                                           ( p.name == 'hello-js-configs-update-keys' ) ? '|IMN|784|true|true' :
+                                                                                          '' )
         pidOnlyToStop   = false
         portNumber      = portNumberForProject( p )
         scriptArguments = "--port $portNumber"
@@ -48,27 +55,41 @@ subprojects {
     }
 }
 
+
 project ( ':hello-js'                 ) { node { configsNewKeys = 'fail'   }}
 project ( ':hello-js-port-number'     ) { node { configsNewKeys = 'ignore' }}
 project ( ':hello-coffee-port-number' ) { node { configsNewKeys = 'create' }}
 
-project ( ':hello-js-configs-new-keys' ) {
+
+project ( ':hello-js-configs-new-keys'    ) {
     Project p ->
 
     node {
-
-        configsNewKeys  = 'create'
-        portNumber      = portNumberForProject( p )
-        scriptArguments = "--port $portNumber"
-        configs         = [[ 'config/development-1.json' : file( "${ project.name }-1.json" ) ],
-                           [ 'config/development-1.json' : file( "${ project.name }-2.json" ) ],
-                           [ 'config/development-1.json' : [ port : portNumber ]],
-                           [ 'config/development-2.json' : file( "${ project.name }.properties" ) ]]
+        configsNewKeys = 'create'
+        configs        = [[ 'config/development.json'   : file( "${ project.name }.json" ) ],
+                          [ 'config/development.json'   : [ port : portNumber ]],
+                          [ 'config/development.json'   : file( "${ project.name }-2.json" ) ],
+                          [ 'config/development-2.json' : file( "${ project.name }.properties" ) ]]
     }
 
     setup << {
-        assert file( 'config/development-1.json' ).text == file( 'config/development-1-result.json' ).text
-        assert file( 'config/development-2.json' ).text == file( 'config/development-2-result.json' ).text
-        println "Configs generated are checked"
+        assertEqualFiles( p, 'config/development.json',   'config/development-result.json' )
+        assertEqualFiles( p, 'config/development-2.json', 'config/development-2-result.json' )
+    }
+}
+
+project ( ':hello-js-configs-update-keys' ) {
+    Project p ->
+
+    node {
+        configsNewKeys = 'fail'
+        configs        = [[ 'config/development.json'   : file( "${ project.name }.json" ) ],
+                          [ 'config/development.json'   : [ port : portNumber ]],
+                          [ 'config/development-2.json' : file( "${ project.name }.properties" ) ]]
+    }
+
+    setup << {
+        assertEqualFiles( p, 'config/development.json',   'config/development-result.json' )
+        assertEqualFiles( p, 'config/development-2.json', 'config/development-2-result.json' )
     }
 }
