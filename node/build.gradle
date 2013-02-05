@@ -33,12 +33,16 @@ subprojects {
     }
 
     node {
-        checkContent    = p.name + (( p.name == 'hello-js'                 ) ? '|yhn|890|' :
-                                    ( p.name == 'hello-js-port-number'     ) ? '|undefined|undefined|' :
-                                    ( p.name == 'hello-coffee-port-number' ) ? '|zaq|123|' : '' )
+        cleanWorkspace         = true
+        cleanWorkspaceCommands = [ 'git checkout -f config' ]
+        checkContent           = p.name + (( p.name == 'hello-js'                  ) ? '|yhn|890|' :
+                                           ( p.name == 'hello-js-port-number'      ) ? '|undefined|undefined|' :
+                                           ( p.name == 'hello-coffee-port-number'  ) ? '|zaq|123|' :
+                                           ( p.name == 'hello-js-configs-new-keys' ) ? '|OLM|457|false|false' :
+                                                                                       '' )
         pidOnlyToStop   = false
-        scriptArguments = "--port $portNumber"
         portNumber      = portNumberForProject( p )
+        scriptArguments = "--port $portNumber"
         configs         = [[ 'config/development.json' : file( "${ project.name }.json" ) ],
                            [ 'config/development.json' : [ port : portNumber ]]]
     }
@@ -48,16 +52,18 @@ project ( ':hello-js'                 ) { node { configsNewKeys = 'fail'   }}
 project ( ':hello-js-port-number'     ) { node { configsNewKeys = 'ignore' }}
 project ( ':hello-coffee-port-number' ) { node { configsNewKeys = 'create' }}
 
-project ( ':hello-js-configs' ) {
+project ( ':hello-js-configs-new-keys' ) {
     Project p ->
 
     node {
-        configsNewKeys = 'create'
-        portNumber     = portNumberForProject( p )
-        configs        = [[ 'config/development-1.json' : file( "${ project.name }-1.json" ) ],
-                          [ 'config/development-1.json' : file( "${ project.name }-2.json" ) ],
-                          [ 'config/development-1.json' : [ port : portNumber ]],
-                          [ 'config/development-2.json' : file( "${ project.name }.properties" ) ]]
+
+        configsNewKeys  = 'create'
+        portNumber      = portNumberForProject( p )
+        scriptArguments = "--port $portNumber"
+        configs         = [[ 'config/development-1.json' : file( "${ project.name }-1.json" ) ],
+                           [ 'config/development-1.json' : file( "${ project.name }-2.json" ) ],
+                           [ 'config/development-1.json' : [ port : portNumber ]],
+                           [ 'config/development-2.json' : file( "${ project.name }.properties" ) ]]
     }
 
     setup << {
