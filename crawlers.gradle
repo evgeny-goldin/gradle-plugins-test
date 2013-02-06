@@ -189,7 +189,7 @@ task teamcityWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
 
     config { it.with {
 
-            baseUrl            = 'confluence.jetbrains.net/display/TCD7'
+            baseUrl            = 'confluence.jetbrains.com/display/TCD7/'
             teamcityMessages   = true
             checkExternalLinks = true
 
