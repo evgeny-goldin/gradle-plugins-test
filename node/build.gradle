@@ -14,13 +14,6 @@ defaultTasks 'clean', 'cleanModules', 'start', 'restartall', 'stop', 'stopall'
 
 
 int portNumberForProject( Project p ){ 3000 + ( Math.abs( p.name.hashCode()) % 100 ) }
-void assertEqualFiles( Project p, String fileName1, String fileName2 )
-{
-    final f1 = p.file( fileName1 )
-    final f2 = p.file( fileName2 )
-    assert f1.text == f2.text, "[$f1.canonicalPath] != [$f2.canonicalPath]"
-    println "[$f1.canonicalPath] == [$f2.canonicalPath]"
-}
 
 
 subprojects {
@@ -55,6 +48,22 @@ subprojects {
         configs         = [[ 'config/development.json' : file( "${ project.name }.json" ) ],
                            [ 'config/development.json' : [ port : portNumber ]]]
     }
+
+    setup << {
+        /**
+         * Comparing all configs generated with 'result' files expected.
+         */
+        final configFiles = new File( p.projectDir, 'config' ).listFiles().findAll{ File f -> f.name.endsWith( '.json' ) }
+        for ( File configFile in configFiles )
+        {
+            final resultFile = new File( configFile.parentFile, configFile.name[ 0 .. -6 ] + '-result.json' )
+            if ( resultFile.file )
+            {
+                assert configFile.text == resultFile.text, "[$configFile.canonicalPath] != [$resultFile.canonicalPath]"
+                println "[$configFile.canonicalPath] = [$resultFile.canonicalPath]"
+            }
+        }
+    }
 }
 
 
@@ -73,11 +82,6 @@ project ( ':hello-js-configs-new-keys'    ) {
                           [ 'config/development.json'   : file( "${ project.name }-2.json" ) ],
                           [ 'config/development-2.json' : file( "${ project.name }.properties" ) ]]
     }
-
-    setup << {
-        assertEqualFiles( p, 'config/development.json',   'config/development-result.json' )
-        assertEqualFiles( p, 'config/development-2.json', 'config/development-2-result.json' )
-    }
 }
 
 project ( ':hello-js-configs-update-keys' ) {
@@ -88,10 +92,5 @@ project ( ':hello-js-configs-update-keys' ) {
         configs        = [[ 'config/development.json'   : file( "${ project.name }.json" ) ],
                           [ 'config/development.json'   : [ port : portNumber ]],
                           [ 'config/development-2.json' : file( "${ project.name }.properties" ) ]]
-    }
-
-    setup << {
-        assertEqualFiles( p, 'config/development.json',   'config/development-result.json' )
-        assertEqualFiles( p, 'config/development-2.json', 'config/development-2-result.json' )
     }
 }
