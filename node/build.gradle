@@ -16,8 +16,10 @@ defaultTasks 'clean', 'cleanModules', 'start', 'restartall', 'stop', 'stopall'
 int portNumberForProject( Project p ){ 3000 + ( Math.abs( p.name.hashCode()) % 100 ) }
 void assertEqualFiles( Project p, String fileName1, String fileName2 )
 {
-    assert p.file( fileName1 ).text == p.file( fileName2 ).text
-    println "[$fileName1] == [$fileName2]"
+    final f1 = p.file( fileName1 )
+    final f2 = p.file( fileName2 )
+    assert f1.text == f2.text, "[$f1.canonicalPath] != [$f2.canonicalPath]"
+    println "[$f1.canonicalPath] == [$f2.canonicalPath]"
 }
 
 
