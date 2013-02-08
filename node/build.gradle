@@ -92,6 +92,8 @@ project ( ':hello-js-configs-update-keys' ) {
         configsNewKeys = 'fail'
         configs        = [[ 'config/development.json'   : file( "${ project.name }.json" ) ],
                           [ 'config/development.json'   : [ port : portNumber ]],
-                          [ 'config/development-2.json' : file( "${ project.name }.properties" ) ]]
+                          [ 'config/development-2.json' : file( "${ project.name }.properties" ) ],
+                          [ 'config/development-3.json' : file( "${ project.name }-3.json" ) ],
+                          [ 'config/development-4.json' : file( "${ project.name }-3.json" ) ]]
     }
 }
