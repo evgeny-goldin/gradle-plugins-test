@@ -35,6 +35,7 @@ subprojects {
     node {
         nodeVersion            = 'latest'
         cleanWorkspace         = true
+        printConfigs           = true
         cleanWorkspaceCommands = [ 'git checkout -f config' ]
         checkContent           = p.name + (( p.name == 'hello-js'                     ) ? '|yhn|890|' :
                                            ( p.name == 'hello-js-port-number'         ) ? '|undefined|undefined|' :
