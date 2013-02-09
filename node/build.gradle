@@ -14,6 +14,11 @@ defaultTasks 'clean', 'cleanModules', 'start', 'restartall', 'stop', 'stopall'
 
 
 int portNumberForProject( Project p ){ 3000 + ( Math.abs( p.name.hashCode()) % 100 ) }
+void assertEqual( File f1, File f2 )
+{
+    assert ( f1.text == f2.text ), "[$f1.canonicalPath] != [$f2.canonicalPath]"
+    println "[$f1.canonicalPath] = [$f2.canonicalPath]"
+}
 
 
 subprojects {
@@ -54,15 +59,12 @@ subprojects {
         /**
          * Comparing all configs generated with '*-merged.json' files expected.
          */
-        final configFiles = new File( p.projectDir, 'config' ).listFiles().findAll{ File f -> f.name.endsWith( '.json' ) }
+        final configFiles = new File( p.projectDir, 'config' ).listFiles().findAll{ File f ->   f.name.endsWith( '.json' ) }.
+                                                                           findAll{ File f -> ! f.name.endsWith( '-merged.json' ) }
         for ( File configFile in configFiles )
         {
-            final mergedFiled = new File( configFile.parentFile, configFile.name[ 0 .. -6 ] + '-merged.json' )
-            if ( mergedFiled.file )
-            {
-                assert ( configFile.text == mergedFiled.text ), "[$configFile.canonicalPath] != [$mergedFiled.canonicalPath]"
-                println "[$configFile.canonicalPath] = [$mergedFiled.canonicalPath]"
-            }
+            final mergedFile = new File( configFile.parentFile, configFile.name[ 0 .. -6 ] + '-merged.json' )
+            assertEqual( configFile, mergedFile )
         }
     }
 }
@@ -97,8 +99,11 @@ project ( ':hello-js-configs-update-keys' ) {
                           [ 'config/development-4.json' : file( "${ project.name }-4.json" ) ],
                           [ 'config/development-5.json' : file( "${ project.name }-5.json" ) ],
                           [ 'config/development-6.json' : file( "${ project.name }-6.json" ) ],
-                          [ 'config/development-7.json' : file( "${ project.name }-7.json" ) ],
+                          [ 'config/development-7.json' : file( "${ project.name }-7.json" ) ]]
 
-        ]
+        replaces       = [[ 'config/resource.txt' : [ 'a'     : 'b',
+                                                      '/\\d/' : '!' ]]]
     }
+
+    setup << { assertEqual( p.file( 'config/resource.txt' ), p.file( 'config/resource-replaced.txt' )) }
 }
