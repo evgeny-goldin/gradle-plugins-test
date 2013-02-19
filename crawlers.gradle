@@ -173,8 +173,8 @@ task berlindevopsCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
             linksMapFile       = file( 'links-berlindevops.txt' )
             newLinksMapFile    = file( 'newLinks-berlindevops.txt' )
 
-            minimumLinks       = 400
-            minimumBytes       = 1 * 1024 * 1024
+            minimumLinks       = 350
+            minimumBytes       = 800 * 1024
             ignoredLinks       = [{ String link -> link.with{ endsWith( '/wp-comments-post.php' ) ||
                                                               endsWith( '/?pushpress=hub' ) }}]
             ignoredBrokenLinks = [{ String link -> link == 'http://berlindevops.org?like=1' }]
