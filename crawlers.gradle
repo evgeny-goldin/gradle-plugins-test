@@ -23,6 +23,7 @@ crawler {
     checkExternalLinks = true
     displayLinks       = true
     teamcityMessages   = true
+    displayLinksPath   = true
 
     log                = file( 'log.txt' )
     linksMapFile       = file( 'links.txt' )
@@ -46,6 +47,7 @@ task wikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
             baseUrl            = 'evgeny-goldin.com/wiki'
             teamcityMessages   = true
             checkExternalLinks = true
+            displayLinksPath   = true
 
             log                = file( 'log-wiki.txt' )
             linksMapFile       = file( 'links-wiki.txt' )
@@ -68,6 +70,7 @@ task jfrogSiteCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
             baseUrl            = 'www.jfrog.com'
             teamcityMessages   = true
             checkExternalLinks = true
+            displayLinksPath   = true
 
             log                = file( 'log-jfrog-site.txt' )
             linksMapFile       = file( 'links-jfrog-site.txt' )
@@ -92,6 +95,7 @@ task jfrogWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
             baseUrl            = 'wiki.jfrog.org'
             teamcityMessages   = true
             checkExternalLinks = true
+            displayLinksPath   = true
             pageDownloadLimit  = 300 * 1024
             totalDownloadLimit = -1
 
@@ -125,6 +129,7 @@ task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask )
             baseUrl            = 'www.gradle.org'
             teamcityMessages   = true
             checkExternalLinks = true
+            displayLinksPath   = true
             pageDownloadLimit  = 500 * 1024
 
             log                = file( 'log-gradle.txt' )
@@ -150,6 +155,7 @@ task marsjobsCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask
             baseUrl            = 'marsjobs.net'
             teamcityMessages   = true
             checkExternalLinks = true
+            displayLinksPath   = true
 
             log                = file( 'log-marsjobs.txt' )
             linksMapFile       = file( 'links-marsjobs.txt' )
@@ -168,6 +174,7 @@ task berlindevopsCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
             baseUrl            = 'berlindevops.org'
             teamcityMessages   = true
             checkExternalLinks = true
+            displayLinksPath   = true
 
             log                = file( 'log-berlindevops.txt' )
             linksMapFile       = file( 'links-berlindevops.txt' )
@@ -192,6 +199,7 @@ task teamcityWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.Crawler
             baseUrl            = 'confluence.jetbrains.com/display/TCD7/'
             teamcityMessages   = true
             checkExternalLinks = true
+            displayLinksPath   = true
 
             log                = file( 'log-teamcity-wiki.txt' )
             linksMapFile       = file( 'links-teamcity-wiki.txt' )
@@ -211,6 +219,7 @@ task teamcityJavadocsCrawler( type: com.github.goldin.plugins.gradle.crawler.Cra
         baseUrl            = 'javadoc.jetbrains.net/teamcity/openapi/current/'
         teamcityMessages   = true
         checkExternalLinks = true
+        displayLinksPath   = true        
         pageDownloadLimit  = 4 * 1024 * 1024
 
         log                = file( 'log-teamcity-javadoc.txt' )
