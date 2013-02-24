@@ -70,6 +70,7 @@ task jfrogSiteCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
             baseUrl            = 'www.jfrog.com'
             teamcityMessages   = true
             checkExternalLinks = true
+            displayLinks       = true 
             displayLinksPath   = true
 
             log                = file( 'log-jfrog-site.txt' )
