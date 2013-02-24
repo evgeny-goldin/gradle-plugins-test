@@ -21,8 +21,8 @@ crawler {
 
     baseUrl            = 'evgeny-goldin.com'
     checkExternalLinks = true
-    displayLinks       = true
     teamcityMessages   = true
+    displayLinks       = true
     displayLinksPath   = true
 
     log                = file( 'log.txt' )
@@ -130,7 +130,8 @@ task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask )
             baseUrl            = 'www.gradle.org'
             teamcityMessages   = true
             checkExternalLinks = true
-            displayLinksPath   = false
+            displayLinks       = true
+            displayLinksPath   = true
             pageDownloadLimit  = 500 * 1024
             totalDownloadLimit = 200 * 1024 * 1024
 
