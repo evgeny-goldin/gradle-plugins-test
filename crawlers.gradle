@@ -63,7 +63,7 @@ task wikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 }
 
 
-task jfrogSiteCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+task jfrogComCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 
     config { it.with {
 
