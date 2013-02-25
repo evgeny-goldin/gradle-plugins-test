@@ -123,7 +123,7 @@ task jfrogWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
 
 
 task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
-    final versionPattern = Pattern.compile( 'gradle.org/docs/(.+?)/' )
+    final versionPattern = Pattern.compile( 'gradle.org/docs/([^/]+)' )
 
     config { it.with {
 
@@ -143,10 +143,12 @@ task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask )
 
             ignoredLinks       = [{
                 String link ->
-                if ( ! link.startsWith( 'http://gradle.org/docs/' )){ return false }
+                if ( ! link.startsWith( 'http://www.gradle.org/docs/' )){ return false }
 
                 final docsVersion = link.find( versionPattern ){ it[ 1 ] }
-                docsVersion.contains( '-milestone-' ) || docsVersion.startsWith( '0.' )
+
+                ( docsVersion != null ) && 
+                ( docsVersion.contains( '-milestone-' ) || docsVersion.startsWith( '0.' ))
             }]
     }}
 }
