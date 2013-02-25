@@ -132,10 +132,8 @@ task gradleCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask )
             checkExternalLinks = true
             displayLinks       = true
             displayLinksPath   = true
-            minimumLinks       = 58000
-            minimumBytes       = 100 * 1024 * 1024
-            totalDownloadLimit = 140 * 1024 * 1024
-            pageDownloadLimit  = 500 * 1024
+            minimumLinks       = 21600
+            minimumBytes       = 40 * 1024 * 1024
 
             log                = file( 'log-gradle.txt' )
             linksMapFile       = file( 'links-gradle.txt' )
