@@ -124,6 +124,7 @@ task jfrogWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
 
 task gradleOrgCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
     final versionPattern = Pattern.compile( 'gradle.org/docs/([^/]+)' )
+    final fullScan       = System.getProperty( 'gradleFull' ) != null
 
     config { it.with {
 
@@ -132,15 +133,16 @@ task gradleOrgCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
             checkExternalLinks = true
             displayLinks       = true
             displayLinksPath   = true
-            minimumLinks       = 21600
-            minimumBytes       = 40  * 1024 * 1024
             pageDownloadLimit  = 500 * 1024
+            minimumLinks       = fullScan ? 58000             : 21600
+            minimumBytes       = fullScan ? 120 * 1024 * 1024 : 40 * 1024 * 1024
+            totalDownloadLimit = fullScan ? 140 * 1024 * 1024 : 60 * 1024 * 1024
 
             log                = file( 'log-gradle.txt' )
             linksMapFile       = file( 'links-gradle.txt' )
             newLinksMapFile    = file( 'newLinks-gradle.txt' )
 
-            ignoredLinks       = (( System.getProperty( 'gradleFull' ) != null ) ? [] : [{
+            ignoredLinks       = ( fullScan ? [] : [{
                 String link ->
                 if ( ! link.startsWith( 'http://www.gradle.org/docs/' )){ return false }
 
