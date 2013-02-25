@@ -134,8 +134,8 @@ task gradleOrgCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
             displayLinks       = true
             displayLinksPath   = true
             pageDownloadLimit  = 500 * 1024
-            minimumLinks       = fullScan ? 58000             : 21600
-            minimumBytes       = fullScan ? 120 * 1024 * 1024 : 40 * 1024 * 1024
+            minimumLinks       = fullScan ? 58500             : 21600
+            minimumBytes       = fullScan ? 110 * 1024 * 1024 : 40 * 1024 * 1024
             totalDownloadLimit = fullScan ? 140 * 1024 * 1024 : 60 * 1024 * 1024
 
             log                = file( 'log-gradle.txt' )
