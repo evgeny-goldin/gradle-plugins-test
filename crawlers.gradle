@@ -140,7 +140,7 @@ task gradleOrgCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
             linksMapFile       = file( 'links-gradle.txt' )
             newLinksMapFile    = file( 'newLinks-gradle.txt' )
 
-            ignoredLinks       = ( System.getProperty( 'gradleFull' ) =! null ) ? [] : [{
+            ignoredLinks       = (( System.getProperty( 'gradleFull' ) != null ) ? [] : [{
                 String link ->
                 if ( ! link.startsWith( 'http://www.gradle.org/docs/' )){ return false }
 
@@ -148,7 +148,7 @@ task gradleOrgCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
 
                 ( docsVersion != null ) && 
                 ( docsVersion.contains( '-milestone-' ) || docsVersion.startsWith( '0.' ))
-            }]
+            }])
     }}
 }
 
