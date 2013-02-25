@@ -84,27 +84,6 @@ task jfrogComCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask
 }
 
 
-task ztCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
-
-    config { it.with {
-
-            baseUrl            = 'zeroturnaround.com'
-            teamcityMessages   = true
-            checkExternalLinks = true
-            displayLinks       = true 
-            displayLinksPath   = true
-
-            log                = file( 'log-zt.txt' )
-            linksMapFile       = file( 'links-zt.txt' )
-            newLinksMapFile    = file( 'newLinks-zt.txt' )
-
-            minimumLinks       = 1
-            minimumBytes       = 1
-            readTimeout        = 30000
-    }}
-}
-
-
 task jfrogWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 
     List<String> nonHtmlLinksData    = file( 'jfrog-non-html-links.txt' ).readLines()*.trim().grep()
