@@ -63,15 +63,6 @@ monitor {
     resourcesFile = file( 'monitor-resources.txt' )
 }
 
-gitdump {
-    urls               = new JsonSlurper().parseText( 'https://api.github.com/users/evgeny-goldin/repos?per_page=1000'.toURL().text ).
-                         collect { Map m -> "${ m.git_url }:<last>" }
-    runAggressiveGitGc = true
-    singleArchive      = true
-    totalBackupMinSize = 70  * 1024 * 1024
-    totalBackupMaxSize = 100 * 1024 * 1024
-}
-
 
 subprojects {
 
@@ -162,6 +153,21 @@ project ( ':kotlin:kotlin-standalone' ) {
         println "Compilation classpath: [${ kotlin.classpath }]"
         assert new File(( String ) kotlin.outputDir ).with{ directory && list() }
     }
+}
+
+
+task gitdumpAll ( type: com.github.goldin.plugins.gradle.gitdump.GitDumpTask ) {
+    config { it.with {
+        final excludedProjects = 'widefinder gcommons-old'.tokenize()
+        githubUser             = 'evgeny-goldin'
+        bitbucketUser          = 'evgenyg'
+        bitbucketPassword      = file( 'bitBucket.txt' ).text.trim()
+        collectProjects        = { String repoUrl -> excludedProjects.any { repoUrl.contains( it )} ? '' : "$repoUrl:<last>" }
+        runAggressiveGitGc     = true
+        singleArchive          = true
+        totalBackupMinSize     = 70  * 1024 * 1024
+        totalBackupMaxSize     = 100 * 1024 * 1024
+    }}
 }
 
 
