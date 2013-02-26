@@ -165,8 +165,8 @@ task gitdumpAll ( type: com.github.goldin.plugins.gradle.gitdump.GitDumpTask ) {
         collectProjects        = { String repoUrl -> excludedProjects.any { repoUrl.contains( it )} ? '' : "$repoUrl:<last>" }
         runAggressiveGitGc     = true
         singleArchive          = true
-        totalBackupMinSize     = 70  * 1024 * 1024
-        totalBackupMaxSize     = 100 * 1024 * 1024
+        totalBackupMinSize     = 40 * 1024 * 1024
+        totalBackupMaxSize     = 60 * 1024 * 1024
     }}
 }
 
