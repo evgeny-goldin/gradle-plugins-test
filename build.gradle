@@ -161,7 +161,7 @@ task gitdumpAll ( type: com.github.goldin.plugins.gradle.gitdump.GitDumpTask ) {
         final excludedProjects = 'widefinder gcommons-old'.tokenize()
         githubUser             = 'evgeny-goldin'
         bitbucketUser          = 'evgenyg'
-        bitbucketPassword      = file( 'bitBucket.txt' ).text.trim()
+        bitbucketPassword      = new File( System.getProperty( 'user.home' ), 'bitBucket.txt' ).text.trim()
         collectProjects        = { String repoUrl -> excludedProjects.any { repoUrl.contains( it )} ? '' : "$repoUrl:<last>" }
         runAggressiveGitGc     = true
         singleArchive          = true
