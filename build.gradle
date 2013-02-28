@@ -164,7 +164,6 @@ task gitdumpAll ( type: com.github.goldin.plugins.gradle.gitdump.GitDumpTask ) {
         githubUseSshUrl        = false
         bitbucketPassword      = new File( System.getProperty( 'user.home' ), 'bitBucket.txt' ).text.trim()
         collectProjects        = { String repoUrl -> excludedProjects.any { repoUrl.contains( it )} ? '' : "$repoUrl:<last>" }
-        runAggressiveGitGc     = true
         singleArchive          = true
         totalBackupMinSize     = 40 * 1024 * 1024
         totalBackupMaxSize     = 60 * 1024 * 1024
