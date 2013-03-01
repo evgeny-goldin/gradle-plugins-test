@@ -79,7 +79,10 @@ project ( ':hello-coffee-port-number' ) { node { configsNewKeys = 'create' }}
 
 
 project ( ':run-commands' ){
-    node { run = [ 'pwd', 'coffee --version', 'grunt -version', 'git log -1', 'less --version', 'ls -al' ]}
+    node {
+        run             = [ 'pwd', 'coffee --version', 'grunt -version', 'git log -1', 'less --version', 'ls -al' ]
+        checkAfterStart = false
+    }
 }
 
 

@@ -12,6 +12,7 @@
         "grunt"         : "*",
         "grunt-cli"     : "*",
         "coffee-script" : "*",
+        "forever"       : "*",
         "less"          : "*"
     },
     "repository": {
