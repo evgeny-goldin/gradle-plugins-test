@@ -3,5 +3,6 @@ include 'hello-js-port-number'
 include 'hello-coffee-port-number'
 include 'hello-js-configs-new-keys'
 include 'hello-js-configs-update-keys'
+include 'run-commands'
 
 rootProject.name = 'gradle-plugins-test-node'

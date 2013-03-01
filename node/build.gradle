@@ -22,9 +22,8 @@ void assertEqual( File f1, File f2 )
 
 
 subprojects {
-    Project p ->
-
     apply plugin: 'node'
+    node { nodeVersion = 'latest' }
 
     clean.doFirst {
         if ( System.getProperty( 'cleanNode' ) != null )
@@ -36,9 +35,13 @@ subprojects {
             project.delete( deleteFiles )
         }
     }
+}
+
+
+configure ( subprojects.findAll{ it.name != 'run-commands' }) {
+    Project p ->
 
     node {
-        nodeVersion            = 'latest'
         cleanWorkspace         = true
         printConfigs           = true
         cleanWorkspaceCommands = [ 'git checkout -f config' ]
@@ -75,7 +78,12 @@ project ( ':hello-js-port-number'     ) { node { configsNewKeys = 'ignore' }}
 project ( ':hello-coffee-port-number' ) { node { configsNewKeys = 'create' }}
 
 
-project ( ':hello-js-configs-new-keys'    ) {
+project ( ':run-commands' ){
+    node { run = [ 'pwd', 'coffee --version', 'grunt -version', 'git log -1', 'less --version', 'ls -al' ]}
+}
+
+
+project ( ':hello-js-configs-new-keys' ) {
     Project p ->
 
     node {

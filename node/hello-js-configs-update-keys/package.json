@@ -2,7 +2,7 @@
     "name": "hello",
     "version": "0.0.1",
     "preferGlobal": "false",
-    "description": "Hello World Node.js JS test",
+    "description": "Hello World Test",
     "contributors": [
         { "name": "Evgeny Goldin",  "email": "evgenyg@gmail.com" }
     ],

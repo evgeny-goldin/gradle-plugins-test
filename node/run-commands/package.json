@@ -9,7 +9,10 @@
     "dependencies": {
     },
     "devDependencies": {
-        "forever"       : "*"
+        "grunt"         : "*",
+        "grunt-cli"     : "*",
+        "coffee-script" : "*",
+        "less"          : "*"
     },
     "repository": {
         "type": "git",
