@@ -52,7 +52,7 @@ task groovydocCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
             linksMapFile       = file( 'links-groovydoc.txt' )
             newLinksMapFile    = file( 'newLinks-groovydoc.txt' )
 
-            minimumLinks       = 220
+            minimumLinks       = 210
             minimumBytes       = 1024 * 1024
 
             linkTransformers   = [{ String link -> link.replaceFirst( /evgeny-goldin.org(:\d+)?/, 'evgeny-goldin.org:8148' ) }]
