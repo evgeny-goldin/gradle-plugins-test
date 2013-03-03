@@ -37,6 +37,25 @@ crawler {
 }
 
 
+task groovydocCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+
+    config { it.with {
+
+            baseUrl            = 'evgeny-goldin.org:8148/groovydoc/gradle-plugins/'
+            teamcityMessages   = true
+            checkExternalLinks = true
+            displayLinksPath   = true
+
+            log                = file( 'log-groovydoc.txt' )
+            linksMapFile       = file( 'links-groovydoc.txt' )
+            newLinksMapFile    = file( 'newLinks-groovydoc.txt' )
+
+            minimumLinks       = 220
+            minimumBytes       = 1024 * 1024
+    }}
+}
+
+
 task wikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 
     final ignoredLinksEndsWith = 'redirect=no /wiki/... /wiki/MyPage'.tokenize()
