@@ -19,6 +19,19 @@ final kotlinVersion  = '0.5.162'
 group                = 'com.github.goldin.plugins.gradle'
 
 
+gitdump {
+    final excludedProjects = 'widefinder gcommons-old'.tokenize()
+    githubUser             = 'evgeny-goldin'
+    bitbucketUser          = 'evgenyg'
+    githubUseSshUrl        = false
+    bitbucketPassword      = new File( System.getProperty( 'user.home' ), 'bitBucket.txt' ).text.trim()
+    collectProjects        = { String repoUrl -> excludedProjects.any { repoUrl.contains( it )} ? '' : "$repoUrl:<last>" }
+    singleArchive          = true
+    totalBackupMinSize     = 40 * 1024 * 1024
+    totalBackupMaxSize     = 60 * 1024 * 1024
+}
+
+
 buildscript {
 
     final version = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : '0.2.2-SNAPSHOT'
@@ -159,21 +172,6 @@ project ( ':kotlin:kotlin-standalone' ) {
         println "Compilation classpath: [${ kotlin.classpath }]"
         assert new File(( String ) kotlin.outputDir ).with{ directory && list() }
     }
-}
-
-
-task gitdumpAll ( type: com.github.goldin.plugins.gradle.gitdump.GitDumpTask ) {
-    config { it.with {
-        final excludedProjects = 'widefinder gcommons-old'.tokenize()
-        githubUser             = 'evgeny-goldin'
-        bitbucketUser          = 'evgenyg'
-        githubUseSshUrl        = false
-        bitbucketPassword      = new File( System.getProperty( 'user.home' ), 'bitBucket.txt' ).text.trim()
-        collectProjects        = { String repoUrl -> excludedProjects.any { repoUrl.contains( it )} ? '' : "$repoUrl:<last>" }
-        singleArchive          = true
-        totalBackupMinSize     = 40 * 1024 * 1024
-        totalBackupMaxSize     = 60 * 1024 * 1024
-    }}
 }
 
 
