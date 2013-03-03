@@ -39,7 +39,8 @@ crawler {
 
 task groovydocCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 
-    final ignoredLinksList = '/org/gradle/api/internal/ /org/gradle/api/tasks/bundling/Jar.html'.tokenize()
+    final ignoredLinksList       = '/org/gradle/api/internal/ /org/gradle/api/tasks/bundling/Jar.html'.tokenize()
+    final ignoredBrokenLinksList = 'constant-values-todo.html overview-tree-todo.html'.tokenize()
 
     config { it.with {
 
@@ -57,6 +58,7 @@ task groovydocCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
 
             linkTransformers   = [{ String link -> link.replaceFirst( /evgeny-goldin.org(:\d+)?/, 'evgeny-goldin.org:8148' ) }]
             ignoredLinks       = [{ String link -> ignoredLinksList.any { link.contains( it ) }}]
+            ignoredBrokenLinks = [{ String link -> ignoredBrokenLinksList.any { link.contains( it ) }}]
     }}
 }
 
