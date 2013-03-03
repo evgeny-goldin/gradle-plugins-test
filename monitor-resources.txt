@@ -41,17 +41,20 @@ http://evgeny-goldin.org:8148/teamcity/login.html|200|>Login as a Guest User<|10
 http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project6|200|>Login as a Guest User<|10000
 
 http://evgeny-goldin.org:8148/teamcity/?guest=1|200|<title>Projects -- TeamCity</title>|10000
+http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project6&guest=1|200|gradle-plugins|10000
+http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project21&guest=1|200|Crawlers|10000
 http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project2&guest=1|200|maven-plugins|10000
 http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project4&guest=1|200|gcommons|10000
-http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project6&guest=1|200|gradle-plugins|10000
-http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project17&guest=1|200|Misc Projects|10000
-http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project21&guest=1|200|Crawlers|10000
+http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project17&guest=1|403|jetbrains.buildServer.serverSide.auth.AccessDeniedException|10000
 
 # Artifactory
 
 http://evgenyg.artifactoryonline.com|200|You are currently not logged-in|10000
 http://evgenyg.artifactoryonline.com/evgenyg/|200|Artifactory anonymously|10000
 http://evgenyg.artifactoryonline.com/evgenyg/webapp/home.html?0|200|Artifactory is happily serving|10000
-http://evgenyg.artifactoryonline.com/evgenyg/repo/com/github/goldin/|200|copy-maven-plugin|10000
 
 # Bintray
+
+http://dl.bintray.com/content/evgenyg/BuildTools|200|com/|3000
+http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/|200|node/|3000
+http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/crawler/0.2.1/|200|crawler-0.2.1.jar|3000
