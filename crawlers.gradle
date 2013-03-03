@@ -52,6 +52,8 @@ task groovydocCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
 
             minimumLinks       = 220
             minimumBytes       = 1024 * 1024
+
+            linkTransformers   = [{ String link -> link.replaceFirst( /evgeny-goldin.org(:\d+)?/, 'evgeny-goldin.org:8148' ) }]
     }}
 }
 
@@ -89,7 +91,7 @@ task jfrogComCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask
             baseUrl            = 'www.jfrog.com'
             teamcityMessages   = true
             checkExternalLinks = true
-            displayLinks       = true 
+            displayLinks       = true
             displayLinksPath   = true
 
             log                = file( 'log-jfrog-site.txt' )
@@ -167,7 +169,7 @@ task gradleOrgCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
 
                 final docsVersion = link.find( versionPattern ){ it[ 1 ] }
 
-                ( docsVersion != null ) && 
+                ( docsVersion != null ) &&
                 ( docsVersion.contains( '-milestone-' ) || docsVersion.startsWith( '0.' ))
             }])
     }}
@@ -244,7 +246,7 @@ task teamcityJavadocsCrawler( type: com.github.goldin.plugins.gradle.crawler.Cra
         baseUrl            = 'javadoc.jetbrains.net/teamcity/openapi/current/'
         teamcityMessages   = true
         checkExternalLinks = true
-        displayLinksPath   = true        
+        displayLinksPath   = true
         pageDownloadLimit  = 4 * 1024 * 1024
 
         log                = file( 'log-teamcity-javadoc.txt' )
