@@ -143,7 +143,7 @@ project ( ':nodejs-blackboard' ){
         logger.info( "Mongo unpacked" )
     }
 
-    final mongoStart = 'build/mongod --dbpath build/db &'
+    final mongoStart = 'build/mongod --fork --logpath build/mongo.log --dbpath build/db'
     final mongoStop  = 'build/mongo  --eval "db.getSiblingDB(\'admin\').shutdownServer()"'
 
     node {
