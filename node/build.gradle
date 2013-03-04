@@ -44,7 +44,7 @@ subprojects {
 }
 
 
-configure ( subprojects.findAll{ it.name != 'run-commands' }) {
+configure ( subprojects.findAll{ it.name.startsWith( 'hello-' ) }) {
     Project p ->
 
     node {
@@ -84,15 +84,6 @@ project ( ':hello-js-port-number'     ) { node { configsNewKeys = 'ignore' }}
 project ( ':hello-coffee-port-number' ) { node { configsNewKeys = 'create' }}
 
 
-project ( ':run-commands' ){
-    node {
-        run                  = [ 'pwd', 'coffee --version', 'grunt -version', 'git log -1', 'less --version', 'ls -al' ]
-        checkAfterStart      = false
-        checkAfterRestartall = false
-    }
-}
-
-
 project ( ':hello-js-configs-new-keys' ) {
     Project p ->
 
@@ -104,6 +95,7 @@ project ( ':hello-js-configs-new-keys' ) {
                           [ 'config/development-2.json' : file( "${ project.name }.properties" ) ]]
     }
 }
+
 
 project ( ':hello-js-configs-update-keys' ) {
     Project p ->
@@ -124,4 +116,42 @@ project ( ':hello-js-configs-update-keys' ) {
     }
 
     setup << { assertEqual( p.file( 'config/resource.txt' ), p.file( 'config/resource-replaced.txt' )) }
+}
+
+
+project ( ':run-commands' ){
+    node {
+        run                  = [ 'pwd', 'coffee --version', 'grunt -version', 'git log -1', 'less --version', 'ls -al' ]
+        checkAfterStart      = false
+        checkAfterRestartall = false
+    }
+}
+
+
+project ( ':nodejs-blackboard' ){
+
+    repositories   { maven  { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }}
+    configurations { mongod }
+    dependencies   { mongod 'mongo:mongo:2.2.3@zip' }
+
+    setup.doFirst {
+        mkdir 'build'
+        mkdir 'build/db'
+        copy { into 'build'; from { zipTree( configurations.mongod.files.toList().first()) }}
+        logger.info( "Mongo unpacked" )
+    }
+
+    node {
+        scriptPath   = 'app.coffee'
+        before       = [ 'build/mongod --dbpath build/db &', 'node add_data.js' ]
+        after        = [ 'build/mongo  --eval "db.getSiblingDB(\'admin\').shutdownServer()"' ]
+
+        // Identical to
+        // start.doLast { assert 'curl http://127.0.0.1:3000'.execute().text.contains( '<h1>nodejs experiment</h1><p>blackboard</p>' ) }
+
+        checkContent = '<h1>nodejs experiment</h1><p>blackboard</p>'
+        portNumber   = 3000
+    }
+
+    start.doLast { assert 'curl http://127.0.0.1:3000'.execute().text.contains( '<h1>nodejs experiment</h1><p>blackboard</p>' ) }
 }
