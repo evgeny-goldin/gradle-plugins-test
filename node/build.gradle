@@ -148,7 +148,7 @@ project ( ':nodejs-blackboard' ){
 
     node {
         scriptPath   = 'app.coffee'
-        before       = [ mongoStop, mongoStart, 'node add_data.js' ]
+        before       = [ mongoStop, 'sleep 5', mongoStart, 'sleep 5', 'node add_data.js' ]
         after        = [ mongoStop, 'exit 0' ]
 
         // Identical to
