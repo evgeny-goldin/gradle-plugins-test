@@ -19,7 +19,7 @@ buildscript {
 defaultTasks 'clean', 'cleanModules', 'start', 'restartall', 'stop', 'stopall'
 
 
-int portNumberForProject( Project p ){ 3000 + ( Math.abs( p.name.hashCode()) % 31 ) }
+int portNumberForProject( Project p ){ 3000 + ( Math.abs( p.name.hashCode()) % 100 ) }
 void assertEqual( File f1, File f2 )
 {
     assert ( f1.text == f2.text ), "[$f1.canonicalPath] != [$f2.canonicalPath]"
@@ -130,9 +130,11 @@ project ( ':run-commands' ){
 
 project ( ':nodejs-blackboard' ){
 
+    final classifier = ( System.getProperty( 'os.name' ).toLowerCase().contains( 'mac os' ) ? 'mac' : 'linux' )
+
     repositories   { maven  { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }}
     configurations { mongod }
-    dependencies   { mongod 'mongo:mongo:2.2.3@zip' }
+    dependencies   { mongod "mongo:mongo:2.2.3:${ classifier }@zip" }
 
     setup.doFirst {
         mkdir 'build'
@@ -144,7 +146,7 @@ project ( ':nodejs-blackboard' ){
     node {
         scriptPath   = 'app.coffee'
         before       = [ 'build/mongod --dbpath build/db &', 'node add_data.js' ]
-        after        = [ 'build/mongo  --eval "db.getSiblingDB(\'admin\').shutdownServer()"' ]
+        after        = [ 'build/mongo  --eval "db.getSiblingDB(\'admin\').shutdownServer()"', 'exit 0' ]
 
         // Identical to
         // start.doLast { assert 'curl http://127.0.0.1:4000'.execute().text.contains( '<h1>nodejs experiment</h1><p>blackboard</p>' ) }
