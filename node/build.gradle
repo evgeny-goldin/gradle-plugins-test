@@ -145,7 +145,7 @@ project ( ':nodejs-blackboard' ){
 
     node {
         scriptPath   = 'app.coffee'
-        before       = [ 'build/mongod --dbpath build/db &', 'node add_data.js' ]
+        before       = [ 'build/mongod --dbpath build/db &', 'sleep 5', 'node add_data.js' ]
         after        = [ 'build/mongo  --eval "db.getSiblingDB(\'admin\').shutdownServer()"', 'exit 0' ]
 
         // Identical to
