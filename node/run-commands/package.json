@@ -11,7 +11,7 @@
     "devDependencies": {
         "grunt"         : "*",
         "grunt-cli"     : "*",
-        "coffee-script" : "*",
+        "coffee-script" : "1.5.0",
         "forever"       : "*",
         "less"          : "*"
     },

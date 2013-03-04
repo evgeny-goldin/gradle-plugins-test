@@ -28,7 +28,7 @@ Data = mongoose.model 'Data'
 # Configuration
 
 app.configure () ->
-	app.set 'port', process.env.PORT || 3000
+	app.set 'port', process.env.PORT || 4000
 	app.set 'views', __dirname + '/views'
 	app.set 'view engine', 'jade'
 	app.use express.favicon()

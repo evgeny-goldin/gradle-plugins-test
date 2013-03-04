@@ -19,7 +19,7 @@ buildscript {
 defaultTasks 'clean', 'cleanModules', 'start', 'restartall', 'stop', 'stopall'
 
 
-int portNumberForProject( Project p ){ 3000 + ( Math.abs( p.name.hashCode()) % 100 ) }
+int portNumberForProject( Project p ){ 3000 + ( Math.abs( p.name.hashCode()) % 31 ) }
 void assertEqual( File f1, File f2 )
 {
     assert ( f1.text == f2.text ), "[$f1.canonicalPath] != [$f2.canonicalPath]"
@@ -147,11 +147,11 @@ project ( ':nodejs-blackboard' ){
         after        = [ 'build/mongo  --eval "db.getSiblingDB(\'admin\').shutdownServer()"' ]
 
         // Identical to
-        // start.doLast { assert 'curl http://127.0.0.1:3000'.execute().text.contains( '<h1>nodejs experiment</h1><p>blackboard</p>' ) }
+        // start.doLast { assert 'curl http://127.0.0.1:4000'.execute().text.contains( '<h1>nodejs experiment</h1><p>blackboard</p>' ) }
 
         checkContent = '<h1>nodejs experiment</h1><p>blackboard</p>'
-        portNumber   = 3000
+        portNumber   = 4000
     }
 
-    start.doLast { assert 'curl http://127.0.0.1:3000'.execute().text.contains( '<h1>nodejs experiment</h1><p>blackboard</p>' ) }
+    start.doLast { assert 'curl http://127.0.0.1:4000'.execute().text.contains( '<h1>nodejs experiment</h1><p>blackboard</p>' ) }
 }
