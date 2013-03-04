@@ -143,10 +143,13 @@ project ( ':nodejs-blackboard' ){
         logger.info( "Mongo unpacked" )
     }
 
+    final mongoStart = 'build/mongod --dbpath build/db &'
+    final mongoStop  = 'build/mongo  --eval "db.getSiblingDB(\'admin\').shutdownServer()"'
+
     node {
         scriptPath   = 'app.coffee'
-        before       = [ 'build/mongod --dbpath build/db &', 'sleep 5', 'node add_data.js' ]
-        after        = [ 'build/mongo  --eval "db.getSiblingDB(\'admin\').shutdownServer()"', 'exit 0' ]
+        before       = [ mongoStop, mongoStart, 'node add_data.js' ]
+        after        = [ mongoStop, 'exit 0' ]
 
         // Identical to
         // start.doLast { assert 'curl http://127.0.0.1:4000'.execute().text.contains( '<h1>nodejs experiment</h1><p>blackboard</p>' ) }
