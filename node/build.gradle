@@ -137,10 +137,15 @@ project ( ':nodejs-blackboard' ){
     dependencies   { mongod "mongo:mongo:2.2.3:${ classifier }@zip" }
 
     setup.doFirst {
-        mkdir 'build'
-        mkdir 'build/db'
-        copy { into 'build'; from { zipTree( configurations.mongod.files.toList().first()) }}
-        logger.info( "Mongo unpacked" )
+        if ( new File( 'build/mongo' ).file && new File( 'build/mongod' ).file )
+        {
+            logger.info( "Mongo is already unpacked" )
+        }
+        else {
+            mkdir 'build/db'
+            copy { into 'build'; from { zipTree( configurations.mongod.files.toList().first()) }}
+            logger.info( "Mongo unpacked" )
+        }
     }
 
     final mongoStart = 'build/mongod --fork --logpath build/mongo.log --dbpath build/db'
