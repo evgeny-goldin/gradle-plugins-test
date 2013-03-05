@@ -130,23 +130,27 @@ project ( ':run-commands' ){
 
 project ( ':nodejs-blackboard' ){
 
-    final classifier = ( System.getProperty( 'os.name' ).toLowerCase().contains( 'mac os' ) ? 'mac' : 'linux' )
+    Project p ->
 
-    repositories   { maven  { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }}
-    configurations { mongod }
-    dependencies   { mongod "mongo:mongo:2.2.3:${ classifier }@zip" }
-
-    setup.doFirst {
-        if ( new File( 'build/mongo' ).file && new File( 'build/mongod' ).file )
+    final classifier       = ( System.getProperty( 'os.name' ).toLowerCase().contains( 'mac os' ) ? 'mac' : 'linux' )
+    final checkApplication = { assert 'curl http://127.0.0.1:4000'.execute().text.contains( '<h1>nodejs experiment</h1><p>blackboard</p>' ) }
+    final unpackMongo      = {
+        final isUnpacked   = new File(( File ) p.projectDir, 'build/mongo'  ).file &&
+                             new File(( File ) p.projectDir, 'build/mongod' ).file
+        if ( isUnpacked )
         {
             logger.info( "Mongo is already unpacked" )
         }
         else {
             mkdir 'build/db'
             copy { into 'build'; from { zipTree( configurations.mongod.files.toList().first()) }}
-            logger.info( "Mongo unpacked" )
+            logger.info( "Mongo is unpacked" )
         }
     }
+
+    repositories   { maven  { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }}
+    configurations { mongod }
+    dependencies   { mongod "mongo:mongo:2.2.3:${ classifier }@zip" }
 
     final mongoStart = 'build/mongod --fork --logpath build/mongo.log --dbpath build/db'
     final mongoStop  = 'build/mongo  --eval "db.getSiblingDB(\'admin\').shutdownServer()"'
@@ -163,5 +167,6 @@ project ( ':nodejs-blackboard' ){
         portNumber   = 4000
     }
 
-    start.doLast { assert 'curl http://127.0.0.1:4000'.execute().text.contains( '<h1>nodejs experiment</h1><p>blackboard</p>' ) }
+    start.doFirst( unpackMongo ).doLast( checkApplication )
+    stop. doFirst( unpackMongo )
 }
