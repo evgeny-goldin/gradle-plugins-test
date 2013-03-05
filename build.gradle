@@ -75,10 +75,7 @@ idea.module {
 }
 
 
-monitor {
-    headers       = [ 'Accept-Encoding' : 'gzip,deflate' ]
-    resourcesFile = file( 'monitor-resources.txt' )
-}
+monitor { resourcesFile = file( 'monitor-resources.txt' )}
 
 
 subprojects {
