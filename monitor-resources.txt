@@ -26,6 +26,28 @@ http://evgeny-goldin.com/wiki/|200|>Gradle Plugins<|10000
 http://evgeny-goldin.com/wiki/Maven_Plugins|200|copy-maven-plugin|10000
 http://evgeny-goldin.com/wiki/Gradle_Plugins|200|kotlin|10000
 
+# Bitbucket
+
+https://bitbucket.org/evgenyg/scala-progfun|200|<h1>Log in</h1>|10000
+https://bitbucket.org/evgenyg/scala-progfun|200|-/Recent activity/|10000
+https://bitbucket.org/evgenyg/chef-repo|200|<h1>Log in</h1>|10000
+https://bitbucket.org/evgenyg/chef-repo|200|-/Recent activity/|10000
+
+# GitHub
+
+https://github.com/evgeny-goldin/tm-jenkins|404|-/\d+\+?\s+commits/
+https://github.com/evgeny-goldin/wiki|200|/\d+\+?\s+commits/
+https://github.com/evgeny-goldin/gradle-plugins|200|/\d+\+?\s+commits/
+https://github.com/evgeny-goldin/gradle-plugins-test|200|/\d+\+?\s+commits/
+https://github.com/evgeny-goldin/gcommons|200|/\d+\+?\s+commits/
+https://github.com/evgeny-goldin/maven-plugins|200|/\d+\+?\s+commits/
+https://github.com/evgeny-goldin/maven-plugins-test|200|/\d+\+?\s+commits/
+https://github.com/evgeny-goldin/teamcity-plugins|200|/\d+\+?\s+commits/
+https://github.com/evgeny-goldin/teamcity-artifactory-plugin|200|/\d+\+?\s+commits/
+https://github.com/evgeny-goldin/teamcity-nuget-support|200|/\d+\+?\s+commits/
+https://github.com/evgeny-goldin/scripts|200|/\d+\+?\s+commits/
+https://github.com/evgeny-goldin/spock-extensions|200|/\d+\+?\s+commits/
+
 # YouTrack
 
 http://evgeny-goldin.org:8148/youtrack/|200|>Log in as guest<|10000
