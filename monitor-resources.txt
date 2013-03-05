@@ -29,9 +29,9 @@ http://evgeny-goldin.com/wiki/Gradle_Plugins|200|kotlin|10000
 # Bitbucket
 
 https://bitbucket.org/evgenyg/scala-progfun|200|<h1>Log in</h1>|10000
-https://bitbucket.org/evgenyg/scala-progfun|200|-/Recent activity/|10000
+https://bitbucket.org/evgenyg/scala-progfun|200|-Recent activity|10000
 https://bitbucket.org/evgenyg/chef-repo|200|<h1>Log in</h1>|10000
-https://bitbucket.org/evgenyg/chef-repo|200|-/Recent activity/|10000
+https://bitbucket.org/evgenyg/chef-repo|200|-Recent activity|10000
 
 # GitHub
 
