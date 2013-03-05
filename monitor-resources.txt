@@ -28,10 +28,10 @@ http://evgeny-goldin.com:80/wiki/Gradle_Plugins|200|kotlin|10000
 
 # Bitbucket
 
-https://bitbucket.org/evgenyg/scala-progfun|200|<h1>Log in</h1>|10000
-https://bitbucket.org/evgenyg/scala-progfun|200|-Recent activity|10000
-https://bitbucket.org/evgenyg/chef-repo|200|<h1>Log in</h1>|10000
-https://bitbucket.org/evgenyg/chef-repo|200|-Recent activity|10000
+Bitbucket (scala-progfun) => https://bitbucket.org/evgenyg/scala-progfun|200|<h1>Log in</h1>|10000
+Bitbucket (scala-progfun) => https://bitbucket.org/evgenyg/scala-progfun|200|-Recent activity|10000
+Bitbucket (chef-repo)     => https://bitbucket.org/evgenyg/chef-repo|200|<h1>Log in</h1>|10000
+Bitbucket (chef-repo)     => https://bitbucket.org/evgenyg/chef-repo|200|-Recent activity|10000
 
 # GitHub
 
@@ -79,11 +79,11 @@ http://evgenyg.artifactoryonline.com/evgenyg/webapp/home.html?0|200|Artifactory 
 
 http://dl.bintray.com/content/evgenyg/BuildTools|200|com/|3000
 http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/|200|node/|3000
-http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/about/0.2.1/|200|about-0.2.1.jar|3000
-http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/crawler/0.2.1/|200|crawler-0.2.1.jar|3000
-http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/duplicates/0.2.1/|200|duplicates-0.2.1.jar|3000
-http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/gitdump/0.2.1/|200|gitdump-0.2.1.jar|3000
-http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/kotlin/0.2.1/|200|kotlin-0.2.1.jar|3000
-http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/monitor/0.2.1/|200|monitor-0.2.1.jar|3000
-http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/node/0.2.1/|200|node-0.2.1.jar|3000
-http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/teamcity/0.2.1/|200|teamcity-0.2.1.jar|3000
+Bintray ('about' plugin)      => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/about/0.2.1/|200|about-0.2.1.jar|3000
+Bintray ('crawler' plugin)    => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/crawler/0.2.1/|200|crawler-0.2.1.jar|3000
+Bintray ('duplicates' plugin) => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/duplicates/0.2.1/|200|duplicates-0.2.1.jar|3000
+Bintray ('gitdump' plugin)    => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/gitdump/0.2.1/|200|gitdump-0.2.1.jar|3000
+Bintray ('kotlin' plugin)     => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/kotlin/0.2.1/|200|kotlin-0.2.1.jar|3000
+Bintray ('monitor' plugin)    => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/monitor/0.2.1/|200|monitor-0.2.1.jar|3000
+Bintray ('node' plugin)       => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/node/0.2.1/|200|node-0.2.1.jar|3000
+Bintray ('teamcity' plugin)   => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/teamcity/0.2.1/|200|teamcity-0.2.1.jar|3000
