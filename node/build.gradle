@@ -7,9 +7,15 @@ buildscript {
     println "> Running Node.js plugin version [$version]"
 
     repositories {
-        mavenLocal()
+        /**
+         * Releases
+         */
         maven { url 'http://jcenter.bintray.com' }
         maven { url 'http://dl.bintray.com/content/evgenyg/BuildTools' }
+        /**
+         * Snapshots
+         */
+        mavenLocal()
         maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }
     }
 
@@ -28,8 +34,12 @@ void assertEqual( File f1, File f2 )
 
 
 subprojects {
+    Project p ->
     apply plugin: 'node'
-    node { nodeVersion = 'latest' }
+
+    node {
+        portNumber = portNumberForProject( p )
+    }
 
     clean.doFirst {
         if ( System.getProperty( 'cleanNode' ) != null )
@@ -37,8 +47,11 @@ subprojects {
             final deleteFiles = [ new File( System.getProperty( 'user.home' ), '.npm' ),
                                   new File( System.getProperty( 'user.home' ), '.nvm' ) ]
 
-            println "Deleting $deleteFiles"
-            project.delete( deleteFiles )
+            if ( deleteFiles.any{ it.exists() })
+            {
+                println "Deleting $deleteFiles"
+                project.delete( deleteFiles )
+            }
         }
     }
 }
@@ -49,7 +62,6 @@ configure ( subprojects.findAll{ it.name.startsWith( 'hello-' ) }) {
 
     node {
         cleanWorkspace         = true
-        printConfigs           = true
         cleanWorkspaceCommands = [ 'git checkout -f config' ]
         checkContent           = p.name + (( p.name == 'hello-js'                     ) ? '|yhn|890|' :
                                            ( p.name == 'hello-js-port-number'         ) ? '|undefined|undefined|' :
@@ -57,11 +69,9 @@ configure ( subprojects.findAll{ it.name.startsWith( 'hello-' ) }) {
                                            ( p.name == 'hello-js-configs-new-keys'    ) ? '|OLM|457|false|false' :
                                            ( p.name == 'hello-js-configs-update-keys' ) ? '|IMN|784|true|true' :
                                                                                           '' )
-        pidOnlyToStop   = false
-        portNumber      = portNumberForProject( p )
-        scriptArguments = "--port $portNumber"
-        configs         = [[ 'config/development.json' : file( "${ project.name }.json" ) ],
-                           [ 'config/development.json' : [ port : portNumber ]]]
+        printConfigs = true
+        configs      = [[ 'config/development.json' : file( "${ project.name }.json" ) ],
+                        [ 'config/development.json' : [ port : portNumber ]]]
     }
 
     setup << {
@@ -128,12 +138,18 @@ project ( ':run-commands' ){
 }
 
 
+project ( ':nirc' ){
+    node {
+        checkContent = '<h1><i>n</i>irc</h1>'
+    }
+}
+
+
 project ( ':nodejs-blackboard' ){
 
     Project p ->
 
     final classifier       = ( System.getProperty( 'os.name' ).toLowerCase().contains( 'mac os' ) ? 'mac' : 'linux' )
-    final checkApplication = { assert 'curl http://127.0.0.1:4000'.execute().text.contains( '<h1>nodejs experiment</h1><p>blackboard</p>' ) }
     final unpackMongo      = {
         final isUnpacked   = new File(( File ) p.projectDir, 'build/mongo'  ).file &&
                              new File(( File ) p.projectDir, 'build/mongod' ).file
@@ -155,18 +171,13 @@ project ( ':nodejs-blackboard' ){
     final mongoStart = 'build/mongod --fork --logpath build/mongo.log --dbpath build/db'
     final mongoStop  = 'build/mongo  --eval "db.getSiblingDB(\'admin\').shutdownServer()"'
 
+    start.doFirst( unpackMongo )
+    stop. doFirst( unpackMongo )
+
     node {
         scriptPath   = 'app.coffee'
         before       = [ mongoStop, 'sleep 5', mongoStart, 'sleep 5', 'node add_data.js' ]
         after        = [ mongoStop, 'exit 0' ]
-
-        // Identical to
-        // start.doLast { assert 'curl http://127.0.0.1:4000'.execute().text.contains( '<h1>nodejs experiment</h1><p>blackboard</p>' ) }
-
         checkContent = '<h1>nodejs experiment</h1><p>blackboard</p>'
-        portNumber   = 4000
     }
-
-    start.doFirst( unpackMongo ).doLast( checkApplication )
-    stop. doFirst( unpackMongo )
 }
