@@ -32,11 +32,12 @@ Bitbucket (scala-progfun) => https://bitbucket.org/evgenyg/scala-progfun|200|<h1
 Bitbucket (scala-progfun) => https://bitbucket.org/evgenyg/scala-progfun|200|-Recent activity|10000
 Bitbucket (chef-repo)     => https://bitbucket.org/evgenyg/chef-repo|200|<h1>Log in</h1>|10000
 Bitbucket (chef-repo)     => https://bitbucket.org/evgenyg/chef-repo|200|-Recent activity|10000
+Bitbucket (wiki/overview) => https://bitbucket.org/evgenyg/wiki/overview|200|Recent activity|10000
+Bitbucket (wiki/src)      => https://bitbucket.org/evgenyg/wiki/src|200|Main.txt|10000
 
 # GitHub
 
-https://github.com/evgeny-goldin/tm-jenkins|404|-/\d+\+?\s+commits/
-https://github.com/evgeny-goldin/wiki|200|/\d+\+?\s+commits/
+https://github.com/evgeny-goldin/chef-repo|404|-/\d+\+?\s+commits/
 https://github.com/evgeny-goldin/gradle-plugins|200|/\d+\+?\s+commits/
 https://github.com/evgeny-goldin/gradle-plugins-test|200|/\d+\+?\s+commits/
 https://github.com/evgeny-goldin/gcommons|200|/\d+\+?\s+commits/
