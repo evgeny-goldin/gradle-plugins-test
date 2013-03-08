@@ -131,9 +131,8 @@ project ( ':hello-js-configs-update-keys' ) {
 
 project ( ':run-commands' ){
     node {
-        run                  = [ 'pwd', 'coffee --version', 'grunt -version', 'git log -1', 'less --version', 'ls -al' ]
-        checkAfterStart      = false
-        checkAfterRestartall = false
+        run          = [ 'pwd', 'coffee --version', 'grunt -version', 'git log -1', 'less --version', 'ls -al' ]
+        checkContent = '|run-commands|'
     }
 }
 
