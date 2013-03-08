@@ -141,43 +141,17 @@ project ( ':run-commands' ){
 project ( ':nirc' ){
     node {
         checkContent = '<h1><i>n</i>irc</h1>'
+        redisPort    = 7000
     }
 }
 
 
 project ( ':nodejs-blackboard' ){
-
-    Project p ->
-
-    final classifier       = ( System.getProperty( 'os.name' ).toLowerCase().contains( 'mac os' ) ? 'mac' : 'linux' )
-    final unpackMongo      = {
-        final isUnpacked   = new File(( File ) p.projectDir, 'build/mongo'  ).file &&
-                             new File(( File ) p.projectDir, 'build/mongod' ).file
-        if ( isUnpacked )
-        {
-            logger.info( "Mongo is already unpacked" )
-        }
-        else {
-            mkdir 'build/db'
-            copy { into 'build'; from { zipTree( configurations.mongod.files.toList().first()) }}
-            logger.info( "Mongo is unpacked" )
-        }
-    }
-
-    repositories   { maven  { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }}
-    configurations { mongod }
-    dependencies   { mongod "mongo:mongo:2.2.3:${ classifier }@zip" }
-
-    final mongoStart = 'build/mongod --fork --logpath build/mongo.log --dbpath build/db'
-    final mongoStop  = 'build/mongo  --eval "db.getSiblingDB(\'admin\').shutdownServer()"'
-
-    start.doFirst( unpackMongo )
-    stop. doFirst( unpackMongo )
-
     node {
         scriptPath   = 'app.coffee'
-        before       = [ mongoStop, 'sleep 5', mongoStart, 'sleep 5', 'node add_data.js' ]
-        after        = [ mongoStop, 'exit 0' ]
         checkContent = '<h1>nodejs experiment</h1><p>blackboard</p>'
+        mongoPort    = 27017
+        mongoDBPath  = 'build/db'
+        before       = [ 'node add_data.js' ]
     }
 }
