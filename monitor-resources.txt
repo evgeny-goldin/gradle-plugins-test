@@ -68,7 +68,10 @@ http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project6&guest=1|2
 http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project21&guest=1|200|Crawlers|10000
 http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project2&guest=1|200|maven-plugins|10000
 http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project4&guest=1|200|gcommons|10000
-http://evgeny-goldin.org:8148/teamcity/project.html?projectId=project17&guest=1|403|jetbrains.buildServer.serverSide.auth.AccessDeniedException|10000
+http://evgeny-goldin.org:8148/teamcity/viewType.html?buildTypeId=bt68&guest=1|403|You do not have enough permissions to access build type with id: bt68|10000
+http://evgeny-goldin.org:8148/teamcity/viewType.html?buildTypeId=bt68&guest=1|403|-Pending changes|10000
+http://evgeny-goldin.org:8148/teamcity/project.html?projectId=MiscProjects&guest=1|403|You do not have enough permissions to access project with id: project38|10000
+http://evgeny-goldin.org:8148/teamcity/project.html?projectId=MiscProjects&guest=1|403|-Change Log|10000
 
 # Artifactory
 
