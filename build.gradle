@@ -4,8 +4,8 @@ apply plugin: 'gitdump'
 
 ext.codenarcSources      =  'codenarc duplicates'.tokenize().collect { "$projectDir/$it/src/main/groovy" }
 ext.codenarcRuleSetFiles = [ "$projectDir/codenarc.groovy" ]
-apply from: 'http://dl.bintray.com/content/evgenyg/GradleScripts/CodeNarc.gradle?direct'
-apply from: 'http://dl.bintray.com/content/evgenyg/GradleScripts/wrapper.gradle?direct'
+apply from: 'http://dl.bintray.com/content/evgenyg/GradleScripts/CodeNarc.gradle'
+apply from: 'http://dl.bintray.com/content/evgenyg/GradleScripts/wrapper.gradle'
 
 
 defaultTasks 'clean', 'codenarc', 'duplicates', 'build'
