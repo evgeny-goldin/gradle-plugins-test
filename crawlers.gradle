@@ -1,7 +1,7 @@
 import java.util.regex.Pattern
 
 apply plugin: 'crawler'
-apply from:   'https://raw.github.com/evgeny-goldin/scripts/master/src/main/gradle/wrapper.gradle'
+apply from:   'http://evgenyg.artifactoryonline.com/evgenyg/libs-releases-local/wrapper.gradle'
 defaultTasks  'crawler'
 
 
