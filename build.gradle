@@ -4,6 +4,7 @@ apply plugin: 'gitdump'
 
 ext.codenarcSources      =  'codenarc duplicates'.tokenize().collect { "$projectDir/$it/src/main/groovy" }
 ext.codenarcRuleSetFiles = [ "$projectDir/codenarc.groovy" ]
+
 apply from: 'http://evgenyg.artifactoryonline.com/evgenyg/libs-releases-local/CodeNarc.gradle'
 apply from: 'http://evgenyg.artifactoryonline.com/evgenyg/libs-releases-local/wrapper.gradle'
 
