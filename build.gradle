@@ -14,7 +14,6 @@ defaultTasks 'clean', 'codenarc', 'duplicates', 'build'
 
 final pluginsVersion = '0.2.3-SNAPSHOT' // Also update in buildscript { .. } below!
 final mavenRepoUrl   = 'http://evgenyg.artifactoryonline.com/evgenyg/repo/'
-final kotlinVersion  = '0.5.162'
 group                = 'com.github.goldin.plugins.gradle'
 
 
@@ -35,7 +34,6 @@ buildscript {
                   "com.github.goldin.plugins.gradle:crawler:$version",
                   "com.github.goldin.plugins.gradle:duplicates:$version",
                   "com.github.goldin.plugins.gradle:gitdump:$version",
-                  "com.github.goldin.plugins.gradle:kotlin:$version",
                   "com.github.goldin.plugins.gradle:monitor:$version",
                   "com.github.goldin.plugins.gradle:node:$version",
                   "com.github.goldin.plugins.gradle:teamcity:$version"
@@ -84,9 +82,9 @@ subprojects {
     Project p ->
 
     apply plugin: 'idea'
+    apply plugin: 'groovy'
     apply plugin: 'about'
     apply plugin: 'duplicates'
-    apply plugin: 'kotlin'
 
     clean { delete( "$rootDir/out", "$rootDir/build" ) }
 
@@ -116,58 +114,11 @@ subprojects {
 }
 
 project ( ':codenarc' ) {
-    apply plugin: 'groovy'
     dependencies { groovy 'org.codehaus.groovy:groovy-all:2.0.6' }
 }
 
 project ( ':duplicates' ) {
-    apply plugin: 'groovy'
     dependencies { groovy 'org.codehaus.groovy:groovy-all:2.0.6' }
-}
-
-project ( ':kotlin:java-depends-on-kotlin' ) {
-    dependencies.compile files( compileKotlin.destinationDir )
-    compileJava.dependsOn compileKotlin
-    dependencies {
-        compile "org.jetbrains.kotlin:kotlin-runtime:$kotlinVersion"
-    }
-}
-
-
-project ( ':kotlin:kotlin-depends-on-java' ) {
-    compileKotlin.  dependsOn compileJava
-    compileTestJava.dependsOn compileKotlin
-    dependencies {
-        testRuntime "org.jetbrains.kotlin:kotlin-runtime:$kotlinVersion"
-    }
-}
-
-
-project ( ':kotlin:kotlin-standalone' ) {
-    compileJava.    dependsOn compileKotlin
-    compileTestJava.dependsOn compileTestKotlin
-
-    dependencies {
-        compile "org.jetbrains.kotlin:kotlin-runtime:$kotlinVersion",
-                "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
-                "org.jetbrains.kotlin:kotlin-jdk-annotations:$kotlinVersion",
-                files( "${ System.getProperty( 'java.home' )}/lib/jce.jar" )
-    }
-
-    // 'kotlin' extension is an instance of K2JVMCompilerArguments (http://goo.gl/NyLkC)
-    kotlin {
-        notNullAssertions      = true
-        notNullParamAssertions = true
-        outputDir              = project.buildDir.canonicalPath + '/' + new Random().nextInt( 100 )
-        // This fails the build
-        // classpath           = ''
-    }
-
-    compileKotlin << {
-        // Can be also seen if Gradle is run with "-i" flag
-        println "Compilation classpath: [${ kotlin.classpath }]"
-        assert new File(( String ) kotlin.outputDir ).with{ directory && list() }
-    }
 }
 
 
@@ -183,7 +134,6 @@ task checkAboutAndLicense << {
                           "com.github.goldin.plugins.gradle:crawler:$version",
                           "com.github.goldin.plugins.gradle:duplicates:$version",
                           "com.github.goldin.plugins.gradle:gitdump:$version",
-                          "com.github.goldin.plugins.gradle:kotlin:$version",
                           "com.github.goldin.plugins.gradle:monitor:$version",
                           "com.github.goldin.plugins.gradle:node:$version",
                           "com.github.goldin.plugins.gradle:teamcity:$version"
