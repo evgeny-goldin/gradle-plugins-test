@@ -12,14 +12,14 @@ apply from: 'http://evgenyg.artifactoryonline.com/evgenyg/libs-releases-local/wr
 defaultTasks 'clean', 'codenarc', 'duplicates', 'build'
 
 
-final pluginsVersion = '0.2.3-SNAPSHOT' // Also update in buildscript { .. } below!
+final pluginsVersion = '0.2.6-SNAPSHOT' // Also update in buildscript { .. } below!
 final mavenRepoUrl   = 'http://evgenyg.artifactoryonline.com/evgenyg/repo/'
 group                = 'com.github.goldin.plugins.gradle'
 
 
 buildscript {
 
-    final version = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : '0.2.3-SNAPSHOT'
+    final version = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : '0.2.6-SNAPSHOT'
     println "> Running plugins version [$version]"
 
     repositories {
