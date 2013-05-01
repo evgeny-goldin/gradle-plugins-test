@@ -90,8 +90,9 @@ subprojects {
 
     repositories { maven { url mavenRepoUrl }}
     dependencies {
+        compile     localGroovy() 
         testCompile 'junit:junit:4.11'
-        testRuntime 'ch.qos.logback:logback-classic:1.0.9'
+        testRuntime 'ch.qos.logback:logback-classic:1.0.12'
     }
 
     jar.dependsOn 'about', ':checkAboutAndLicense'
