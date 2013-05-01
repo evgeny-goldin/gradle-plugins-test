@@ -113,14 +113,6 @@ subprojects {
     artifacts { archives sourcesJar }
 }
 
-project ( ':codenarc' ) {
-    dependencies { groovy 'org.codehaus.groovy:groovy-all:2.0.6' }
-}
-
-project ( ':duplicates' ) {
-    dependencies { groovy 'org.codehaus.groovy:groovy-all:2.0.6' }
-}
-
 
 task checkAboutAndLicense << {
 
