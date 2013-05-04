@@ -136,8 +136,8 @@ task jfrogWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
             linksMapFile       = file( 'links-jfrog-wiki.txt' )
             newLinksMapFile    = file( 'newLinks-jfrog-wiki.txt' )
 
-            minimumLinks       = 15000
-            minimumBytes       = 400 * 1024 * 1024
+            minimumLinks       = 13000
+            minimumBytes       = 40 * 1024 * 1024
             nonHtmlLinks       = [{ String link -> nonHtmlLinksData.any { link.contains( it ) }}]
             ignoredLinks       = [{ String link -> ignoredLinksData.any { link.contains( it ) }}]
             linkTransformers   = [{ String link -> link.replaceAll( jsessionidPattern, '' )}]
