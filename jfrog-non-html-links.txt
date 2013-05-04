@@ -3,7 +3,8 @@ osd.action
 /download/attachments/
 /rpc/trackback/
 /placeholder/macro?definition=
-
+/exportword?
+/pdfpageexport.action
 downloadallattachments.action
 diffpagesbyversion.action
 diffpages.action
