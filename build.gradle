@@ -63,7 +63,7 @@ idea.project {
 idea.module {
 
     downloadSources = true
-    downloadJavadoc = false
+    downloadJavadoc = true
 
     excludeDirs += file( 'out' )
 
