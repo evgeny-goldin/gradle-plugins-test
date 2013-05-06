@@ -1,47 +1,42 @@
 apply plugin: 'idea'
-apply plugin: 'monitor'
 apply plugin: 'gitdump'
+apply plugin: 'monitor'
 
-ext.codenarcSources      =  'codenarc duplicates'.tokenize().collect { "$projectDir/$it/src/main/groovy" }
+ext.codenarcSources      = [ "$projectDir/codenarc/src/main/groovy" ]
 ext.codenarcRuleSetFiles = [ "$projectDir/codenarc.groovy" ]
 
 apply from: 'http://evgenyg.artifactoryonline.com/evgenyg/libs-releases-local/CodeNarc.gradle'
 apply from: 'http://evgenyg.artifactoryonline.com/evgenyg/libs-releases-local/wrapper.gradle'
 
 
-defaultTasks 'clean', 'codenarc', 'duplicates', 'build'
+defaultTasks 'clean', 'codenarc', 'build'
 
 
-final pluginsVersion = '0.2.10-SNAPSHOT' // Also update in buildscript { .. } below!
-final mavenRepoUrl   = 'http://evgenyg.artifactoryonline.com/evgenyg/repo/'
-group                = 'com.github.goldin.plugins.gradle'
+group = 'com.github.goldin.plugins.gradle'
 
 
 buildscript {
 
-    final version = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : '0.2.10-SNAPSHOT'
-    println "> Running plugins version [$version]"
+    ext.pluginsVersion = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : '0.2.10-SNAPSHOT'
+    println "> Running plugins version [$pluginsVersion]"
 
     repositories {
         mavenLocal()
         maven { url 'http://jcenter.bintray.com' }
-        maven { url 'http://dl.bintray.com/content/evgenyg/BuildTools' }
-        maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/repo/' }
+        maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/plugins-snapshots-local/' }
     }
 
     dependencies {
-        classpath "com.github.goldin.plugins.gradle:about:$version",
-                  "com.github.goldin.plugins.gradle:crawler:$version",
-                  "com.github.goldin.plugins.gradle:duplicates:$version",
-                  "com.github.goldin.plugins.gradle:gitdump:$version",
-                  "com.github.goldin.plugins.gradle:monitor:$version",
-                  "com.github.goldin.plugins.gradle:node:$version",
-                  "com.github.goldin.plugins.gradle:teamcity:$version"
+        classpath "com.github.goldin.plugins.gradle:about:$pluginsVersion",
+                  "com.github.goldin.plugins.gradle:gitdump:$pluginsVersion",
+                  "com.github.goldin.plugins.gradle:monitor:$pluginsVersion"
+
     }
 }
 
 
-gitdump {
+monitor    { resourcesFile = file( 'monitor-resources.txt' )}
+gitdump    {
     final excludedProjects = 'widefinder gcommons-old'.tokenize()
     githubUser             = 'evgeny-goldin'
     bitbucketUser          = 'evgenyg'
@@ -62,8 +57,8 @@ idea.project {
 
 idea.module {
 
-    downloadSources = true
-    downloadJavadoc = true
+    downloadSources = false
+    downloadJavadoc = false
 
     excludeDirs += file( 'out' )
 
@@ -74,23 +69,34 @@ idea.module {
 }
 
 
-monitor { resourcesFile = file( 'monitor-resources.txt' )}
-
-
-subprojects {
+allprojects {
 
     Project p ->
 
-    apply plugin: 'idea'
     apply plugin: 'groovy'
     apply plugin: 'about'
-    apply plugin: 'duplicates'
 
     clean { delete( "$rootDir/out", "$rootDir/build" ) }
 
-    repositories { maven { url mavenRepoUrl }}
+    repositories {
+        mavenLocal()
+        maven { url 'http://jcenter.bintray.com' }
+        maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/plugins-snapshots-local/' }
+    }
+
+    configurations { plugins { transitive = false  }}
+
+    'about crawler duplicates gitdump monitor node teamcity'.tokenize().each {
+        String pluginName ->
+        dependencies {
+            plugins "com.github.goldin.plugins.gradle:$pluginName:$pluginsVersion",
+                    "com.github.goldin.plugins.gradle:$pluginName:$pluginsVersion:sources",
+                    "com.github.goldin.plugins.gradle:$pluginName:$pluginsVersion:javadoc"
+        }
+    }
+
     dependencies {
-        compile     localGroovy() 
+        compile     localGroovy()
         testCompile 'junit:junit:4.11'
         testRuntime 'ch.qos.logback:logback-classic:1.0.12'
     }
@@ -117,41 +123,30 @@ subprojects {
 
 task checkAboutAndLicense << {
 
-    final version = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : pluginsVersion
-    println "> Testing plugins version [$version] for correct 'about' and 'license' files"
-
-    configurations { aboutDependencies { transitive = false }}
-    repositories   { mavenLocal(); maven { url mavenRepoUrl }}
-    dependencies   {
-        aboutDependencies "com.github.goldin.plugins.gradle:about:$version",
-                          "com.github.goldin.plugins.gradle:crawler:$version",
-                          "com.github.goldin.plugins.gradle:duplicates:$version",
-                          "com.github.goldin.plugins.gradle:gitdump:$version",
-                          "com.github.goldin.plugins.gradle:monitor:$version",
-                          "com.github.goldin.plugins.gradle:node:$version",
-                          "com.github.goldin.plugins.gradle:teamcity:$version"
-    }
+    println "> Testing plugins version [$pluginsVersion] for correct 'about' and 'license' files"
 
     final unpackDir = new File(( String ) project.buildDir, 'aboutLicenseUnpack' )
-    final config    = ( Configuration ) configurations.aboutDependencies
+    final config    = ( Configuration ) configurations.plugins
 
     config.dependencies.each {
         Dependency dependency ->
 
-        File file = config.fileCollection( dependency ).singleFile
+        config.fileCollection( dependency ).each {
+            File file ->
 
-        delete ( unpackDir )
-        mkdir  ( unpackDir )
-        copy   { from zipTree( file ); into unpackDir }
+            delete ( unpackDir )
+            mkdir  ( unpackDir )
+            copy   { from zipTree( file ); into unpackDir }
 
-        final aboutFileText         = new File( unpackDir, 'about.txt'   ).text
-        final licenseFileText       = new File( unpackDir, 'license.txt' ).text
-        final dependencyCoordinates = "${ dependency.group }:${ dependency.name }:${ dependency.version }"
-        final currentYear           = Calendar.instance.get( Calendar.YEAR )
+            final aboutFileText         = new File( unpackDir, 'about.txt'   ).text
+            final licenseFileText       = new File( unpackDir, 'license.txt' ).text
+            final dependencyCoordinates = "${ dependency.group }:${ dependency.name }:${ dependency.version }"
+            final currentYear           = Calendar.instance.get( Calendar.YEAR )
 
-        [ 'Git Info', 'Build Info', 'Gradle Info', dependencyCoordinates ].each { assert aboutFileText.contains( it )}
-        assert licenseFileText.contains( "Copyright $currentYear Goldin Evgeny (http://evgeny-goldin.com/)" )
+            [ 'Git Info', 'Build Info', 'Gradle Info', dependencyCoordinates ].each { assert aboutFileText.contains( it )}
+            assert licenseFileText.contains( "Copyright $currentYear Goldin Evgeny (http://evgeny-goldin.com/)" )
 
-        println "[$dependencyCoordinates][$file] - about and license checked"
+            println "[$dependencyCoordinates][$file.canonicalPath] - about and license checked"
+        }
     }
 }

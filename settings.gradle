@@ -1,4 +1,3 @@
 include 'codenarc'
-include 'duplicates'
 
 rootProject.name = 'gradle-plugins-test'
