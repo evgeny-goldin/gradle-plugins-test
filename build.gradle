@@ -9,7 +9,7 @@ apply from: 'http://evgenyg.artifactoryonline.com/evgenyg/libs-releases-local/Co
 apply from: 'http://evgenyg.artifactoryonline.com/evgenyg/libs-releases-local/wrapper.gradle'
 
 
-defaultTasks 'clean', 'codenarc', 'build'
+defaultTasks 'clean', 'codenarc', 'build', 'checkAboutAndLicense'
 
 
 group = 'com.github.goldin.plugins.gradle'
@@ -84,14 +84,14 @@ allprojects {
         maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/plugins-snapshots-local/' }
     }
 
-    configurations { plugins { transitive = false  }}
+    configurations { testFiles { transitive = false  }}
 
     'about crawler duplicates gitdump monitor node teamcity'.tokenize().each {
         String pluginName ->
         dependencies {
-            plugins "com.github.goldin.plugins.gradle:$pluginName:$pluginsVersion",
-                    "com.github.goldin.plugins.gradle:$pluginName:$pluginsVersion:sources",
-                    "com.github.goldin.plugins.gradle:$pluginName:$pluginsVersion:javadoc"
+            testFiles "com.github.goldin.plugins.gradle:$pluginName:$pluginsVersion",
+                      "com.github.goldin.plugins.gradle:$pluginName:$pluginsVersion:sources",
+                      "com.github.goldin.plugins.gradle:$pluginName:$pluginsVersion:javadoc"
         }
     }
 
@@ -101,7 +101,10 @@ allprojects {
         testRuntime 'ch.qos.logback:logback-classic:1.0.12'
     }
 
-    jar.dependsOn 'about', ':checkAboutAndLicense'
+    jar {
+        dependsOn 'about'
+        from file( 'license.txt' )
+    }
 
     about {
         includeEnv          = true
@@ -109,15 +112,27 @@ allprojects {
         includeProperties   = true
         includePaths        = true
         includeDependencies = [ 'compile', 'runtime' ]
+        prefix              = '/'
     }
 
     task sourcesJar( type: Jar, dependsOn: classes ) {
         dependsOn 'about'
         classifier = 'sources'
         from sourceSets.main.allSource
+        from file( 'license.txt' )
     }
 
-    artifacts { archives sourcesJar }
+    task groovydocJar( type: Jar, dependsOn: groovydoc ) {
+        dependsOn 'about'
+        classifier = 'javadoc'
+        from groovydoc.destinationDir
+        from file( 'license.txt' )
+    }
+
+    artifacts {
+        archives sourcesJar
+        archives groovydocJar
+    }
 }
 
 
@@ -126,27 +141,21 @@ task checkAboutAndLicense << {
     println "> Testing plugins version [$pluginsVersion] for correct 'about' and 'license' files"
 
     final unpackDir = new File(( String ) project.buildDir, 'aboutLicenseUnpack' )
-    final config    = ( Configuration ) configurations.plugins
 
-    config.dependencies.each {
-        Dependency dependency ->
+    configurations.testFiles.files.each {
+        File file ->
 
-        config.fileCollection( dependency ).each {
-            File file ->
+        delete ( unpackDir )
+        mkdir  ( unpackDir )
+        copy   { from zipTree( file ); into unpackDir }
 
-            delete ( unpackDir )
-            mkdir  ( unpackDir )
-            copy   { from zipTree( file ); into unpackDir }
+        final aboutFileText   = new File( unpackDir, 'about.txt'   ).text
+        final licenseFileText = new File( unpackDir, 'license.txt' ).text
+        final currentYear     = Calendar.instance.get( Calendar.YEAR )
 
-            final aboutFileText         = new File( unpackDir, 'about.txt'   ).text
-            final licenseFileText       = new File( unpackDir, 'license.txt' ).text
-            final dependencyCoordinates = "${ dependency.group }:${ dependency.name }:${ dependency.version }"
-            final currentYear           = Calendar.instance.get( Calendar.YEAR )
+        [ 'Git Info', 'Build Info', 'Gradle Info' ].each { assert aboutFileText.contains( it )}
+        assert licenseFileText.contains( "Copyright $currentYear Goldin Evgeny (http://evgeny-goldin.com/)" )
 
-            [ 'Git Info', 'Build Info', 'Gradle Info', dependencyCoordinates ].each { assert aboutFileText.contains( it )}
-            assert licenseFileText.contains( "Copyright $currentYear Goldin Evgeny (http://evgeny-goldin.com/)" )
-
-            println "[$dependencyCoordinates][$file.canonicalPath] - about and license checked"
-        }
+        println "[$file.canonicalPath] - about and license checked"
     }
 }
