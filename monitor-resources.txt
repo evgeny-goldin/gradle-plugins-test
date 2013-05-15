@@ -62,11 +62,11 @@ https://github.com/evgeny-goldin/spock-extensions|200|/\d+\+?\s+commits/
 
 # YouTrack
 
-http://evgeny-goldin.org:8148/youtrack/|200|>Log in as guest<|15000
-http://evgeny-goldin.org:8148/youtrack/issues|200|Enter search request|15000
-http://evgeny-goldin.org:8148/youtrack/issues/pl|200|Maven Plugins (pl)|15000
-http://evgeny-goldin.org:8148/youtrack/issues/gc|200|GCommons (gc)|15000
-http://evgeny-goldin.org:8148/youtrack/issues/gp|200|Gradle Plugins (gp)|15000
+# http://evgeny-goldin.org:8148/youtrack/|200|>Log in as guest<|15000
+# http://evgeny-goldin.org:8148/youtrack/issues|200|Enter search request|15000
+# http://evgeny-goldin.org:8148/youtrack/issues/pl|200|Maven Plugins (pl)|15000
+# http://evgeny-goldin.org:8148/youtrack/issues/gc|200|GCommons (gc)|15000
+# http://evgeny-goldin.org:8148/youtrack/issues/gp|200|Gradle Plugins (gp)|15000
 
 # TeamCity
 
