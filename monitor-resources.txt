@@ -73,11 +73,9 @@ https://github.com/evgeny-goldin/spock-extensions|200|/\d+\+?\s+commits/
 http://evgeny-goldin.org:8148/teamcity/|200|>Log in to TeamCity<|15000
 http://evgeny-goldin.org:8148/teamcity/project.html?projectId=gradleplugins|200|>Log in to TeamCity<|15000
 
-http://evgeny-goldin.org:8148/teamcity/?guest=1|200|Crawlers*gcommons*gradle-plugins*maven-plugins|15000
+http://evgeny-goldin.org:8148/teamcity/?guest=1|200|Crawlers*gradle-plugins|15000
 http://evgeny-goldin.org:8148/teamcity/project.html?projectId=Crawlers&guest=1|200|Crawlers*Change Log*berlindevops.org|15000
-http://evgeny-goldin.org:8148/teamcity/project.html?projectId=gcommons&guest=1|200|gcommons*Change Log*Release Deploy|15000
-http://evgeny-goldin.org:8148/teamcity/project.html?projectId=gradleplugins&guest=1|200|gradle-plugins*Change Log*Release Deploy|15000
-http://evgeny-goldin.org:8148/teamcity/project.html?projectId=mavenplugins&guest=1|200|maven-plugins*Change Log*Release Deploy|15000
+http://evgeny-goldin.org:8148/teamcity/project.html?projectId=gradleplugins&guest=1|200|gradle-plugins*Main*General Tests*Node.js Tests|15000
 http://evgeny-goldin.org:8148/teamcity/project.html?projectId=MiscProjects&guest=1|200|-GitDump*Log in to TeamCity*Login as a Guest User|15000
 http://evgeny-goldin.org:8148/teamcity/viewType.html?buildTypeId=bt68&guest=1|403|-Pending changes*You do not have enough permissions to access build type with internal id: bt68|15000
 
