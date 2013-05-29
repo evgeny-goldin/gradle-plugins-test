@@ -35,7 +35,10 @@ buildscript {
 }
 
 
-monitor    { resourcesFile = file( 'monitor-resources.txt' )}
+monitor    { 
+    resourcesFile = file( 'monitor-resources.txt' )
+    plotBuilds    = 3
+}
 gitdump    {
     final excludedProjects = 'widefinder gcommons-old'.tokenize()
     githubUser             = 'evgeny-goldin'
