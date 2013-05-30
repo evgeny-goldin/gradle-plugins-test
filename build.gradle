@@ -35,7 +35,7 @@ buildscript {
 }
 
 
-monitor    { resourcesFile = file( 'monitor-resources.txt' )}
+monitor    { resources     = file( 'monitor-resources.txt' )}
 gitdump    {
     final excludedProjects = 'widefinder gcommons-old'.tokenize()
     githubUser             = 'evgeny-goldin'
