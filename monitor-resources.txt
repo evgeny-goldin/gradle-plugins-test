@@ -117,6 +117,14 @@ Bintray ('monitor' plugin)    => http://dl.bintray.com/content/evgenyg/BuildTool
 Bintray ('node' plugin)       => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/node/0.3/|200|node-0.3-javadoc.jar*node-0.3-sources.jar*node-0.3.jar*node-0.3.pom|3000
 Bintray ('teamcity' plugin)   => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/teamcity/0.3/|200|teamcity-0.3-javadoc.jar*teamcity-0.3-sources.jar*teamcity-0.3.jar*teamcity-0.3.pom|3000
 
+JCenter ('about' plugin)      => http://jcenter.bintray.com/com/github/goldin/plugins/gradle/about/0.3/|200|about-0.3-javadoc.jar*about-0.3-sources.jar*about-0.3.jar*about-0.3.pom|3000
+JCenter ('crawler' plugin)    => http://jcenter.bintray.com/com/github/goldin/plugins/gradle/crawler/0.3/|200|crawler-0.3-javadoc.jar*crawler-0.3-sources.jar*crawler-0.3.jar*crawler-0.3.pom|3000
+JCenter ('duplicates' plugin) => http://jcenter.bintray.com/com/github/goldin/plugins/gradle/duplicates/0.3/|200|duplicates-0.3-javadoc.jar*duplicates-0.3-sources.jar*duplicates-0.3.jar*duplicates-0.3.pom|3000
+JCenter ('gitdump' plugin)    => http://jcenter.bintray.com/com/github/goldin/plugins/gradle/gitdump/0.3/|200|gitdump-0.3-javadoc.jar*gitdump-0.3-sources.jar*gitdump-0.3.jar*gitdump-0.3.pom|3000
+JCenter ('monitor' plugin)    => http://jcenter.bintray.com/com/github/goldin/plugins/gradle/monitor/0.3/|200|monitor-0.3-javadoc.jar*monitor-0.3-sources.jar*monitor-0.3.jar*monitor-0.3.pom|3000
+JCenter ('node' plugin)       => http://jcenter.bintray.com/com/github/goldin/plugins/gradle/node/0.3/|200|node-0.3-javadoc.jar*node-0.3-sources.jar*node-0.3.jar*node-0.3.pom|3000
+JCenter ('teamcity' plugin)   => http://jcenter.bintray.com/com/github/goldin/plugins/gradle/teamcity/0.3/|200|teamcity-0.3-javadoc.jar*teamcity-0.3-sources.jar*teamcity-0.3.jar*teamcity-0.3.pom|3000
+
 # Bintray REST
 
 https://bintray.com/docs/rest/api.html#_get_repositories
