@@ -85,42 +85,42 @@ http://evgenyg.artifactoryonline.com|200|-You are logged-in as*You are currently
 http://evgenyg.artifactoryonline.com/evgenyg/|200|-You are logged-in as*You are currently not logged-in*Artifactory anonymously*Artifactory is happily serving|15000
 http://evgenyg.artifactoryonline.com/evgenyg/webapp/home.html?0|200|-You are logged-in as*You are currently not logged-in*Artifactory anonymously*Artifactory is happily serving|15000
 
-http://evgenyg.artifactoryonline.com/evgenyg/plugins-releases-local/com/github/goldin/plugins/gradle/about/0.2.8/|200|about-0.2.8.jar|15000
-http://evgenyg.artifactoryonline.com/evgenyg/plugins-releases-local/com/github/goldin/plugins/gradle/crawler/0.2.8/|200|crawler-0.2.8.jar|15000
-http://evgenyg.artifactoryonline.com/evgenyg/plugins-releases-local/com/github/goldin/plugins/gradle/duplicates/0.2.8/|200|duplicates-0.2.8.jar|15000
-http://evgenyg.artifactoryonline.com/evgenyg/plugins-releases-local/com/github/goldin/plugins/gradle/gitdump/0.2.8/|200|gitdump-0.2.8.jar|15000
-http://evgenyg.artifactoryonline.com/evgenyg/plugins-releases-local/com/github/goldin/plugins/gradle/monitor/0.2.8/|200|monitor-0.2.8.jar|15000
-http://evgenyg.artifactoryonline.com/evgenyg/plugins-releases-local/com/github/goldin/plugins/gradle/node/0.2.8/|200|node-0.2.8.jar|15000
-http://evgenyg.artifactoryonline.com/evgenyg/plugins-releases-local/com/github/goldin/plugins/gradle/teamcity/0.2.8/|200|teamcity-0.2.8.jar|15000
+http://evgenyg.artifactoryonline.com/evgenyg/plugins-releases-local/com/github/goldin/plugins/gradle/about/0.3/|200|about-0.3.jar|15000
+http://evgenyg.artifactoryonline.com/evgenyg/plugins-releases-local/com/github/goldin/plugins/gradle/crawler/0.3/|200|crawler-0.3.jar|15000
+http://evgenyg.artifactoryonline.com/evgenyg/plugins-releases-local/com/github/goldin/plugins/gradle/duplicates/0.3/|200|duplicates-0.3.jar|15000
+http://evgenyg.artifactoryonline.com/evgenyg/plugins-releases-local/com/github/goldin/plugins/gradle/gitdump/0.3/|200|gitdump-0.3.jar|15000
+http://evgenyg.artifactoryonline.com/evgenyg/plugins-releases-local/com/github/goldin/plugins/gradle/monitor/0.3/|200|monitor-0.3.jar|15000
+http://evgenyg.artifactoryonline.com/evgenyg/plugins-releases-local/com/github/goldin/plugins/gradle/node/0.3/|200|node-0.3.jar|15000
+http://evgenyg.artifactoryonline.com/evgenyg/plugins-releases-local/com/github/goldin/plugins/gradle/teamcity/0.3/|200|teamcity-0.3.jar|15000
 
 # Artifactory REST
 
 http://wiki.jfrog.org/confluence/display/RTF/Artifactory+REST+API#ArtifactoryRESTAPI-ArtifactSearch(QuickSearch)
-http://evgenyg.artifactoryonline.com/evgenyg/api/search/artifact?name=about-0.2.8&repos=plugins-releases-local|200|{ "results": [{ "uri": "http://evgenyg.artifactoryonline.com/evgenyg/api/storage/plugins-releases-local/com/github/goldin/plugins/gradle/about/0.2.8/about-0.2.8.jar" }] }|5000
-http://evgenyg.artifactoryonline.com/evgenyg/api/search/artifact?name=crawler-0.2.8&repos=plugins-releases-local|200|{ "results": [{ "uri": "http://evgenyg.artifactoryonline.com/evgenyg/api/storage/plugins-releases-local/com/github/goldin/plugins/gradle/crawler/0.2.8/crawler-0.2.8.jar" }] }|5000
-http://evgenyg.artifactoryonline.com/evgenyg/api/search/artifact?name=duplicates-0.2.8&repos=plugins-releases-local|200|{ "results": [{ "uri": "http://evgenyg.artifactoryonline.com/evgenyg/api/storage/plugins-releases-local/com/github/goldin/plugins/gradle/duplicates/0.2.8/duplicates-0.2.8.jar" }] }|5000
-http://evgenyg.artifactoryonline.com/evgenyg/api/search/artifact?name=gitdump-0.2.8&repos=plugins-releases-local|200|{ "results": [{ "uri": "http://evgenyg.artifactoryonline.com/evgenyg/api/storage/plugins-releases-local/com/github/goldin/plugins/gradle/gitdump/0.2.8/gitdump-0.2.8.jar" }] }|5000
-http://evgenyg.artifactoryonline.com/evgenyg/api/search/artifact?name=monitor-0.2.8&repos=plugins-releases-local|200|{ "results": [{ "uri": "http://evgenyg.artifactoryonline.com/evgenyg/api/storage/plugins-releases-local/com/github/goldin/plugins/gradle/monitor/0.2.8/monitor-0.2.8.jar" }] }|5000
-http://evgenyg.artifactoryonline.com/evgenyg/api/search/artifact?name=node-0.2.8&repos=plugins-releases-local|200|{ "results": [{ "uri": "http://evgenyg.artifactoryonline.com/evgenyg/api/storage/plugins-releases-local/com/github/goldin/plugins/gradle/node/0.2.8/node-0.2.8.jar" }] }|5000
-http://evgenyg.artifactoryonline.com/evgenyg/api/search/artifact?name=teamcity-0.2.8&repos=plugins-releases-local|200|{ "results": [{ "uri": "http://evgenyg.artifactoryonline.com/evgenyg/api/storage/plugins-releases-local/com/github/goldin/plugins/gradle/teamcity/0.2.8/teamcity-0.2.8.jar" }] }|5000
+http://evgenyg.artifactoryonline.com/evgenyg/api/search/artifact?name=about-0.3&repos=plugins-releases-local|200|{ "results": [{ "uri": "http://evgenyg.artifactoryonline.com/evgenyg/api/storage/plugins-releases-local/com/github/goldin/plugins/gradle/about/0.3/about-0.3.jar" }] }|5000
+http://evgenyg.artifactoryonline.com/evgenyg/api/search/artifact?name=crawler-0.3&repos=plugins-releases-local|200|{ "results": [{ "uri": "http://evgenyg.artifactoryonline.com/evgenyg/api/storage/plugins-releases-local/com/github/goldin/plugins/gradle/crawler/0.3/crawler-0.3.jar" }] }|5000
+http://evgenyg.artifactoryonline.com/evgenyg/api/search/artifact?name=duplicates-0.3&repos=plugins-releases-local|200|{ "results": [{ "uri": "http://evgenyg.artifactoryonline.com/evgenyg/api/storage/plugins-releases-local/com/github/goldin/plugins/gradle/duplicates/0.3/duplicates-0.3.jar" }] }|5000
+http://evgenyg.artifactoryonline.com/evgenyg/api/search/artifact?name=gitdump-0.3&repos=plugins-releases-local|200|{ "results": [{ "uri": "http://evgenyg.artifactoryonline.com/evgenyg/api/storage/plugins-releases-local/com/github/goldin/plugins/gradle/gitdump/0.3/gitdump-0.3.jar" }] }|5000
+http://evgenyg.artifactoryonline.com/evgenyg/api/search/artifact?name=monitor-0.3&repos=plugins-releases-local|200|{ "results": [{ "uri": "http://evgenyg.artifactoryonline.com/evgenyg/api/storage/plugins-releases-local/com/github/goldin/plugins/gradle/monitor/0.3/monitor-0.3.jar" }] }|5000
+http://evgenyg.artifactoryonline.com/evgenyg/api/search/artifact?name=node-0.3&repos=plugins-releases-local|200|{ "results": [{ "uri": "http://evgenyg.artifactoryonline.com/evgenyg/api/storage/plugins-releases-local/com/github/goldin/plugins/gradle/node/0.3/node-0.3.jar" }] }|5000
+http://evgenyg.artifactoryonline.com/evgenyg/api/search/artifact?name=teamcity-0.3&repos=plugins-releases-local|200|{ "results": [{ "uri": "http://evgenyg.artifactoryonline.com/evgenyg/api/storage/plugins-releases-local/com/github/goldin/plugins/gradle/teamcity/0.3/teamcity-0.3.jar" }] }|5000
 
 # Bintray
 
 http://dl.bintray.com/content/evgenyg/BuildTools|200|com/|3000
 http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/|200|node/|3000
 
-Bintray ('about' plugin)      => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/about/0.2.8/|200|about-0.2.8-javadoc.jar*about-0.2.8-sources.jar*about-0.2.8.jar*about-0.2.8.pom|3000
-Bintray ('crawler' plugin)    => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/crawler/0.2.8/|200|crawler-0.2.8-javadoc.jar*crawler-0.2.8-sources.jar*crawler-0.2.8.jar*crawler-0.2.8.pom|3000
-Bintray ('duplicates' plugin) => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/duplicates/0.2.8/|200|duplicates-0.2.8-javadoc.jar*duplicates-0.2.8-sources.jar*duplicates-0.2.8.jar*duplicates-0.2.8.pom|3000
-Bintray ('gitdump' plugin)    => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/gitdump/0.2.8/|200|gitdump-0.2.8-javadoc.jar*gitdump-0.2.8-sources.jar*gitdump-0.2.8.jar*gitdump-0.2.8.pom|3000
-Bintray ('monitor' plugin)    => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/monitor/0.2.8/|200|monitor-0.2.8-javadoc.jar*monitor-0.2.8-sources.jar*monitor-0.2.8.jar*monitor-0.2.8.pom|3000
-Bintray ('node' plugin)       => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/node/0.2.8/|200|node-0.2.8-javadoc.jar*node-0.2.8-sources.jar*node-0.2.8.jar*node-0.2.8.pom|3000
-Bintray ('teamcity' plugin)   => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/teamcity/0.2.8/|200|teamcity-0.2.8-javadoc.jar*teamcity-0.2.8-sources.jar*teamcity-0.2.8.jar*teamcity-0.2.8.pom|3000
+Bintray ('about' plugin)      => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/about/0.3/|200|about-0.3-javadoc.jar*about-0.3-sources.jar*about-0.3.jar*about-0.3.pom|3000
+Bintray ('crawler' plugin)    => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/crawler/0.3/|200|crawler-0.3-javadoc.jar*crawler-0.3-sources.jar*crawler-0.3.jar*crawler-0.3.pom|3000
+Bintray ('duplicates' plugin) => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/duplicates/0.3/|200|duplicates-0.3-javadoc.jar*duplicates-0.3-sources.jar*duplicates-0.3.jar*duplicates-0.3.pom|3000
+Bintray ('gitdump' plugin)    => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/gitdump/0.3/|200|gitdump-0.3-javadoc.jar*gitdump-0.3-sources.jar*gitdump-0.3.jar*gitdump-0.3.pom|3000
+Bintray ('monitor' plugin)    => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/monitor/0.3/|200|monitor-0.3-javadoc.jar*monitor-0.3-sources.jar*monitor-0.3.jar*monitor-0.3.pom|3000
+Bintray ('node' plugin)       => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/node/0.3/|200|node-0.3-javadoc.jar*node-0.3-sources.jar*node-0.3.jar*node-0.3.pom|3000
+Bintray ('teamcity' plugin)   => http://dl.bintray.com/content/evgenyg/BuildTools/com/github/goldin/plugins/gradle/teamcity/0.3/|200|teamcity-0.3-javadoc.jar*teamcity-0.3-sources.jar*teamcity-0.3.jar*teamcity-0.3.pom|3000
 
 # Bintray REST
 
 https://bintray.com/docs/rest/api.html#_get_repositories
 https://api.bintray.com/repos/evgenyg|200|[{ "name": "BuildTools", "owner": "evgenyg" }]|3000|evgenyg|d415761fd4282065d7728a422336ef7a8289c21f3d107d21b6892d5b1b42530e
 https://api.bintray.com/repos/evgenyg/BuildTools|200|{ "name": "BuildTools", "owner": "evgenyg" }|3000|evgenyg|d415761fd4282065d7728a422336ef7a8289c21f3d107d21b6892d5b1b42530e
-https://api.bintray.com/packages/evgenyg/BuildTools/Gradle-Plugins|200|{ "name": "Gradle-Plugins", "repo": "BuildTools", "owner": "evgenyg", "desc": "Gradle Plugins", "labels": [ "node.js", "teamcity", "gradle" ], "versions": [ "0.2.8" ], "latest_version": "0.2.8" }|3000|evgenyg|d415761fd4282065d7728a422336ef7a8289c21f3d107d21b6892d5b1b42530e
-https://api.bintray.com/packages/evgenyg/BuildTools/Gradle-Plugins/versions/_latest|200|{ "name": "0.2.8", "package": "Gradle-Plugins", "repo": "BuildTools", "owner": "evgenyg" }|3000|evgenyg|d415761fd4282065d7728a422336ef7a8289c21f3d107d21b6892d5b1b42530e
+https://api.bintray.com/packages/evgenyg/BuildTools/Gradle-Plugins|200|{ "name": "Gradle-Plugins", "repo": "BuildTools", "owner": "evgenyg", "desc": "Gradle Plugins", "labels": [ "node.js", "teamcity", "gradle" ], "versions": [ "0.3" ], "latest_version": "0.3" }|3000|evgenyg|d415761fd4282065d7728a422336ef7a8289c21f3d107d21b6892d5b1b42530e
+https://api.bintray.com/packages/evgenyg/BuildTools/Gradle-Plugins/versions/_latest|200|{ "name": "0.3", "package": "Gradle-Plugins", "repo": "BuildTools", "owner": "evgenyg" }|3000|evgenyg|d415761fd4282065d7728a422336ef7a8289c21f3d107d21b6892d5b1b42530e
