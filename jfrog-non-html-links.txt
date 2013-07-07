@@ -12,4 +12,4 @@ osd.action
 /viewpageattachments.action?
 /createrssfeed.action?
 /placeholder?thumb=http://
-
+/pdfexport-

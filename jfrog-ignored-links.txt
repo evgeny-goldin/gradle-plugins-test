@@ -20,7 +20,14 @@ viewpage.action?pageId=20316438
 {4}
 {4}/
 
-http://localhost:8080
+http://artifactory.yourdomain.com/
+http://artifactoryserver/
+http://localhost
+http://myhost.com
+http://myhostmyport
+http://server/
+http://server1/
+http://server:8081/
 http://groupIdartifactIdversion
 http://yourserver/artifactory/p2
 http://5.5.5.5:8081/artifactory
