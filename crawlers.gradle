@@ -97,7 +97,7 @@ task wikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 
 task jfrogComCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 
-    final jfrogComIgnoredLinks = [ 'exportword?pageId=', 'http://localhost:8080' ]
+    final jfrogComIgnoredLinks = [ 'exportword?pageId=', 'http://localhost:8080', 'placeholder?thumb=http://' ]
     config { it.with {
 
             baseUrl            = 'www.jfrog.com'
