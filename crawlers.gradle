@@ -95,29 +95,7 @@ task wikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 }
 
 
-task jfrogComCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
-
-    final jfrogComIgnoredLinks = [ 'exportword?pageId=', 'http://localhost:8080', 'placeholder?thumb=http://' ]
-    config { it.with {
-
-            baseUrl            = 'www.jfrog.com'
-            teamcityMessages   = true
-            checkExternalLinks = true
-            displayLinks       = true
-            displayLinksPath   = true
-
-            log                = file( 'log-jfrog-site.txt' )
-            linksMapFile       = file( 'links-jfrog-site.txt' )
-            newLinksMapFile    = file( 'newLinks-jfrog-site.txt' )
-
-            minimumLinks       = 210
-            minimumBytes       = 400 * 1024
-            ignoredLinks       = [{ String link -> jfrogComIgnoredLinks.any { link.contains( it ) }}]
-    }}
-}
-
-
-task jfrogWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
+task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 
     List<String> nonHtmlLinksData    = file( 'jfrog-non-html-links.txt' ).readLines()*.trim().grep()
     List<String> ignoredLinksData    = file( 'jfrog-ignored-links.txt'  ).readLines()*.trim().grep()
@@ -126,16 +104,16 @@ task jfrogWikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
 
     config { it.with {
 
-            baseUrl            = 'wiki.jfrog.org'
+            baseUrl            = 'www.jfrog.com'
             teamcityMessages   = true
             checkExternalLinks = true
             displayLinksPath   = true
             pageDownloadLimit  = 300 * 1024
             totalDownloadLimit = -1
 
-            log                = file( 'log-jfrog-wiki.txt' )
-            linksMapFile       = file( 'links-jfrog-wiki.txt' )
-            newLinksMapFile    = file( 'newLinks-jfrog-wiki.txt' )
+            log                = file( 'log-jfrog.txt' )
+            linksMapFile       = file( 'links-jfrog.txt' )
+            newLinksMapFile    = file( 'newLinks-jfrog.txt' )
 
             minimumLinks       = 13000
             minimumBytes       = 40 * 1024 * 1024

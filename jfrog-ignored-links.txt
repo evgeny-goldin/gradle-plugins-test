@@ -2,8 +2,6 @@ viewpagesrc.action
 space-bookmarks.action
 copypage.action
 viewpage.action?pageId=20316438
-downloadallattachments.action
-exportword?pageId=
 
 <a href=
 </fieldset>
@@ -22,6 +20,7 @@ exportword?pageId=
 {4}
 {4}/
 
+http://localhost:8080
 http://groupIdartifactIdversion
 http://yourserver/artifactory/p2
 http://5.5.5.5:8081/artifactory

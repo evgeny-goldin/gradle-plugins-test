@@ -4,8 +4,12 @@ osd.action
 /rpc/trackback/
 /placeholder/macro?definition=
 /exportword?
-/pdfpageexport.action
-downloadallattachments.action
-diffpagesbyversion.action
-diffpages.action
-viewpreviousversions.action
+/pdfpageexport.action?
+/downloadallattachments.action?
+/diffpagesbyversion.action?
+/diffpages.action?
+/viewpreviousversions.action?
+/viewpageattachments.action?
+/createrssfeed.action?
+/placeholder?thumb=http://
+
