@@ -110,6 +110,7 @@ task jfrogCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) 
             displayLinksPath   = true
             pageDownloadLimit  = 300 * 1024
             totalDownloadLimit = -1
+            requestDelay       = 350
 
             log                = file( 'log-jfrog.txt' )
             linksMapFile       = file( 'links-jfrog.txt' )
