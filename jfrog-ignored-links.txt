@@ -23,8 +23,10 @@ viewpage.action?pageId=20316438
 http://artifactory.yourdomain.com/
 http://artifactoryserver/
 http://localhost
-http://myhost.com
-http://myhostmyport
+http://myhost.com/
+http://myhostmyport/
+http://HOSTNAME/
+http://hostport/
 http://server/
 http://server1/
 http://server:8081/
