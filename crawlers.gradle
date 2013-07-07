@@ -97,6 +97,7 @@ task wikiCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 
 task jfrogComCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
 
+    final jfrogComIgnoredLinks = [ 'exportword?pageId=', 'http://localhost:8080' ]
     config { it.with {
 
             baseUrl            = 'www.jfrog.com'
@@ -111,7 +112,7 @@ task jfrogComCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask
 
             minimumLinks       = 210
             minimumBytes       = 400 * 1024
-            ignoredLinks       = [{ String link -> link == 'http://localhost:8080/artifactory/' }]
+            ignoredLinks       = [{ String link -> jfrogComIgnoredLinks.any { link.contains( it ) }}]
     }}
 }
 

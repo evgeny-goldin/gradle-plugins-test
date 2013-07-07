@@ -3,6 +3,7 @@ space-bookmarks.action
 copypage.action
 viewpage.action?pageId=20316438
 downloadallattachments.action
+exportword?pageId=
 
 <a href=
 </fieldset>
