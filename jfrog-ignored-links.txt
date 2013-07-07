@@ -24,9 +24,9 @@ http://artifactory.yourdomain.com/
 http://artifactoryserver/
 http://localhost
 http://myhost.com/
-http://myhostmyport/
+http://myhostmyport
 http://HOSTNAME/
-http://hostport/
+http://hostport
 http://server/
 http://server1/
 http://server:8081/
