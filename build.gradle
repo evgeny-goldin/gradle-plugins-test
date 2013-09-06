@@ -21,9 +21,9 @@ buildscript {
     println "> Running plugins version [$pluginsVersion]"
 
     repositories {
-        mavenLocal()
-        maven { url 'http://jcenter.bintray.com' }
+        jcenter()
         maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/plugins-snapshots-local/' }
+        mavenLocal()
     }
 
     dependencies {
