@@ -4,17 +4,6 @@ http://www.google.com/
 https://www.google.com/
 http://www.trademob.com/
 
-# Home Pages
-
-http://evgeny-goldin.com/|200|<h1>Evgeny Goldin</h1>|15000
-http://evgeny-goldin.com/|200|-<h2>Evgeny Goldin</h2>|15000
-http://evgeny-goldin.com/|200|/Evgeny\s+Goldin/|15000
-http://evgeny-goldin.com/|200|-/Evgeny\w+Goldin/|15000
-http://evgeny-goldin.org:8148/|200|<title>Evgeny Goldin</title>|15000
-
-# nmap tests
-# nmap://evgeny-goldin.org|22,9090
-
 # StatusCake
 
 StatusCake (all tests)         => statuscake://evgenyg|qCgvMWyjyWkPMnCgOK5x
@@ -25,6 +14,14 @@ StatusCake (Blog)              => statuscake://Blog|evgenyg|qCgvMWyjyWkPMnCgOK5x
 StatusCake (Wiki)              => statuscake://Wiki|evgenyg|qCgvMWyjyWkPMnCgOK5x
 StatusCake (TeamCity)          => statuscake://TeamCity|evgenyg|qCgvMWyjyWkPMnCgOK5x
 StatusCake (YouTrack)          => statuscake://YouTrack|evgenyg|qCgvMWyjyWkPMnCgOK5x
+
+# Home Pages
+
+http://evgeny-goldin.com/|200|<h1>Evgeny Goldin</h1>|15000
+http://evgeny-goldin.com/|200|-<h2>Evgeny Goldin</h2>|15000
+http://evgeny-goldin.com/|200|/Evgeny\s+Goldin/|15000
+http://evgeny-goldin.com/|200|-/Evgeny\w+Goldin/|15000
+http://evgeny-goldin.org:8148/|200|<title>Evgeny Goldin</title>|15000
 
 # Blog
 
@@ -48,17 +45,16 @@ Bitbucket (wiki/src)      => https://bitbucket.org/evgenyg/wiki/src|200|Main.txt
 
 # GitHub
 
-https://github.com/evgeny-goldin/chef-repo|404|-/\d+\+?\s+commits/
-https://github.com/evgeny-goldin/gradle-plugins|200|/\d+\+?\s+commits/
-https://github.com/evgeny-goldin/gradle-plugins-test|200|/\d+\+?\s+commits/
-https://github.com/evgeny-goldin/gcommons|200|/\d+\+?\s+commits/
-https://github.com/evgeny-goldin/maven-plugins|200|/\d+\+?\s+commits/
-https://github.com/evgeny-goldin/maven-plugins-test|200|/\d+\+?\s+commits/
-https://github.com/evgeny-goldin/teamcity-plugins|200|/\d+\+?\s+commits/
-https://github.com/evgeny-goldin/teamcity-artifactory-plugin|200|/\d+\+?\s+commits/
-https://github.com/evgeny-goldin/teamcity-nuget-support|200|/\d+\+?\s+commits/
-https://github.com/evgeny-goldin/scripts|200|/\d+\+?\s+commits/
-https://github.com/evgeny-goldin/spock-extensions|200|/\d+\+?\s+commits/
+https://github.com/evgeny-goldin/gradle-plugins|200|/\d+\+?\n\s+</span>\n\s+commits/
+https://github.com/evgeny-goldin/gradle-plugins-test|200|/\d+\+?\n\s+</span>\n\s+commits/
+https://github.com/evgeny-goldin/gcommons|200|/\d+\+?\n\s+</span>\n\s+commits/
+https://github.com/evgeny-goldin/maven-plugins|200|/\d+\+?\n\s+</span>\n\s+commits/
+https://github.com/evgeny-goldin/maven-plugins-test|200|/\d+\+?\n\s+</span>\n\s+commits/
+https://github.com/evgeny-goldin/teamcity-plugins|200|/\d+\+?\n\s+</span>\n\s+commits/
+https://github.com/evgeny-goldin/teamcity-artifactory-plugin|200|/\d+\+?\n\s+</span>\n\s+commits/
+https://github.com/evgeny-goldin/teamcity-nuget-support|200|/\d+\+?\n\s+</span>\n\s+commits/
+https://github.com/evgeny-goldin/scripts|200|/\d+\+?\n\s+</span>\n\s+commits/
+https://github.com/evgeny-goldin/spock-extensions|200|/\d+\+?\n\s+</span>\n\s+commits/
 
 # YouTrack
 
@@ -70,14 +66,13 @@ https://github.com/evgeny-goldin/spock-extensions|200|/\d+\+?\s+commits/
 
 # TeamCity
 
-http://evgeny-goldin.org:8148/teamcity/|200|>Log in to TeamCity<|15000
-http://evgeny-goldin.org:8148/teamcity/project.html?projectId=gradleplugins|200|>Log in to TeamCity<|15000
-
+http://evgeny-goldin.org:8148/teamcity/|401|Authentication required|15000
+http://evgeny-goldin.org:8148/teamcity/project.html?projectId=gradleplugins|401|Authentication required|15000
 http://evgeny-goldin.org:8148/teamcity/?guest=1|200|Crawlers*gradle-plugins|15000
 http://evgeny-goldin.org:8148/teamcity/project.html?projectId=Crawlers&guest=1|200|Crawlers*Change Log*berlindevops.org|15000
 http://evgeny-goldin.org:8148/teamcity/project.html?projectId=gradleplugins&guest=1|200|gradle-plugins*Main*General Tests*Node.js Tests|15000
-http://evgeny-goldin.org:8148/teamcity/project.html?projectId=MiscProjects&guest=1|200|-GitDump*Log in to TeamCity*Login as a Guest User|15000
-http://evgeny-goldin.org:8148/teamcity/viewType.html?buildTypeId=bt68&guest=1|403|-Pending changes*You do not have enough permissions to access build type with internal id: bt68|15000
+http://evgeny-goldin.org:8148/teamcity/project.html?projectId=MiscProjects&guest=1|401|-GitDump*-Artifactory*Authentication required|15000
+http://evgeny-goldin.org:8148/teamcity/viewType.html?buildTypeId=bt68&guest=1|403|-GitDump*AccessDeniedException: You do not have enough permissions|15000
 
 # Artifactory
 
