@@ -23,8 +23,7 @@ buildscript {
     repositories {
         mavenLocal()
         jcenter()
-        maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/plugins-snapshots-local/' }
-        
+        maven { url 'http://evgenyg.artifactoryonline.com/evgenyg/plugins-snapshots-local/' }        
     }
 
     dependencies {
