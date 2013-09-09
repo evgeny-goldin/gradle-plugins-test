@@ -264,7 +264,7 @@ task akqaCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTask ) {
         linksMapFile       = file( 'links-akqa.txt' )
         newLinksMapFile    = file( 'newLinks-akqa.txt' )
 
-        minimumLinks       = 1
-        minimumBytes       = 1
+        minimumLinks       = 1300
+        minimumBytes       = 2 * 1024 * 1024
     }}
 }
