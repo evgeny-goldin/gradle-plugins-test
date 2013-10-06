@@ -53,6 +53,7 @@ task groovydocCrawler( type: com.github.goldin.plugins.gradle.crawler.CrawlerTas
             teamcityMessages   = true
             checkExternalLinks = true
             displayLinksPath   = true
+            pageDownloadLimit  = 200 * 1024
 
             log                = file( 'log-groovydoc.txt' )
             linksMapFile       = file( 'links-groovydoc.txt' )
