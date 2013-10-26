@@ -86,7 +86,7 @@ allprojects {
 
     configurations { testFiles { transitive = false  }}
 
-    'about common crawler duplicates gitdump monitor node teamcity'.tokenize().each {
+    'about common crawler duplicates gitdump monitor node play teamcity'.tokenize().each {
         String pluginName ->
         dependencies {
             testFiles "com.github.goldin.plugins.gradle:$pluginName:$pluginsVersion",
