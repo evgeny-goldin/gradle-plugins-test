@@ -17,7 +17,7 @@ group = 'com.github.goldin.plugins.gradle'
 
 buildscript {
 
-    ext.pluginsVersion = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : '0.3.1-SNAPSHOT'
+    ext.pluginsVersion = project.hasProperty( 'pluginsVersion' ) ? project.pluginsVersion : '0.3.2-SNAPSHOT'
     println "> Running plugins version [$pluginsVersion]"
 
     repositories {
