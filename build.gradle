@@ -45,7 +45,7 @@ gitdump    {
     collectProjects        = { String repoUrl -> excludedProjects.any { repoUrl.contains( it )} ? '' : "$repoUrl:<last>" }
     singleArchive          = true
     totalBackupMinSize     = 40 * 1024 * 1024
-    totalBackupMaxSize     = 60 * 1024 * 1024
+    totalBackupMaxSize     = 70 * 1024 * 1024
 }
 
 
